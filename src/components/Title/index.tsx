@@ -1,4 +1,4 @@
-import Particles from '../Particles';
+import Particles from '../ui/Particles';
 
 const Title = () => {
   return (
