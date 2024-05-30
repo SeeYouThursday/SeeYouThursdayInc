@@ -9,6 +9,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        slate: {
+          50: '#F8FAFC',
+          200: '#E2E8F0',
+          300: '#CBD5E1',
+          600: '#475569',
+          500: '#64748B',
+          700: '#334155',
+          800: '#1E293B',
+          900: '#0F172A',
+          950: '#020617',
+        },
+      
+       
+      },
       typography: {
         DEFAULT: {
           css: {
