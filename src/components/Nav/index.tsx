@@ -4,10 +4,10 @@ const Nav = () => {
   return (
     <nav className="bg-black">
       <Image
-        height={50}
-        width={50}
+        height={100}
+        width={100}
         quality={100}
-        src="/SeeYouThursday.png"
+        src="/Purple-SeeYouThursday.png"
         alt="SeeYouThursday"
         className="p-3 rounded-sm"
       />
