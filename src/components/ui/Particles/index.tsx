@@ -9,6 +9,7 @@ interface ParticlesProps {
   staticity?: number;
   ease?: number;
   refresh?: boolean;
+  maxHeight?: number; // Add this line
 }
 
 export default function Particles({
@@ -80,11 +81,13 @@ export default function Particles({
     magnetism: number;
   };
 
+  let maxHeight: number;
   const resizeCanvas = () => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {
       circles.current.length = 0;
       canvasSize.current.w = canvasContainerRef.current.offsetWidth;
       canvasSize.current.h = canvasContainerRef.current.offsetHeight;
+      maxHeight = canvasSize.current.h; // Save the max height
       canvasRef.current.width = canvasSize.current.w * dpr;
       canvasRef.current.height = canvasSize.current.h * dpr;
       canvasRef.current.style.width = `${canvasSize.current.w}px`;
