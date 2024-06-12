@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const Nav = () => {
   return (
-    <nav className="bg-slate-900">
+    <nav className="bg-slate-900 mb-0">
       <Image
         height={100}
         width={100}
