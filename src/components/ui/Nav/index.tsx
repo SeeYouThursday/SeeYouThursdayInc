@@ -45,7 +45,7 @@ const Nav = () => {
       <Navbar
         shouldHideOnScroll={true}
         maxWidth="full"
-        className="w-screen bg-slate-900 bg-image"
+        className="w-screen bg-slate-900 bg-nav"
         classNames={{ toggleIcon: ['text-blue-200'], brand: ['rounded-full'] }}
       >
         <NavbarContent className="sm:hidden" justify="start">
