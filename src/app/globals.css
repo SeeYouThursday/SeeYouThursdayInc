@@ -125,3 +125,9 @@
   font-weight: 900;
   font-style: italic;
 }
+.bg-image {
+  background-image: url("/heroimage.jpeg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size:cover;
+}
