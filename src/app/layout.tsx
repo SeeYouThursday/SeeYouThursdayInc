@@ -1,20 +1,20 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Footer from "../components/ui/Footer/footer";
-import Nav from "@/components/ui/Nav";
-import { NextUIProvider } from "@nextui-org/react";
-import { Providers } from "./providers";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Footer from '../components/ui/Footer/footer';
+import Nav from '@/components/ui/Nav';
+import { NextUIProvider } from '@nextui-org/react';
+import { Providers } from './providers';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "SeeYouThursday Web Dev",
-  description: "SeeYouThursday Web Development",
+  title: 'SeeYouThursday Web Dev',
+  description: 'SeeYouThursday Web Development',
 };
 
 const links = [
-  { url: "www.github.com/SeeYouThursday", title: "Github", id: "1" },
+  { url: 'www.github.com/SeeYouThursday', title: 'Github', id: '1' },
 ];
 
 export default function RootLayout({
@@ -25,13 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>
-          <NextUIProvider>
+        <NextUIProvider>
+          <Providers>
             <Nav />
             {children}
             <Footer links={links} />
-          </NextUIProvider>
-        </Providers>
+          </Providers>
+        </NextUIProvider>
       </body>
     </html>
   );
