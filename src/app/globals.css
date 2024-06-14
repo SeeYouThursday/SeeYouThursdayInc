@@ -124,15 +124,15 @@
   font-style: italic;
 }
 .bg-image {
-  background-image: url("/heroimage.jpeg");
+  background-image: url('/heroimage.jpeg');
   background-position: top;
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
 }
 
 .bg-nav {
-  background-image: url("/bgnav-edit.png");
+  background-image: url('/heroimage.jpeg');
   background-position: center;
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
 }
