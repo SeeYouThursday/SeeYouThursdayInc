@@ -11,7 +11,7 @@
   "dependencies": {
     "@nextui-org/react": "^2.4.0",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.2.10",
+    "framer-motion": "^11.2.12",
     "next": "14.2.3",
     "react": "^18",
     "react-animate-on-scroll": "^2.1.9",

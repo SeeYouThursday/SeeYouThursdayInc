@@ -9,7 +9,7 @@ interface TestimonialProps {
 
 const Testimonial: React.FC<TestimonialProps> = ({ testimonial }) => {
   return (
-    <div className="bg-black py-4 text-white md:py-8">
+    <div className="py-4 text-white md:py-8 rounded-full mx-4">
       <div className="mx-auto max-w-4xl text-center">
         <p className="mb-2 text-base md:mb-4 md:text-lg lg:text-xl xl:text-2xl">
           {testimonial.text}
@@ -45,8 +45,8 @@ const Testimonials: React.FC = () => {
   ];
 
   return (
-    <div className="bg-black py-4 text-white md:py-8">
-      <div className="mx-auto max-w-4xl text-center">
+    <div className=" py-4 rounded text-white md:py-8 mt-10 mb-10">
+      <div className="mx-auto max-w-4xl text-center pt-10">
         <h2 className="mb-2 text-lg font-bold md:mb-4 md:text-xl lg:text-2xl">
           CLIENT TESTIMONIAL
         </h2>
@@ -54,7 +54,7 @@ const Testimonials: React.FC = () => {
           Positive Testimonials That Motivate Us
         </p>
         <Carousel
-          showArrows={true}
+          showArrows={false}
           infiniteLoop={true}
           showThumbs={false}
           showStatus={false}
