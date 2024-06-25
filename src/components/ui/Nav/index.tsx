@@ -56,22 +56,16 @@ const Nav = () => {
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         />
         <NavbarBrand>
-          <Image
-            height={50}
-            width={50}
-            quality={100}
-            src="/Purple-SeeYouThursday.png"
-            alt="SeeYouThursday"
-            className="w-16 h-16 mt-3"
-          />
-          <Image
-            height={50}
-            width={50}
-            quality={100}
-            src="/SeeYouThursdayGlass.png"
-            alt="SeeYouThursday"
-            className="w-16 h-16 mt-3"
-          />
+          <NavbarBrand>
+            <Image
+              height={50}
+              width={50}
+              quality={100}
+              src="/solid-webdevdesign.png"
+              alt="SeeYouThursday"
+              className="w-16 h-16 mt-3 mb-3"
+            />
+          </NavbarBrand>
         </NavbarBrand>
       </NavbarContent>
 
@@ -104,7 +98,7 @@ const Nav = () => {
               height={50}
               width={50}
               quality={100}
-              src="/clear-webdevdesign.png"
+              src="/solid-webdevdesign.png"
               alt="SeeYouThursday"
               className="w-16 h-16 mt-3 mb-3"
             />
