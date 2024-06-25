@@ -1,8 +1,10 @@
 import Particles from '../ui/Particles';
+import Image from 'next/image';
+import FlipWordsHero from '../Flip-Words';
 
 const Title = () => {
   return (
-    <div className="flex flex-col items-center justify-center w-screen  bg-slate-900">
+    <div className="flex flex-col items-center justify-center w-screen bg-slate-900 pt-3">
       <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-b from-violet-200 via-violet-200/50 to-violet-200" />
       {/* <Particles
         className="absolute inset-0 -z-1 animate-fade-in bg-slate-900"
@@ -12,8 +14,10 @@ const Title = () => {
         SeeYouThursday
       </h1>
       <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-b from-violet-200 via-violet-200/50 to-violet-200" />
-      <h2 className="text-center text-violet-200 text-2xl pb-2">Web Dev + Design</h2>
-      <h2 className="text-center text-violet-200 text-2xl pb-2"></h2>
+      <h2 className="text-center text-violet-200 text-2xl pb-5">
+        Web Dev + Design
+      </h2>
+      <FlipWordsHero />
     </div>
   );
 };

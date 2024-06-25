@@ -4,6 +4,7 @@ import './globals.css';
 import Footer from '../components/ui/Footer/footer';
 import Nav from '@/components/ui/Nav';
 import { NextUIProvider } from '@nextui-org/react';
+import { Providers } from './providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,9 +26,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <NextUIProvider>
-          <Nav />
-          {children}
-          <Footer links={links} />
+          <Providers>
+            <Nav />
+            {children}
+            <Footer links={links} />
+          </Providers>
         </NextUIProvider>
       </body>
     </html>
