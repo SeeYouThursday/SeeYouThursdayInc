@@ -2,17 +2,21 @@
 
 import React from 'react';
 import ScrollAnimation from 'react-animate-on-scroll';
+import 'animate.css/animate.min.css'; 
 
 const Mission = () => {
   return (
     <div className="text-white overflow-y-auto max-h-screen flex flex-col m-10 text-balance text-center">
-      <ScrollAnimation animateIn="fadeIn" duration={1} animateOnce={true}>
+      <ScrollAnimation 
+        animateIn="fadeIn" 
+        delay={200} 
+        animateOnce={true}
+      >
         <h1 className="text-6xl text-center mb-7">Our Mission</h1>
       </ScrollAnimation>
       <ScrollAnimation
         animateIn="fadeIn"
-        duration={1}
-        delay={500}
+        delay={200} 
         animateOnce={true}
       >
         <p>
