@@ -10,13 +10,14 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.4.0",
-    "bootstrap": "^5.3.3",
+    "framer-motion": "^11.2.9",
+    "next": "14.2.3",
+    "react-animate-on-scroll": "^2.1.9",
+    "react-dom": "^18",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.10",
-    "next": "14.2.3",
     "react": "^18",
     "react-animate-on-scroll": "^2.1.9",
-    "react-bootstrap": "^2.10.2",
     "react-dom": "^18",
     "react-scroll-parallax": "^3.4.5",
     "tailwind-merge": "^2.3.0"
