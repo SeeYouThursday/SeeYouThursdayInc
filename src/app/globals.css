@@ -140,6 +140,7 @@
 }
 
 .bg-nav {
+  backkground-color: transparent;
   background-image: url('/heroimage.jpeg');
   background-position: center;
   background-repeat: no-repeat;

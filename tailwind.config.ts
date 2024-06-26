@@ -1,6 +1,19 @@
 import type { Config } from 'tailwindcss';
 const defaultTheme = require('tailwindcss/defaultTheme');
 const { nextui } = require('@nextui-org/react');
+const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default;
+
+
+const addVariablesForColors = ({ addBase, theme }: { addBase: any, theme: any }) => {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+ 
+  addBase({
+    ":root": newVars,
+  });
+}
 
 const config: Config = {
   content: [
@@ -53,21 +66,21 @@ const config: Config = {
           'radial-gradient(50% 50% at 50% 50%, var(--tw-gradient-stops))',
       },
       animation: {
-        'fade-in': 'fade-in 3s ease-in-out forwards',
+        fadeIn: 'fadeIn .3s ease-in-out',
         title: 'title 3s ease-out forwards',
         'fade-left': 'fade-left 3s ease-in-out forwards',
         'fade-right': 'fade-right 3s ease-in-out forwards',
+        scroll:
+          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
       keyframes: {
-        'fade-in': {
-          '0%': {
-            opacity: '0%',
-          },
-          '75%': {
-            opacity: '0%',
-          },
-          '100%': {
-            opacity: '100%',
+        'fadeIn': {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        }, 
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
           },
         },
         'fade-left': {
@@ -122,9 +135,10 @@ const config: Config = {
   },
   darkMode: 'class',
   plugins: [
-    require('@tailwindcss/typography'),
-    require('tailwindcss-debug-screens'),
-    nextui(),
-  ],
+      require('@tailwindcss/typography'),
+      require('tailwindcss-debug-screens'),
+      nextui(),
+      addVariablesForColors,
+    ],
 };
 export default config;
