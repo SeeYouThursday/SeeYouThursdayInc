@@ -67,13 +67,14 @@ export const InfiniteCards = ({
   };
 
   return (
-    <div className="overflow-clip mx-auto max-w-screen text-center pt-10 text-white">
+    <div className=" flex flex-col md:mx-auto w-screen text-center pt-10 text-white">
       <h1 className="mb-8 mt-8 text-lg font-bold md:mb-4 md:text-xl lg:text-2xl">CLIENT TESTIMONIAL</h1>
       <p className="mb-4 text-xs uppercase md:mb-8 md:text-sm">Positive Testimonials That Motivate Us</p>
+      <div className="flex justify-center max-w-full">
       <div
         ref={containerRef}
         className={cn(
-          "scroller relative z-20 max-w-7xl overflow-hidden mt-8 mb-8 [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+          "scroller flex relative z-20 overflow-hidden lg:max-w-7xl mt-8 mb-8 [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
           className
         )}
       >
@@ -110,6 +111,7 @@ export const InfiniteCards = ({
         </ul>
       </div>
     </div>
+  </div>
   );
 };
 

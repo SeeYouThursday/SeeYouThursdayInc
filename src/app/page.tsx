@@ -8,7 +8,7 @@ import Contact from '@/components/ui/Contact';
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center bg-slate-900 relative">
+    <main className="flex flex-col items-center justify-center overflow-hidden bg-slate-900 relative">
       <Title />
       {/* <Hero /> */}
       <Mission />
