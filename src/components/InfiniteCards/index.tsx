@@ -67,7 +67,7 @@ export const InfiniteCards = ({
   };
 
   return (
-    <div className="mx-auto max-w-4xl text-center pt-10 text-white">
+    <div className="overflow-clip mx-auto max-w-screen text-center pt-10 text-white">
       <h1 className="mb-8 mt-8 text-lg font-bold md:mb-4 md:text-xl lg:text-2xl">CLIENT TESTIMONIAL</h1>
       <p className="mb-4 text-xs uppercase md:mb-8 md:text-sm">Positive Testimonials That Motivate Us</p>
       <div
