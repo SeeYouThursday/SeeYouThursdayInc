@@ -26,8 +26,8 @@ const testimonials = [
 
 const TestimonialSection = () => {
   return (
-    <div>
-      <InfiniteCards items={testimonials} direction="left" speed="normal" pauseOnHover={true} className="" />
+    <div className="overflow-clip w-screen">
+      <InfiniteCards items={testimonials} direction="left" speed="normal" pauseOnHover={true}  />
     </div>
   );
 };
