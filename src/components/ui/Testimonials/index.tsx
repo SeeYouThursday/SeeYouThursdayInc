@@ -1,5 +1,5 @@
 import React from "react";
-import { InfiniteCards } from "../../InfiniteCards"; 
+import { InfiniteCards } from "@/components/InfiniteCards"; 
 
 const testimonials = [
   {
