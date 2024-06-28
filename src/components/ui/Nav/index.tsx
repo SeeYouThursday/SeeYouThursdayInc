@@ -41,35 +41,16 @@ const Nav = () => {
   ];
 
   return (
-    
     <Navbar
       // shouldHideOnScroll={true}
       maxWidth="full"
-      className="w-[100svw] bg-nav"
+      className="bg-nav"
       classNames={{
         toggleIcon: ['text-blue-200'],
         brand: ['rounded-full'],
         base: ['bg-slate-900'],
       }}
     >
-      <NavbarContent className="sm:hidden" justify="start">
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-        />
-        <NavbarBrand>
-          <NavbarBrand>
-            <Image
-              height={50}
-              width={50}
-              quality={100}
-              src="/solid-webdevdesign.png"
-              alt="SeeYouThursday"
-              className="w-16 h-16 mt-3 mb-3"
-            />
-          </NavbarBrand>
-        </NavbarBrand>
-      </NavbarContent>
-
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
           <Link color="foreground" href="#">
@@ -115,6 +96,21 @@ const Nav = () => {
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
+      <NavbarContent className="sm:hidden" justify="end">
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+        />
+        <NavbarBrand>
+          <Image
+            height={50}
+            width={50}
+            quality={100}
+            src="/solid-webdevdesign.png"
+            alt="SeeYouThursday"
+            className="w-16 h-16 mt-3 mb-3"
+          />
+        </NavbarBrand>
+      </NavbarContent>
     </Navbar>
   );
 };
