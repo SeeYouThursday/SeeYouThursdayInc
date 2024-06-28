@@ -139,6 +139,7 @@ const config: Config = {
       require('tailwindcss-debug-screens'),
       nextui(),
       addVariablesForColors,
+      require('daisyui'),
     ],
 };
 export default config;
