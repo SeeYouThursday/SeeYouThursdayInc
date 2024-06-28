@@ -37,13 +37,16 @@ const Nav = () => {
   />;
   const navItems: navItem[] = [
     { href: '/', name: 'Home', isActive: false },
-    { href: '/portfolio', name: 'Portfolio', isActive: false },
+    { href: '/pricing', name: 'Pricing', isActive: false },
+    { href: '/team', name: 'Meet The Team', isActive: false },
+    { href: '/services', name: 'Services', isActive: false },
   ];
 
   return (
     <Navbar
       // shouldHideOnScroll={true}
       maxWidth="full"
+      shouldHideOnScroll={true}
       className="bg-nav"
       classNames={{
         toggleIcon: ['text-blue-200'],
@@ -51,28 +54,46 @@ const Nav = () => {
         base: ['bg-slate-900'],
       }}
     >
+      {/* when window is not on a phone, show links and hide hamburger menu */}
+      <NavbarContent justify="start">
+        <NavbarItem className="sm:hidden">
+          <NavbarBrand>
+            <Image
+              height={50}
+              width={50}
+              quality={100}
+              src="/solid-webdevdesign.png"
+              alt="SeeYouThursday"
+              className="w-16 h-16 mt-3 mb-3"
+            />
+          </NavbarBrand>
+        </NavbarItem>
+      </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#">
-            PlaceHolder
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            PlaceHolder
+          <Link color="primary" href="#">
+            Services
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
-            PlaceHolder
+          <Link color="primary" href="#">
+            Pricing
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="primary" href="#">
+            Meet The Team
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem>
-          <Button as={Link} href="#" className="bg-violet-400">
-            Get a Quote!
-          </Button>
+        <Button as={Link} href="#" className="bg-violet-400">
+          Get a Quote!
+        </Button>
+        <NavbarItem className="sm:hidden">
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          />
         </NavbarItem>
         <NavbarItem className="hidden sm:flex">
           <NavbarBrand>
@@ -87,6 +108,7 @@ const Nav = () => {
           </NavbarBrand>
         </NavbarItem>
       </NavbarContent>
+
       <NavbarMenu>
         {navItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
@@ -96,21 +118,6 @@ const Nav = () => {
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
-      <NavbarContent className="sm:hidden" justify="end">
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-        />
-        <NavbarBrand>
-          <Image
-            height={50}
-            width={50}
-            quality={100}
-            src="/solid-webdevdesign.png"
-            alt="SeeYouThursday"
-            className="w-16 h-16 mt-3 mb-3"
-          />
-        </NavbarBrand>
-      </NavbarContent>
     </Navbar>
   );
 };
