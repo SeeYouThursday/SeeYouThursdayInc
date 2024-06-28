@@ -69,7 +69,7 @@ const ContactForm = () => {
 
   return (
     <Card className="w-full p-8">
-      <CardHeader className="text-center w-full">Reach Out!</CardHeader>
+      <CardHeader className="text-center w-full">Reach Out To Us!</CardHeader>
       <form
         onSubmit={sendEmail}
         className="flex flex-col items-center justify-between md:flex-nowrap gap-4"
