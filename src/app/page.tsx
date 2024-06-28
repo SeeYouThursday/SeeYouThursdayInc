@@ -4,7 +4,7 @@ import Hero from '@/components/ui/Hero';
 import Testimonials from '@/components/ui/Testimonials';
 import Mission from '@/components/ui/Mission';
 import Pricing from '@/components/ui/Pricing';
-import Contact from '@/components/ui/Contact';
+import { ContactModal } from '@/components/ContactForm';
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
       <Mission />
       <Testimonials />
       <Pricing />
-      <Contact />
+      <ContactModal />
     </main>
   );
 }
