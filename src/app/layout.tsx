@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Footer from '../components/ui/Footer/footer';
+import Footer, { FooterProps } from '../components/ui/Footer/footer';
 import Nav from '@/components/ui/Nav';
 import { NextUIProvider } from '@nextui-org/react';
 import { Providers } from './providers';
@@ -14,7 +14,9 @@ export const metadata: Metadata = {
 };
 
 const links = [
-  { url: 'www.github.com/SeeYouThursday', title: 'Github', id: '1' },
+  { url: '/about', title: 'About us', id: '1' },
+  { url: '/services', title: 'Service', id: '2' },
+  { url: '/contact', title: 'Contact', id: '3' },
 ];
 
 export default function RootLayout({
@@ -36,3 +38,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export type { FooterProps };
