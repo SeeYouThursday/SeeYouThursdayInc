@@ -140,9 +140,7 @@ export const ContactModal = () => {
           onPress={onOpen}
         >
           {/* <FontAwesomeIcon icon={contactBtn.icon} /> */}
-          <h3 className="hidden md:flex ms-1 text-sm text-balance text-center">
-            Contact Us!
-          </h3>
+          <h3 className="ms-1 text-sm text-balance text-center">Contact Us!</h3>
         </Button>
         {/* </Tooltip> */}
       </div>
