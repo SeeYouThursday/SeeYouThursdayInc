@@ -44,9 +44,8 @@ const Nav = () => {
 
   return (
     <Navbar
-      // shouldHideOnScroll={true}
       maxWidth="full"
-      shouldHideOnScroll={true}
+      shouldHideOnScroll
       className="bg-nav"
       classNames={{
         toggleIcon: ['text-blue-200'],
