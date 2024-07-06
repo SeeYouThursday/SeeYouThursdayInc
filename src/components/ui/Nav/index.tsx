@@ -55,7 +55,7 @@ const Nav = () => {
     >
       {/* when window is not on a phone, show links and hide hamburger menu */}
       <NavbarContent justify="start">
-        <NavbarItem className="sm:hidden">
+        <NavbarItem className="">
           <NavbarBrand>
             <Image
               height={50}
@@ -94,7 +94,7 @@ const Nav = () => {
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           />
         </NavbarItem>
-        <NavbarItem className="hidden sm:flex">
+        {/* <NavbarItem className="hidden sm:flex">
           <NavbarBrand>
             <Image
               height={50}
@@ -105,7 +105,7 @@ const Nav = () => {
               className="w-16 h-16 mt-3 mb-3"
             />
           </NavbarBrand>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
 
       <NavbarMenu>
