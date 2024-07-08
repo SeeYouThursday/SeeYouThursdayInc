@@ -27,14 +27,7 @@ const Nav = () => {
     name: string;
     isActive: boolean;
   };
-  <Image
-    height={50}
-    width={50}
-    quality={100}
-    src="/Purple-SeeYouThursday.png"
-    alt="SeeYouThursday"
-    className="p-3 w-24 h-24 rounded-sm"
-  />;
+
   const navItems: navItem[] = [
     { href: '/', name: 'Home', isActive: false },
     { href: '/pricing', name: 'Pricing', isActive: false },
@@ -45,7 +38,6 @@ const Nav = () => {
   return (
     <Navbar
       maxWidth="full"
-      shouldHideOnScroll
       className="bg-nav"
       classNames={{
         toggleIcon: ['text-blue-200'],
