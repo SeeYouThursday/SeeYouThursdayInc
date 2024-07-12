@@ -72,7 +72,7 @@ const Nav = () => {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="primary" href="#">
+          <Link color="primary" href="#ourCrew">
             Meet The Team
           </Link>
         </NavbarItem>
