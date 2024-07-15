@@ -13,7 +13,6 @@ import {
   ModalHeader,
   useDisclosure,
   Tooltip,
-  // Image,
 } from '@nextui-org/react';
 
 const ContactForm = () => {
@@ -125,12 +124,12 @@ export const ContactModal = () => {
 
   return (
     <>
-      <div className="flex justify-start items-center">
+      <div className="flex justify-start items-center pb-5">
         {/* <Tooltip
           content="Contact Me"
           placement={location === 'under' ? 'bottom' : 'right-end'}
         > */}
-        <Button
+        <Button 
           // radius=""
           isIconOnly={true}
           aria-label={contactBtn.ariaLabel}

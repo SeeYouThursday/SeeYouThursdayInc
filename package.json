@@ -11,6 +11,8 @@
   "dependencies": {
     "@emailjs/browser": "^4.3.3",
     "@nextui-org/react": "^2.4.0",
+    "@react-three/drei": "^9.108.3",
+    "@react-three/fiber": "^8.16.8",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.12",
     "next": "14.2.3",
@@ -19,10 +21,13 @@
     "react-dom": "^18",
     "react-responsive-carousel": "^3.2.23",
     "react-scroll-parallax": "^3.4.5",
-    "tailwind-merge": "^2.3.0"
+    "tailwind-merge": "^2.3.0",
+    "three": "^0.166.1",
+    "three-globe": "^2.31.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
+    "@types/geojson": "^7946.0.14",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-animate-on-scroll": "^2.1.8",
