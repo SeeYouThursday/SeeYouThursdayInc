@@ -5,7 +5,7 @@ import Testimonials from "@/components/ui/Testimonials";
 import Mission from "@/components/ui/Mission";
 import Pricing from "@/components/ui/Pricing";
 import { ContactModal } from "@/components/ContactForm";
-import MeetTheTeam from "@/components/ui/MeetTheTeam";
+import FlipCard from "@/components/ui/MeetTheTeam";
 
 export default function Home() {
 
@@ -16,7 +16,7 @@ export default function Home() {
       <Mission />
       <Pricing />
       <Testimonials />
-      <MeetTheTeam />
+      <FlipCard />
       <ContactModal />
     </main>
   );
