@@ -134,7 +134,7 @@ export const ContactModal = () => {
           isIconOnly={true}
           aria-label={contactBtn.ariaLabel}
           variant="shadow"
-          className="m-1 hover:scale-110 w-28"
+          className="m-1 mt-5 hover:scale-110 w-28"
           color="primary"
           onPress={onOpen}
         >
