@@ -19,6 +19,7 @@ const Nav = () => {
   // used to track active tab/link in nav
   const [isActive, setIsActive] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const pathname = usePathname();
 
@@ -33,6 +34,7 @@ const Nav = () => {
     { href: '/pricing', name: 'Pricing', isActive: false },
     { href: '/team', name: 'Meet The Team', isActive: false },
     { href: '/services', name: 'Services', isActive: false },
+    { href: '/contact', name: 'Contact Us', isActive: false },
   ];
 
   return (
@@ -49,6 +51,7 @@ const Nav = () => {
       <NavbarContent justify="start">
         <NavbarItem className="">
           <NavbarBrand>
+          <a href='/'>
             <Image
               height={50}
               width={50}
@@ -57,6 +60,7 @@ const Nav = () => {
               alt="SeeYouThursday"
               className="w-16 h-16 mt-3 mb-3"
             />
+            </a>
           </NavbarBrand>
         </NavbarItem>
       </NavbarContent>
@@ -76,11 +80,13 @@ const Nav = () => {
             Meet The Team
           </Link>
         </NavbarItem>
+        <NavbarItem>
+          <Link color="primary" href="#ourCrew">
+            Contact Us
+          </Link>
+        </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <Button as={Link} href="#" className="bg-violet-400">
-          Get a Quote!
-        </Button>
         <NavbarItem className="sm:hidden">
           <NavbarMenuToggle
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
