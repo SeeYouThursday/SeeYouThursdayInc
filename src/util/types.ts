@@ -4,4 +4,5 @@ export type ProductProps = {
   type: string;
   stack: string;
   img: string;
+  link: string;
 };
