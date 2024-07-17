@@ -14,11 +14,12 @@ const PortfolioCard = ({
   type,
   stack,
   img,
+  link,
 }: ProductProps) => {
   return (
-    <div className="bg-slate-900 rounded-xl py-4 px-4 flex items-center shadow-2xl m-5">
+    <div className="bg-slate-900 rounded-xl py-4 px-4 flex items-center shadow-2xl m-5 h-full vollkorn flex-col md:flex-row">
       {/* Circle with Title, Type, and Description */}
-      <div className="bg-[#E8F2F3] h-56 w-56 rounded-xl md:rounded-full text-center m-2 flex justify-center items-center flex-col">
+      <div className="bg-[#E8F2F3] h-56 w-56 rounded-xl md:rounded-full text-center m-2 flex justify-center items-center flex-col hover:hue-rotate-180">
         <h2 className="text-4xl text-[#F05331] font-semibold m-2">{title}</h2>
         <h3 className="text-black font-semibold text-lg">{type}</h3>
         <p className="text-black m-1 p-1">{description}</p>
@@ -29,7 +30,7 @@ const PortfolioCard = ({
           Stack: {stack}
         </h4>
         <figure>
-          <a href="https://www.iball247.com" target="blank" title="iball">
+          <a href={link} target="blank" title="iball">
             <Image
               src={img}
               height={400}
