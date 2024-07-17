@@ -133,7 +133,7 @@
 }
 
 .bg-image {
-  background-image: url('/heroimage.jpeg');
+  background-image: url('/heroimage.webp');
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
