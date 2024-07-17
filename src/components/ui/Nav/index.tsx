@@ -66,7 +66,7 @@ const Nav = () => {
       </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="primary" href="#">
+          <Link color="primary" href="#services">
             Services
           </Link>
         </NavbarItem>
@@ -81,7 +81,7 @@ const Nav = () => {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="primary" href="#ourCrew">
+          <Link color="primary" href="#ContactUs">
             Contact Us
           </Link>
         </NavbarItem>
