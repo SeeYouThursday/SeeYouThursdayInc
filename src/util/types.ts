@@ -1,8 +1,7 @@
 export type ProductProps = {
   title: string;
   description: string;
-  objective: string;
-  strategy: string;
-  results: string;
+  type: string;
+  stack: string;
   img: string;
 };
