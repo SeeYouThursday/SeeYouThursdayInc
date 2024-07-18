@@ -124,7 +124,7 @@ export const ContactModal = () => {
 
   return (
     <>
-      <div className="flex justify-start items-center pb-5">
+      <div className="flex justify-start items-center pb-5" id='ContactUs'>
         {/* <Tooltip
           content="Contact Me"
           placement={location === 'under' ? 'bottom' : 'right-end'}
