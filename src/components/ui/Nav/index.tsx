@@ -51,15 +51,15 @@ const Nav = () => {
       <NavbarContent justify="start">
         <NavbarItem className="">
           <NavbarBrand>
-          <a href='/'>
-            <Image
-              height={50}
-              width={50}
-              quality={100}
-              src="/solid-webdevdesign.png"
-              alt="SeeYouThursday"
-              className="w-16 h-16 mt-3 mb-3"
-            />
+            <a href="/">
+              <Image
+                height={50}
+                width={50}
+                quality={100}
+                src="/solid-webdevdesign.png"
+                alt="SeeYouThursday"
+                className="w-16 h-16 mt-3 mb-3"
+              />
             </a>
           </NavbarBrand>
         </NavbarItem>
@@ -87,25 +87,11 @@ const Nav = () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="sm:hidden">
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          />
-        </NavbarItem>
-        {/* <NavbarItem className="hidden sm:flex">
-          <NavbarBrand>
-            <Image
-              height={50}
-              width={50}
-              quality={100}
-              src="/solid-webdevdesign.png"
-              alt="SeeYouThursday"
-              className="w-16 h-16 mt-3 mb-3"
-            />
-          </NavbarBrand>
-        </NavbarItem> */}
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          className="sm:hidden"
+        />
       </NavbarContent>
-
       <NavbarMenu>
         {navItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
