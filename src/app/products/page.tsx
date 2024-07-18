@@ -14,14 +14,14 @@ const Products = () => {
       img: '/iball247/SYT-projects-laptop.png',
       link: 'https://www.iball247.com',
     },
-    {
-      title: 'Wizard of Pawz',
-      description: 'Pet Grooming',
-      type: 'Marketing',
-      stack: 'Nextjs, Tailwind',
-      img: '/PH-SYT-projects-laptop.png',
-      link: 'https://www.wizardofpawz.co',
-    },
+    // {
+    //   title: 'Wizard of Pawz',
+    //   description: 'Pet Grooming',
+    //   type: 'Marketing',
+    //   stack: 'Nextjs, Tailwind',
+    //   img: '/PH-SYT-projects-laptop.png',
+    //   link: 'https://www.wizardofpawz.co',
+    // },
   ];
   // const iball: ProductProps = {
   //   title: 'iBall247',

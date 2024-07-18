@@ -43,9 +43,9 @@ const ContactForm = () => {
 
   const sendEmail = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const publicKey: env = process.env.NEXT_EMAIL_PUBLIC_KEY!;
-    const serviceId: env = process.env.NEXT_SERVICE_ID!;
-    const templateId: env = process.env.NEXT_TEMPLATE_ID!;
+    const publicKey: any = process.env.NEXT_PUBLIC_EMAIL_PUBLIC_KEY;
+    const serviceId: any = process.env.NEXT_PUBLIC_SERVICE_ID;
+    const templateId: any = process.env.NEXT_PUBLIC_TEMPLATE_ID;
 
     if (form.current) {
       emailjs
@@ -67,11 +67,12 @@ const ContactForm = () => {
   const form = useRef();
 
   return (
-    <Card className="w-full p-8">
-      <CardHeader className="text-center w-full">Reach Out To Us!</CardHeader>
+    <>
+      <h2 className="text-center w-full">Reach Out To Us!</h2>
       <form
         onSubmit={sendEmail}
         className="flex flex-col items-center justify-between md:flex-nowrap gap-4"
+        ref={form}
       >
         <Input
           type="text"
@@ -109,7 +110,7 @@ const ContactForm = () => {
           Send It!
         </Button>
       </form>
-    </Card>
+    </>
   );
 };
 
@@ -124,12 +125,12 @@ export const ContactModal = () => {
 
   return (
     <>
-      <div className="flex justify-start items-center pb-5" id='ContactUs'>
+      <div className="flex justify-start items-center pb-5" id="ContactUs">
         {/* <Tooltip
           content="Contact Me"
           placement={location === 'under' ? 'bottom' : 'right-end'}
         > */}
-        <Button 
+        <Button
           // radius=""
           isIconOnly={true}
           aria-label={contactBtn.ariaLabel}
