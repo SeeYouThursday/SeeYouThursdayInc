@@ -68,7 +68,7 @@ const ContactForm = () => {
 
   return (
     <>
-      <h2 className="text-center w-full">Reach Out To Us!</h2>
+      <h2 className="text-center w-full pt-5 pb-5">Reach Out To Us!</h2>
       <form
         onSubmit={sendEmail}
         className="flex flex-col items-center justify-between md:flex-nowrap gap-4"
@@ -101,7 +101,7 @@ const ContactForm = () => {
         >
           Enter Your Message:
         </Textarea>
-        <Button
+        <Button className="hover:bg-purple-800 hover:text-white"
           type="submit"
           isDisabled={
             email === '' || name === '' || message === '' ? true : false
@@ -126,23 +126,10 @@ export const ContactModal = () => {
   return (
     <>
       <div className="flex justify-start items-center pb-5" id="ContactUs">
-        {/* <Tooltip
-          content="Contact Me"
-          placement={location === 'under' ? 'bottom' : 'right-end'}
-        > */}
-        <Button
-          // radius=""
-          isIconOnly={true}
-          aria-label={contactBtn.ariaLabel}
-          variant="shadow"
-          className="m-1 mt-5 hover:scale-110 w-28"
-          color="primary"
-          onPress={onOpen}
-        >
-          {/* <FontAwesomeIcon icon={contactBtn.icon} /> */}
-          <h3 className="ms-1 text-sm text-balance text-center">Contact Us!</h3>
-        </Button>
-        {/* </Tooltip> */}
+        <button className="group relative overflow-hidden rounded-full bg-purple-800 px-14 py-4 text-lg transition-all" onClick={onOpen}>
+          <span className="absolute bottom-0 left-0 h-48 w-full origin-bottom translate-y-full transform overflow-hidden rounded-full bg-white/15 transition-all duration-300 ease-out group-hover:translate-y-14"></span>
+          <span className="font-semibold text-purple-200">Work with us</span>
+        </button>
       </div>
       <Suspense fallback={<div>loading...</div>}>
         <Modal
@@ -154,13 +141,6 @@ export const ContactModal = () => {
             {(onClose) => {
               return (
                 <>
-                  <ModalHeader>
-                    <Button
-                      color="danger"
-                      variant="light"
-                      onPress={onClose}
-                    ></Button>
-                  </ModalHeader>
                   <div className="p-3">
                     <ContactForm />
                   </div>
