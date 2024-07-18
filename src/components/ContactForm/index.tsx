@@ -64,7 +64,7 @@ const ContactForm = () => {
     }
   };
 
-  const form = useRef();
+  const form = useRef<HTMLFormElement>(null);
 
   return (
     <>
