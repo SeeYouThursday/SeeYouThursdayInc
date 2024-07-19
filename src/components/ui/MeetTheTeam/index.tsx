@@ -33,7 +33,7 @@ const MeetTheTeam: React.FC = () => {
         <h2 className="mt-8 text-5xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
           Meet The Team
         </h2>
-        <p className="mt-4 mb-16 max-w-2xl  text-xl text-gray-500 md:mx-auto lg:mx-auto">
+        <p className="mt-4 mb-16 max-w-2xl text-xl text-white md:mx-auto lg:mx-auto">
           We&apos;re passionate about our work and grateful for the incredible people we collaborate with. Meet our amazing team below.
         </p>
       </div>

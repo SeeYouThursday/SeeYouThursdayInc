@@ -59,7 +59,7 @@ export function Service() {
         </h2>
       </div>
       <div className="flex justify-center items-center text-center">
-        <p className="text-xl text-gray-500 mt-4 mb-14">
+        <p className="text-xl text-white mt-4 mb-14">
           We offer a wide range of services to help you create a beautiful,
           user-friendly website.
         </p>
