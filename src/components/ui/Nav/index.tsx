@@ -19,7 +19,6 @@ const Nav = () => {
   // used to track active tab/link in nav
   const [isActive, setIsActive] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const pathname = usePathname();
 
@@ -30,28 +29,30 @@ const Nav = () => {
   };
 
   const navItems: navItem[] = [
-    { href: '/', name: 'Home', isActive: false },
-    { href: '/pricing', name: 'Pricing', isActive: false },
-    { href: '/team', name: 'Meet The Team', isActive: false },
+    // { href: '/', name: 'Home', isActive: false },
     { href: '/services', name: 'Services', isActive: false },
-    { href: '/contact', name: 'Contact Us', isActive: false },
+    { href: '#ourCrew', name: 'Meet The Team', isActive: false },
+    { href: '/pricing', name: 'Pricing', isActive: false },
+    { href: '#ContactUs', name: 'Contact Us', isActive: false },
   ];
 
   return (
     <Navbar
       maxWidth="full"
-      className="bg-nav"
+      position="static"
+      className="bg-nav-small md:bg-nav bg-center"
       classNames={{
-        toggleIcon: ['text-blue-200'],
+        toggleIcon: ['text-slate-800 font-bolder p-2'],
+        toggle: ['bg-violet-200 h-8 w-auto'],
         brand: ['rounded-full'],
         base: ['bg-slate-900'],
       }}
     >
       {/* when window is not on a phone, show links and hide hamburger menu */}
       <NavbarContent justify="start">
-        <NavbarItem className="">
+        <NavbarItem>
           <NavbarBrand>
-            <a href="/">
+            <a href="/" title="Home">
               <Image
                 height={50}
                 width={50}
@@ -59,32 +60,66 @@ const Nav = () => {
                 src="/solid-webdevdesign.png"
                 alt="SeeYouThursday"
                 className="w-16 h-16 mt-3 mb-3"
+                // bg-indigo-700 bg-opacity-50
               />
             </a>
           </NavbarBrand>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="primary" href="#services">
+      <NavbarContent
+        className="hidden sm:flex gap-4 bg-violet-200 bg-opacity-40
+          rounded-3xl p-3 m-3 h-12 ps-10 pe-10 font-bold shadow-inner backdrop-blur-sm"
+        justify="center"
+      >
+        {navItems.map((item) => {
+          return (
+            <NavbarItem
+              key={item.name}
+              isActive={pathname === item.href}
+              className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary"
+            >
+              <Link color="primary" href={item.href} className="text-white">
+                {item.name}
+              </Link>
+            </NavbarItem>
+          );
+        })}
+        {/* <NavbarItem className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary">
+          <Link
+            color="primary"
+            href="#services"
+            className="text-inherit hover:text-white"
+          >
             Services
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="primary" href="#">
+        <NavbarItem className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary">
+          <Link
+            color="primary"
+            href="/pricing"
+            className="text-inherit hover:text-white"
+          >
             Pricing
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="primary" href="#ourCrew">
+        <NavbarItem className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary">
+          <Link
+            color="primary"
+            href="#ourCrew"
+            className="text-inherit hover:text-white"
+          >
             Meet The Team
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="primary" href="#ContactUs">
+        <NavbarItem className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary">
+          <Link
+            color="primary"
+            href="#ContactUs"
+            className="text-inherit hover:text-white"
+          >
             Contact Us
           </Link>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarMenuToggle
@@ -95,7 +130,7 @@ const Nav = () => {
       <NavbarMenu>
         {navItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className="w-full" href="#" size="lg">
+            <Link className="w-full" href={item.href} size="lg">
               {item.name}
             </Link>
           </NavbarMenuItem>
