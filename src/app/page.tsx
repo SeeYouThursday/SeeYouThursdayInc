@@ -7,6 +7,7 @@ import Pricing from '@/components/ui/Pricing';
 import { ContactModal } from '@/components/ContactForm';
 import FlipCard from '@/components/ui/MeetTheTeam';
 import Service from '@/components/ui/ServicesCard';
+import {Suspense} from 'react'
 
 export default function Home() {
   return (
