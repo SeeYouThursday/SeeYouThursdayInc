@@ -3,22 +3,31 @@ import Title from "@/components/Title";
 import Hero from "@/components/ui/Hero";
 import Testimonials from "@/components/ui/Testimonials";
 import Mission from "@/components/ui/Mission";
-import Pricing from "@/components/ui/Pricing";
 import { ContactModal } from "@/components/ContactForm";
 import FlipCard from "@/components/ui/MeetTheTeam";
 import Service from "@/components/ui/ServicesCard";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center overflow-hidden bg-slate-900 relative">
       <Title />
       {/* <Hero /> */}
+      <Suspense fallback={<div>Loading...</div>}>
       <Mission />
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
       <Service />
-      <Pricing />
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
       <FlipCard />
-      <Testimonials />
-      <ContactModal />
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Testimonials />
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ContactModal />
+      </Suspense>
     </main>
   );
 }
