@@ -1,6 +1,7 @@
 'use client';
 import { useState, useRef, Suspense } from 'react';
 import { validateEmail } from '@/util/helpers';
+import ContactToast from '@/components/ui/ContactToast';
 import emailjs from '@emailjs/browser';
 import {
   Input,
@@ -15,13 +16,18 @@ import {
   Tooltip,
 } from '@nextui-org/react';
 
-const ContactForm = () => {
+const ContactForm = ({
+  onClose,
+  setSubmit,
+}: {
+  onClose: any;
+  setSubmit: any;
+}) => {
   const [validated, setValidated] = useState(false);
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [name, setName] = useState('');
   const [error, setError] = useState(false);
-
   type env = string;
   interface FormInputEvent
     extends React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> {
@@ -55,6 +61,8 @@ const ContactForm = () => {
         .then(
           () => {
             console.log('SUCCESS!');
+            setSubmit(true);
+            onClose();
           },
           (error) => {
             setError(true);
@@ -101,11 +109,16 @@ const ContactForm = () => {
         >
           Enter Your Message:
         </Textarea>
-        <Button className="hover:bg-purple-800 hover:text-white"
+        <Button
+          className="hover:bg-purple-800 hover:text-white"
           type="submit"
           isDisabled={
             email === '' || name === '' || message === '' ? true : false
           }
+          // onPress={() => {
+          //   onClose();
+          //   setSubmit(true);
+          // }}
         >
           Send It!
         </Button>
@@ -115,18 +128,21 @@ const ContactForm = () => {
 };
 
 export const ContactModal = () => {
-  const contactBtn = {
-    name: 'contact',
-    href: '/contact',
-    // icon: faAddressBook,
-    ariaLabel: 'Contact Me',
-  };
+  // const contactBtn = {
+  //   name: 'contact',
+  //   href: '/contact',
+  //   ariaLabel: 'Contact Me',
+  // };
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [submitted, setSubmit] = useState(false);
 
   return (
     <>
       <div className="flex justify-start items-center pb-5" id="ContactUs">
-        <button className="group relative overflow-hidden rounded-full bg-purple-800 px-14 py-4 text-lg transition-all" onClick={onOpen}>
+        <button
+          className="group relative overflow-hidden rounded-full bg-purple-800 px-14 py-4 text-lg transition-all"
+          onClick={onOpen}
+        >
           <span className="absolute bottom-0 left-0 h-48 w-full origin-bottom translate-y-full transform overflow-hidden rounded-full bg-white/15 transition-all duration-300 ease-out group-hover:translate-y-14"></span>
           <span className="font-semibold text-purple-200">Work with us</span>
         </button>
@@ -142,7 +158,7 @@ export const ContactModal = () => {
               return (
                 <>
                   <div className="p-3">
-                    <ContactForm />
+                    <ContactForm onClose={onClose} setSubmit={setSubmit} />
                   </div>
                 </>
               );
@@ -150,6 +166,7 @@ export const ContactModal = () => {
           </ModalContent>
         </Modal>
       </Suspense>
+      <ContactToast submit={submitted} />
     </>
   );
 };
