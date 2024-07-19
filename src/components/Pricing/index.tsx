@@ -5,7 +5,7 @@ import { BackgroundBeams } from "@/components/ui/Background-beams";
 
 const pricingPlans = [
   {
-    title: "Light",
+    title: "Lite",
     price: 150,
     description: "Ideal for touching up your website",
     features: [
@@ -25,6 +25,7 @@ const pricingPlans = [
       "Design & Development",
     ],
     highlight: true,
+    textBlack: true, // This property specifies that the text should be black
   },
   {
     title: "Pro",
@@ -41,17 +42,17 @@ const pricingPlans = [
 const Pricing = () => {
   return (
     <>
-      <div className="">
+      <div className="pb-24">
         <div className="flex justify-center items-center text-center mt-20">
-          <h2 className="text-5xl font-bold text-white pb-14">Pricing</h2>
+          <h2 className="text-5xl font-bold text-white pb-10">Pricing</h2>
         </div>
-        <section className="py-8 leading-7 text-gray-900 bg-white sm:py-12 md:py-16 lg:py-24">
+        <section className="py-8leading-7 text-white  sm:py-12 md:py-16 lg:py-8">
           <div className="box-border px-4 mx-auto border-solid sm:px-6 md:px-6 lg:px-8 max-w-7xl">
             <div className="flex flex-col items-center leading-7 text-center text-gray-900 border-0 border-gray-200">
-              <h2 className="box-border m-0 text-3xl font-semibold leading-tight tracking-tight text-black border-solid sm:text-4xl md:text-5xl">
+              <h2 className="box-border m-0 text-3xl text-white font-semibold leading-tight tracking-tight text-white border-solid sm:text-4xl md:text-5xl">
                 Simple, Transparent Pricing
               </h2>
-              <p className="box-border mt-2 text-xl text-gray-900 border-solid sm:text-2xl">
+              <p className="box-border mt-2 text-xl text-white border-solid sm:text-2xl pt-5 pb-5">
                 Pricing to fit the needs of any company size.
               </p>
             </div>
@@ -65,13 +66,13 @@ const Pricing = () => {
                   data-rounded="rounded-lg"
                   data-rounded-max="rounded-full"
                 >
-                  <h3 className="m-0 text-2xl font-semibold leading-tight tracking-tight text-black border-0 border-gray-200 sm:text-3xl md:text-4xl">
+                  <h3 className={`m-0 text-2xl font-semibold leading-tight tracking-tight border-0 border-gray-200 sm:text-3xl md:text-4xl ${plan.textBlack ? 'text-black' : 'text-white'}`}>
                     {plan.title}
                   </h3>
-                  <div className="flex items-end mt-6 leading-7 text-gray-900 border-0 border-gray-200">
+                  <div className={`flex items-end mt-6 leading-7 border-0 border-gray-200 ${plan.textBlack ? 'text-black' : 'text-white'}`}>
                     <p>starting at</p>
                   </div>
-                  <div className="flex items-end mt-6 leading-7 text-gray-900 border-0 border-gray-200">
+                  <div className={`flex items-end mt-6 leading-7 border-0 border-gray-200 ${plan.textBlack ? 'text-black' : 'text-white'}`}>
                     <p className="box-border m-0 text-6xl font-semibold leading-none border-solid">
                       ${plan.price}
                     </p>
@@ -79,10 +80,10 @@ const Pricing = () => {
                       / month
                     </p>
                   </div>
-                  <p className="mt-6 mb-5 text-base leading-normal text-left text-gray-900 border-0 border-gray-200">
+                  <p className={`mt-6 mb-5 text-base leading-normal text-left border-0 border-gray-200 ${plan.textBlack ? 'text-black' : 'text-white'}`}>
                     {plan.description}
                   </p>
-                  <ul className="flex-1 p-0 mt-4 ml-5 leading-7 text-gray-900 border-0 border-gray-200">
+                  <ul className={`flex-1 p-0 mt-4 ml-5 leading-7 border-0 border-gray-200 ${plan.textBlack ? 'text-black' : 'text-white'}`}>
                     {plan.features.map((feature, idx) => (
                       <li
                         key={idx}
@@ -107,13 +108,6 @@ const Pricing = () => {
                       </li>
                     ))}
                   </ul>
-                  <button
-                    className="inline-flex justify-center w-full px-4 py-3 mt-8 font-sans text-sm leading-none text-center text-blue-600 no-underline bg-transparent border border-blue-600 rounded-md cursor-pointer hover:bg-blue-700 hover:border-blue-700 hover:text-white focus-within:bg-blue-700 focus-within:border-blue-700 focus-within:text-white sm:text-base md:text-lg"
-                    data-primary="blue-600"
-                    data-rounded="rounded-md"
-                  >
-                    Select Plan
-                  </button>
                 </div>
               ))}
             </div>
