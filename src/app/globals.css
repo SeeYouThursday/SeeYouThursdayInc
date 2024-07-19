@@ -142,7 +142,15 @@
 .bg-nav {
   background-color: transparent;
   background-image: url('/heroimage.webp');
-  background-position: center;
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-nav-small {
+  background-color: transparent;
+  background-image: url('/rework-try-again.jpeg');
+  /* background-position: bottom; */
   background-repeat: no-repeat;
   background-size: cover;
 }
