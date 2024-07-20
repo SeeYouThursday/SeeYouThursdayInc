@@ -113,7 +113,9 @@ const Pricing = () => {
             </div>
           </div>
         </section>
+        <div className="hidden sm:block">
         <BackgroundBeams />
+        </div>
       </div>
     </>
   );
