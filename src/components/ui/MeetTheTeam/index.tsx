@@ -18,7 +18,7 @@ type Team = {
 };
 
 const team: Team[] = [
-  { description: 'Lead Developer', image: '/SeeYouThursdayGlass.png', rotate: 'y', subtitle: 'Founder', title: 'Brian Galyen' },
+  { description: 'Lead Developer', image: '/BrianG.webp', rotate: 'y', subtitle: 'Founder', title: 'Brian Galyen' },
   { description: 'Developer', image: '/devon-thinks.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Devon Whitaker' },
   { description: 'Designer', image: '/JojoU.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Joanna Underwood' }
 ];
