@@ -6,7 +6,7 @@ const Mission = () => {
   return (
     <div className="text-white overflow-y-auto max-h-screen flex flex-col mt-10 text-balance text-center bg-slate-900">
       {/* <ScrollAnimation animateIn="fadeIn" delay={0.1 * 2000} animateOnce> */}
-        <h2 className="text-5xl font-bold text-center mt-7 mb-7">Our Mission</h2>
+        <h2 className="text-5xl font-bold text-sky-300 text-center mt-7 mb-7">Our Mission</h2>
       {/* </ScrollAnimation> */}
       {/* <ScrollAnimation
         animateIn="fadeIn"

@@ -18,7 +18,7 @@ type Team = {
 };
 
 const team: Team[] = [
-  { description: 'Lead Developer', image: '/SeeYouThursdayGlass.png', rotate: 'y', subtitle: 'Founder', title: 'Brian Galyen' },
+  { description: 'Lead Developer', image: '/BrianG.webp', rotate: 'y', subtitle: 'Founder', title: 'Brian Galyen' },
   { description: 'Developer', image: '/devon-thinks.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Devon Whitaker' },
   { description: 'Designer', image: '/JojoU.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Joanna Underwood' }
 ];
@@ -30,7 +30,7 @@ const MeetTheTeam: React.FC = () => {
         <h3 className="inline-block bg-purple-200 text-purple-800 px-4 py-4 rounded-full text-3xl font-semibold uppercase tracking-wide">
           Our Crew
         </h3>
-        <h2 className="mt-8 text-5xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+        <h2 className="mt-8 text-5xl leading-8 font-extrabold tracking-tight text-sky-300 sm:text-4xl">
           Meet The Team
         </h2>
         <p className="mt-4 mb-16 max-w-2xl text-xl text-white md:mx-auto lg:mx-auto">

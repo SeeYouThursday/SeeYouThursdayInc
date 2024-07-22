@@ -54,7 +54,7 @@ export function Service() {
   return (
     <section>
       <div className="flex justify-center items-center text-center">
-        <h2 className="text-5xl mt-20 font-bold tracking-wide text-white ">
+        <h2 className="text-5xl mt-20 font-bold tracking-wide text-sky-300">
           Our Services
         </h2>
       </div>

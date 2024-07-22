@@ -1,4 +1,5 @@
 import { cn } from "@/util/cn";
+import Image from "next/image";
 
 interface FlipCardProps extends React.HTMLAttributes<HTMLDivElement> {
   image: string;
@@ -33,14 +34,14 @@ export default function FlipCard({
       >
         {/* Front */}
         <div className="absolute h-full w-full [backface-visibility:hidden]">
-          <img
+          <Image
             src={image}
             alt="image"
-            className="h-full w-full rounded-2xl object-cover shadow-2xl shadow-black/40"
+            width={500}
+            height={500}
+            className="h-full w-full rounded-2xl object-cover"
           />
-          <div className="absolute bottom-4 left-4 text-xl font-bold text-white">{title}</div>
         </div>
-
         {/* Back */}
         <div
           className={cn(
@@ -55,6 +56,8 @@ export default function FlipCard({
             </p>
           </div>
         </div>
+      </div>
+      <div className="bottom-4  left-4 text-xl text-center font-bold bg-opacity-80 text-violet-200 mt-3">{title}
       </div>
     </div>
   );
