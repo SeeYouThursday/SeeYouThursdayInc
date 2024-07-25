@@ -14,6 +14,7 @@ import {
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { ContactModal } from '@/components/ContactForm';
 
 const Nav = () => {
   // used to track active tab/link in nav
@@ -30,22 +31,26 @@ const Nav = () => {
 
   const navItems: navItem[] = [
     // { href: '/', name: 'Home', isActive: false },
-    { href: '/services', name: 'Services', isActive: false },
+    // { href: '/services', name: 'Services', isActive: false },
     { href: '#ourCrew', name: 'Meet The Team', isActive: false },
     { href: '/pricing', name: 'Pricing', isActive: false },
-    { href: '#ContactUs', name: 'Contact Us', isActive: false },
+    // { href: '#ContactUs', name: 'Contact Us', isActive: false },
   ];
 
   return (
     <Navbar
+      isBlurred
+      isBordered
       maxWidth="full"
       position="static"
-      className="bg-nav-small md:bg-nav bg-center"
+      className="bg-nav md:bg-nav bg-center"
+      height={'8rem'}
       classNames={{
         toggleIcon: ['text-slate-800 font-bolder p-2'],
         toggle: ['bg-violet-200 h-8 w-auto'],
         brand: ['rounded-full'],
         base: ['bg-slate-900'],
+        menu: ['bg-violet-200 max-h-40'],
       }}
     >
       {/* when window is not on a phone, show links and hide hamburger menu */}
@@ -54,6 +59,15 @@ const Nav = () => {
           <NavbarBrand>
             <a href="/" title="Home">
               <Image
+                height={100}
+                width={100}
+                quality={100}
+                src="/revised-logo.png"
+                alt="SeeYouThursday"
+                className="w-auto h-auto mt-3 mb-3"
+                // bg-indigo-700 bg-opacity-50
+              />
+              {/* <Image
                 height={50}
                 width={50}
                 quality={100}
@@ -61,7 +75,7 @@ const Nav = () => {
                 alt="SeeYouThursday"
                 className="w-16 h-16 mt-3 mb-3"
                 // bg-indigo-700 bg-opacity-50
-              />
+              /> */}
             </a>
           </NavbarBrand>
         </NavbarItem>
@@ -76,7 +90,7 @@ const Nav = () => {
             <NavbarItem
               key={item.name}
               isActive={pathname === item.href}
-              className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary"
+              className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary"
             >
               <Link color="primary" href={item.href} className="text-white">
                 {item.name}
@@ -84,42 +98,10 @@ const Nav = () => {
             </NavbarItem>
           );
         })}
-        {/* <NavbarItem className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary">
-          <Link
-            color="primary"
-            href="#services"
-            className="text-inherit hover:text-white"
-          >
-            Services
-          </Link>
+        {/* Contact Modal */}
+        <NavbarItem>
+          <ContactModal location="nav" />
         </NavbarItem>
-        <NavbarItem className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary">
-          <Link
-            color="primary"
-            href="/pricing"
-            className="text-inherit hover:text-white"
-          >
-            Pricing
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary">
-          <Link
-            color="primary"
-            href="#ourCrew"
-            className="text-inherit hover:text-white"
-          >
-            Meet The Team
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary">
-          <Link
-            color="primary"
-            href="#ContactUs"
-            className="text-inherit hover:text-white"
-          >
-            Contact Us
-          </Link>
-        </NavbarItem> */}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarMenuToggle
