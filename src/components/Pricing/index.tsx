@@ -1,11 +1,8 @@
 'use client'
 
-import React, { Suspense } from "react";
-const BackgroundBeams = React.lazy(async () => {
-  const component = await import('@/components/ui/Background-beams');
-  component.default.displayName = 'BackgroundBeams';
-  return component;
-});
+import React from "react";
+import ShootingStars from "../ui/shooting-star";
+import { StarsBackground } from "../ui/stars-background";
 
 const pricingPlans = [
   {
@@ -56,7 +53,8 @@ type PricingPlanProps = {
 
 const PricingPlan: React.FC<PricingPlanProps> = React.memo(({ plan }) => (
   <div
-    className={`relative z-10 flex flex-col items-center max-w-md p-4 mx-auto my-0 border border-solid rounded-lg sm:my-0 sm:p-6 md:my-8 md:p-8 ${
+    className={`relative z-10 flex flex-col items-center w-full max-w-sm p-4 mx-auto my-2 border border-solid rounded-lg sm:my-0 sm:p-6 md:my-4 md:p-6
+      lg:p-8 ${
       plan.highlight ? 'bg-white border-4 border-blue-600' : ''
     }`}
     data-rounded="rounded-lg"
@@ -114,31 +112,28 @@ const Pricing = () => {
     <>
       <div className="pb-24">
         <div className="flex justify-center items-center text-center mt-20">
-          <h2 className="text-5xl font-bold text-sky-300 pb-10">Pricing</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-sky-300 pb-5 sm:pb-10">Pricing</h2>
         </div>
         <section className="py-8 leading-7 text-white sm:py-12 md:py-16 lg:py-8">
           <div className="box-border px-4 mx-auto border-solid sm:px-6 md:px-6 lg:px-8 max-w-7xl">
             <div className="flex flex-col items-center leading-7 text-center text-gray-900 border-0 border-gray-200">
-              <h2 className="box-border m-0 text-3xl text-white font-semibold leading-tight tracking-tight text-white border-solid sm:text-4xl md:text-5xl">
+              <h2 className="box-border m-0 text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white font-semibold leading-tight tracking-tight border-solid">
                 Simple, Transparent Pricing
               </h2>
               <p className="box-border mt-2 text-xl text-white border-solid sm:text-2xl pt-5 pb-5">
                 Pricing to fit the needs of any company size.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-4 mt-4 leading-7 text-gray-900 border-0 border-gray-200 sm:mt-6 sm:gap-6 md:mt-8 md:gap-0 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 mt-4 leading-7 text-gray-900 border-0 border-gray-200 sm:mt-6 sm:gap-6 md:mt-8 md:gap-0 lg:grid-cols-3 sm:grid-cols-2">
               {pricingPlans.map((plan, index) => (
                 <PricingPlan key={index} plan={plan} />
               ))}
             </div>
           </div>
         </section>
-        <div className="hidden sm:block md:block lg:block xl:block">
-          <Suspense fallback={<div>Loading...</div>}>
-            <BackgroundBeams />
-          </Suspense>
+          <ShootingStars />
+      <StarsBackground />
         </div>
-      </div>
     </>
   );
 };
