@@ -9,18 +9,22 @@ import FlipCard from '@/components/MeetTeam';
 //   { id: 3, name: 'Joanna Underwood', position: 'Co-Founder & Designer', imageUrl: '/JoannaU.png' },
 // ];
 
-type Team = {
-  image: string;
-  title: string;
+type FlipCardProps = {
+  key: number;
   description: string;
-  subtitle?: string;
+  image: string;
   rotate?: 'x' | 'y';
+  subtitle?: string;
+  title: string;
+  fact?: string;
 };
 
-const team: Team[] = [
-  { description: 'Lead Developer', image: '/BrianG.webp', rotate: 'y', subtitle: 'Founder', title: 'Brian Galyen' },
-  { description: 'Developer', image: '/devon-thinks.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Devon Whitaker' },
-  { description: 'Designer', image: '/JojoU.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Joanna Underwood' }
+type Team = FlipCardProps[];
+
+const team: Team = [
+  { key: 1, description: 'Lead Developer', image: '/BrianG.webp', rotate: 'y', subtitle: 'Founder', title: 'Brian Galyen', fact: 'I love to play the guitar.' },
+  { key: 2, description: 'Developer', image: '/devon-thinks.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Devon Whitaker', fact: 'My favorite college football team is The Oregon Ducks... Sco Ducks!!!' },
+  { key: 3, description: 'Designer', image: '/JojoU.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Joanna Underwood', fact: 'I love to read books.' }
 ];
 
 const MeetTheTeam: React.FC = () => {
@@ -46,6 +50,7 @@ const MeetTheTeam: React.FC = () => {
             rotate={team.rotate}
             subtitle={team.subtitle}
             title={team.title}
+            fact={team.fact} 
           />
         ))}
       </div>
