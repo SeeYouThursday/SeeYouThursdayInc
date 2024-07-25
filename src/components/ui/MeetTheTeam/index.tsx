@@ -3,11 +3,6 @@
 import React from 'react';
 import FlipCard from '@/components/MeetTeam';
 
-// const teamMembers = [
-//   { id: 1, name: 'Brian Galyen', position: 'Founder & Lead Developer', imageUrl: '/BrianG.webp' },
-//   { id: 2, name: 'Devon Whitaker', position: 'Co-Founder & Developer', imageUrl: '/DevonW.webp' },
-//   { id: 3, name: 'Joanna Underwood', position: 'Co-Founder & Designer', imageUrl: '/JoannaU.png' },
-// ];
 
 type FlipCardProps = {
   key: number;
@@ -22,7 +17,7 @@ type FlipCardProps = {
 type Team = FlipCardProps[];
 
 const team: Team = [
-  { key: 1, description: 'Lead Developer', image: '/BrianG.webp', rotate: 'y', subtitle: 'Founder', title: 'Brian Galyen', fact: 'I love to play the guitar.' },
+  { key: 1, description: 'Lead Developer', image: '/BrianG.webp', rotate: 'y', subtitle: 'Founder', title: 'Brian Galyen', fact: 'I\'m a huge anime fan.' },
   { key: 2, description: 'Developer', image: '/devon-thinks.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Devon Whitaker', fact: 'My favorite college football team is The Oregon Ducks... Sco Ducks!!!' },
   { key: 3, description: 'Designer', image: '/JojoU.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Joanna Underwood', fact: 'I love to read books.' }
 ];
