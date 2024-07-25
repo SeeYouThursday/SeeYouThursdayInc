@@ -184,7 +184,7 @@ export const ContactModal = ({ location }: { location: string }) => {
         <button
           className={
             location === 'nav'
-              ? `${buttonStyle} hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary`
+              ? `${buttonStyle} hover:bg-violet-600 p-2 px-3 rounded-3xl text-white`
               : `${buttonStyle} rounded-full bg-purple-800 px-14 py-4 text-lg`
           }
           onClick={onOpen}
@@ -196,7 +196,7 @@ export const ContactModal = ({ location }: { location: string }) => {
                 : `${animationStyle} h-48`
             }
           ></span>
-          <span className="font-semibold text-purple-200">Work with us</span>
+          <span className="font-semibold text-white text-md">Work with Us</span>
         </button>
       </div>
       <Suspense fallback={<div>loading...</div>}>

@@ -11,10 +11,26 @@ import {
   NavbarMenuItem,
   Link,
   Button,
+  Dropdown,
+  DropdownItem,
+  DropdownTrigger,
+  DropdownMenu,
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ContactModal } from '@/components/ContactForm';
+import { IconChevronDown, IconHome } from '@tabler/icons-react';
+
+interface navItem {
+  href: string;
+  name: string;
+  isActive: boolean;
+}
+
+interface dropDown extends navItem {
+  icon: string;
+  key: string;
+}
 
 const Nav = () => {
   // used to track active tab/link in nav
@@ -22,19 +38,34 @@ const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const pathname = usePathname();
-
-  type navItem = {
-    href: string;
-    name: string;
-    isActive: boolean;
-  };
+  console.log(pathname);
 
   const navItems: navItem[] = [
-    // { href: '/', name: 'Home', isActive: false },
-    // { href: '/services', name: 'Services', isActive: false },
-    { href: '#ourCrew', name: 'Meet The Team', isActive: false },
     { href: '/pricing', name: 'Pricing', isActive: false },
-    // { href: '#ContactUs', name: 'Contact Us', isActive: false },
+  ];
+
+  const dropdown = [
+    {
+      href: '#services',
+      name: 'Services',
+      icon: '',
+      key: 'Services',
+      isActive: false,
+    },
+    {
+      href: '#ourCrew',
+      name: 'Meet The Team',
+      icon: '',
+      key: 'Team',
+      isActive: false,
+    },
+    {
+      href: '#ContactUs',
+      name: 'Contact Us',
+      icon: '',
+      key: 'Contact',
+      isActive: false,
+    },
   ];
 
   return (
@@ -64,18 +95,9 @@ const Nav = () => {
                 quality={100}
                 src="/revised-logo.png"
                 alt="SeeYouThursday"
-                className="w-auto h-auto mt-3 mb-3"
+                className="w-auto min-w-24 h-auto mt-3 mb-3"
                 // bg-indigo-700 bg-opacity-50
               />
-              {/* <Image
-                height={50}
-                width={50}
-                quality={100}
-                src="/solid-webdevdesign.png"
-                alt="SeeYouThursday"
-                className="w-16 h-16 mt-3 mb-3"
-                // bg-indigo-700 bg-opacity-50
-              /> */}
             </a>
           </NavbarBrand>
         </NavbarItem>
@@ -85,6 +107,21 @@ const Nav = () => {
           rounded-3xl p-3 m-3 h-12 ps-10 pe-10 font-bold shadow-inner backdrop-blur-sm"
         justify="center"
       >
+        {pathname === '/' ? (
+          <NavDropDown dropdown={dropdown} />
+        ) : (
+          <NavbarItem
+            // isActive={pathname === item.href}
+            className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary"
+          >
+            <div className="flex items-start">
+              <Link color="primary" href="/" className="text-white ">
+                Home
+              </Link>
+            </div>
+          </NavbarItem>
+        )}
+
         {navItems.map((item) => {
           return (
             <NavbarItem
@@ -119,6 +156,43 @@ const Nav = () => {
         ))}
       </NavbarMenu>
     </Navbar>
+  );
+};
+
+const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => {
+  return (
+    <Dropdown className="navLinkStyle">
+      <NavbarItem>
+        <DropdownTrigger>
+          <Button
+            disableRipple
+            className="hover:bg-violet-600 p-2 px-3 rounded-3xl text-medium text-white font-semibold"
+            endContent={<IconChevronDown stroke={2} />}
+            radius="sm"
+            variant="light"
+          >
+            Home
+          </Button>
+        </DropdownTrigger>
+      </NavbarItem>
+      <NavbarItem>
+        <DropdownMenu
+          aria-label="ACME features"
+          className="w-[340px]"
+          itemClasses={{
+            base: 'gap-4',
+          }}
+        >
+          {dropdown.map((item) => {
+            return (
+              <DropdownItem key={item.key} href={item.href}>
+                {item.name}
+              </DropdownItem>
+            );
+          })}
+        </DropdownMenu>
+      </NavbarItem>
+    </Dropdown>
   );
 };
 

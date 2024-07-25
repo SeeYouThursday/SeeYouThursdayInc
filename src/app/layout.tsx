@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <NextUIProvider>
           <Providers>
-            <Nav />
+            <Nav location="home" />
             {children}
             <Footer links={links} />
           </Providers>
