@@ -11,9 +11,26 @@ import {
   NavbarMenuItem,
   Link,
   Button,
+  Dropdown,
+  DropdownItem,
+  DropdownTrigger,
+  DropdownMenu,
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { ContactModal } from '@/components/ContactForm';
+import { IconChevronDown, IconHome } from '@tabler/icons-react';
+
+interface navItem {
+  href: string;
+  name: string;
+  isActive: boolean;
+}
+
+interface dropDown extends navItem {
+  icon: string;
+  key: string;
+}
 
 const Nav = () => {
   // used to track active tab/link in nav
@@ -21,31 +38,50 @@ const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const pathname = usePathname();
-
-  type navItem = {
-    href: string;
-    name: string;
-    isActive: boolean;
-  };
+  console.log(pathname);
 
   const navItems: navItem[] = [
-    // { href: '/', name: 'Home', isActive: false },
-    { href: '/services', name: 'Services', isActive: false },
-    { href: '#ourCrew', name: 'Meet The Team', isActive: false },
     { href: '/pricing', name: 'Pricing', isActive: false },
-    { href: '#ContactUs', name: 'Contact Us', isActive: false },
+  ];
+
+  const dropdown = [
+    {
+      href: '#services',
+      name: 'Services',
+      icon: '',
+      key: 'Services',
+      isActive: false,
+    },
+    {
+      href: '#ourCrew',
+      name: 'Meet The Team',
+      icon: '',
+      key: 'Team',
+      isActive: false,
+    },
+    {
+      href: '#ContactUs',
+      name: 'Contact Us',
+      icon: '',
+      key: 'Contact',
+      isActive: false,
+    },
   ];
 
   return (
     <Navbar
+      isBlurred
+      isBordered
       maxWidth="full"
       position="static"
-      className="bg-nav-small md:bg-nav bg-center"
+      className="bg-nav md:bg-nav bg-center"
+      height={'8rem'}
       classNames={{
         toggleIcon: ['text-slate-800 font-bolder p-2'],
         toggle: ['bg-violet-200 h-8 w-auto'],
         brand: ['rounded-full'],
         base: ['bg-slate-900'],
+        menu: ['bg-violet-200 max-h-40'],
       }}
     >
       {/* when window is not on a phone, show links and hide hamburger menu */}
@@ -54,12 +90,12 @@ const Nav = () => {
           <NavbarBrand>
             <a href="/" title="Home">
               <Image
-                height={50}
-                width={50}
+                height={100}
+                width={100}
                 quality={100}
-                src="/solid-webdevdesign.png"
+                src="/revised-logo.png"
                 alt="SeeYouThursday"
-                className="w-16 h-16 mt-3 mb-3"
+                className="w-auto min-w-24 h-auto mt-3 mb-3"
                 // bg-indigo-700 bg-opacity-50
               />
             </a>
@@ -71,12 +107,27 @@ const Nav = () => {
           rounded-3xl p-3 m-3 h-12 ps-10 pe-10 font-bold shadow-inner backdrop-blur-sm"
         justify="center"
       >
+        {pathname === '/' ? (
+          <NavDropDown dropdown={dropdown} />
+        ) : (
+          <NavbarItem
+            // isActive={pathname === item.href}
+            className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary"
+          >
+            <div className="flex items-start">
+              <Link color="primary" href="/" className="text-white ">
+                Home
+              </Link>
+            </div>
+          </NavbarItem>
+        )}
+
         {navItems.map((item) => {
           return (
             <NavbarItem
               key={item.name}
               isActive={pathname === item.href}
-              className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary"
+              className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary"
             >
               <Link color="primary" href={item.href} className="text-white">
                 {item.name}
@@ -84,42 +135,10 @@ const Nav = () => {
             </NavbarItem>
           );
         })}
-        {/* <NavbarItem className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary">
-          <Link
-            color="primary"
-            href="#services"
-            className="text-inherit hover:text-white"
-          >
-            Services
-          </Link>
+        {/* Contact Modal */}
+        <NavbarItem>
+          <ContactModal location="nav" />
         </NavbarItem>
-        <NavbarItem className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary">
-          <Link
-            color="primary"
-            href="/pricing"
-            className="text-inherit hover:text-white"
-          >
-            Pricing
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary">
-          <Link
-            color="primary"
-            href="#ourCrew"
-            className="text-inherit hover:text-white"
-          >
-            Meet The Team
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="hover:bg-violet-600 p-2 ps-3 pe-3 rounded-3xl hover:text-white text-primary">
-          <Link
-            color="primary"
-            href="#ContactUs"
-            className="text-inherit hover:text-white"
-          >
-            Contact Us
-          </Link>
-        </NavbarItem> */}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarMenuToggle
@@ -137,6 +156,43 @@ const Nav = () => {
         ))}
       </NavbarMenu>
     </Navbar>
+  );
+};
+
+const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => {
+  return (
+    <Dropdown className="navLinkStyle">
+      <NavbarItem>
+        <DropdownTrigger>
+          <Button
+            disableRipple
+            className="hover:bg-violet-600 p-2 px-3 rounded-3xl text-medium text-white font-semibold"
+            endContent={<IconChevronDown stroke={2} />}
+            radius="sm"
+            variant="light"
+          >
+            Home
+          </Button>
+        </DropdownTrigger>
+      </NavbarItem>
+      <NavbarItem>
+        <DropdownMenu
+          aria-label="ACME features"
+          className="w-[340px]"
+          itemClasses={{
+            base: 'gap-4',
+          }}
+        >
+          {dropdown.map((item) => {
+            return (
+              <DropdownItem key={item.key} href={item.href}>
+                {item.name}
+              </DropdownItem>
+            );
+          })}
+        </DropdownMenu>
+      </NavbarItem>
+    </Dropdown>
   );
 };
 
