@@ -68,8 +68,8 @@ export const InfiniteCards = ({
 
   return (
     <div className=" flex flex-col md:mx-auto w-screen text-center pt-10 text-white">
-      <h2 className="mb-8 mt-8 text-5xl font-bold md:mb-4 md:text-xl lg:text-2xl">CLIENT TESTIMONIAL</h2>
-      <p className="mb-4 text-xl text-gray-500 uppercase md:mb-8 md:text-sm">Positive Testimonials That Motivate Us</p>
+      <h2 className="mb-8 mt-8 text-5xl font-bold text-sky-300 md:mb-4 md:text-xl lg:text-2xl">CLIENT TESTIMONIAL</h2>
+      <p className="mb-4 text-xl text-white uppercase md:mb-8 md:text-sm">Positive Testimonials That Motivate Us</p>
       <div className="flex justify-center max-w-full">
       <div
         ref={containerRef}
