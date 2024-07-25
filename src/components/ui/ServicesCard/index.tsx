@@ -53,12 +53,12 @@ export function Service() {
   return (
     <section id="services">
       <div className="flex justify-center items-center text-center">
-        <h2 className="text-5xl mt-20 font-bold tracking-wide text-white ">
+        <h2 className="text-5xl mt-20 font-bold tracking-wide text-sky-300">
           Our Services
         </h2>
       </div>
       <div className="flex justify-center items-center text-center">
-        <p className="text-xl text-gray-500 mt-4 mb-14">
+        <p className="text-xl text-white mt-4 mb-14">
           We offer a wide range of services to help you create a beautiful,
           user-friendly website.
         </p>

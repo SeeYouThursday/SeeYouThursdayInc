@@ -23,13 +23,15 @@ export const ContactForm = ({
   onClose: any;
   setSubmit: any;
 }) => {
+
   // const [validated, setValidated] = useState(false);
+
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [name, setName] = useState('');
   const [error, setError] = useState(false);
-  const [plan, setPlan] = useState('');
 
+  const [plan, setPlan] = useState('');
   const plans: string[] = ['Lite', 'Basic', 'Pro'];
 
   interface FormInputEvent
@@ -148,6 +150,10 @@ export const ContactForm = ({
           isDisabled={
             email === '' || name === '' || message === '' ? true : false
           }
+          // onPress={() => {
+          //   onClose();
+          //   setSubmit(true);
+          // }}
         >
           Send It!
         </Button>
