@@ -32,9 +32,8 @@ const ContactUs = () => {
             className="w-56 h-56 hidden md:block p-3 rounded-md "
           />
         </div>
-        {/* <Spacer x={4} /> */}
-        <div className="bg-[url('/contact-background.png')] bg-center bg-no-repeat bg-contain overflow-hidden m-3 rounded-box border-3">
-          <div className="flex flex-col justify-center items-center p-3 backdrop-blur-2xl text-white shadow-3xl">
+        <div className="bg-[url('/contact-background1.webp')] bg-no-repeat bg-cover overflow-hidden m-3 rounded-box border-3">
+          <div className="flex flex-col justify-center items-center text-white shadow-3xl p-3">
             <h3 className="">Let Us Help You!</h3>
             <ContactForm location="contact-page" />
           </div>
