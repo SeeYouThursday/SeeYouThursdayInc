@@ -3,7 +3,6 @@ import { useState, useRef, Suspense, ChangeEvent } from 'react';
 import { validateEmail } from '@/util/helpers';
 import ContactToast from '@/components/ui/ContactToast';
 import emailjs from '@emailjs/browser';
-import Image from 'next/image';
 import {
   Input,
   Button,
@@ -14,23 +13,23 @@ import {
   Select,
   SelectItem,
   Tooltip,
+  ModalHeader,
 } from '@nextui-org/react';
 
 export const ContactForm = ({
   onClose,
-  setSubmit,
+  location,
 }: {
-  onClose: any;
-  setSubmit: any;
+  onClose?: any;
+  location: string;
 }) => {
-
   // const [validated, setValidated] = useState(false);
 
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [name, setName] = useState('');
   const [error, setError] = useState(false);
-
+  const [submitted, setSubmit] = useState(false);
   const [plan, setPlan] = useState('');
   const plans: string[] = ['Lite', 'Basic', 'Pro'];
 
@@ -66,13 +65,15 @@ export const ContactForm = ({
       e.preventDefault();
       e.stopPropagation();
       emailjs
-        .sendForm(serviceId, templateId, '#contact', {
+        .sendForm(serviceId, templateId, '#contactForm', {
           publicKey: publicKey,
         })
         .then(
           () => {
             setSubmit(true);
-            onClose();
+            if (location === 'modal') {
+              onClose();
+            }
           },
           (error) => {
             setError(true);
@@ -86,13 +87,9 @@ export const ContactForm = ({
 
   return (
     <section className="flex flex-col justify-center w-full">
-      <h2 className="text-center w-full pt-5 pb-5 text-slate-900 text-2xl">
-        Reach Out To Us!
-      </h2>
-      {/* <div className="flex w-full items-center justify-evenly"> */}
       <form
         onSubmit={sendEmail}
-        id="contact"
+        id="contactForm"
         className="flex flex-col items-center justify-between md:flex-nowrap gap-4 text-black"
         ref={form}
       >
@@ -150,24 +147,11 @@ export const ContactForm = ({
           isDisabled={
             email === '' || name === '' || message === '' ? true : false
           }
-          // onPress={() => {
-          //   onClose();
-          //   setSubmit(true);
-          // }}
         >
           Send It!
         </Button>
       </form>
-      {/* For when we ditch the modal */}
-      {/* <Image
-          src="/SeeYouThursdayGlass.png"
-          width={1000}
-          height={1000}
-          quality={100}
-          alt="contact image"
-          className="w-36 h-36 p-3 rounded-md bg-[#B1B4BF]"
-        /> */}
-      {/* </div> */}
+      <ContactToast submit={submitted} />
     </section>
   );
 };
@@ -191,9 +175,12 @@ export const ContactModal = ({ location }: { location: string }) => {
           className={
             location === 'nav'
               ? `${buttonStyle} hover:bg-violet-600 p-2 px-3 rounded-3xl text-white`
-              : `${buttonStyle} rounded-full bg-purple-800 px-14 py-4 text-lg`
+              : location === 'navMobile'
+                ? `${buttonStyle} hover:bg-violet-600 p-2 px-3 rounded-3xl text-white bg-purple-800`
+                : `${buttonStyle} rounded-full bg-purple-800 px-14 py-4 text-lg`
           }
           onClick={onOpen}
+          id={location === 'nav' ? 'navContact' : 'contact'}
         >
           <span
             className={
@@ -213,12 +200,17 @@ export const ContactModal = ({ location }: { location: string }) => {
           className=""
           // size="xl"
         >
+          <ModalHeader>
+            <h2 className="text-center w-full pt-5 pb-5 text-2xl">
+              Reach Out To Us!
+            </h2>
+          </ModalHeader>
           <ModalContent>
             {(onClose) => {
               return (
                 <>
                   <div className="p-3">
-                    <ContactForm onClose={onClose} setSubmit={setSubmit} />
+                    <ContactForm onClose={onClose} location="modal" />
                   </div>
                 </>
               );
@@ -226,7 +218,7 @@ export const ContactModal = ({ location }: { location: string }) => {
           </ModalContent>
         </Modal>
       </Suspense>
-      <ContactToast submit={submitted} />
+      {/* <ContactToast submit={submitted} /> */}
     </>
   );
 };
