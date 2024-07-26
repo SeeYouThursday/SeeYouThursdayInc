@@ -60,8 +60,8 @@ export default function FlipCard({
         </div>
         {fact && (
           <div className="mt-4"> 
-            <h2 className="text-sm font-semibold text-yellow-300">Fun Fact:</h2>
-            <p className="text-xs italic text-gray-300 mt-1">{fact}</p>
+            <h2 className="text-md font-semibold text-yellow-300">Fun Fact:</h2>
+            <p className="text-sm italic text-gray-300 mt-1">{fact}</p>
           </div>
         )}
       </div>

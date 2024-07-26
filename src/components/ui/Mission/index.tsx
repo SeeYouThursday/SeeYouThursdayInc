@@ -9,7 +9,7 @@ const Mission = () => {
       id="mission"
     >
       {/* <ScrollAnimation animateIn="fadeIn" delay={0.1 * 2000} animateOnce> */}
-      <h2 className="text-5xl font-bold text-center mt-7 mb-7">Our Mission</h2>
+      <h2 className="text-5xl font-bold text-center text-sky-300 mt-7 mb-7">Our Mission</h2>
       {/* </ScrollAnimation> */}
       {/* <ScrollAnimation
         animateIn="fadeIn"
