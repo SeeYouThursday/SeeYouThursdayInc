@@ -13,6 +13,7 @@ import {
   Select,
   SelectItem,
   Tooltip,
+  ModalHeader,
 } from '@nextui-org/react';
 
 export const ContactForm = ({
@@ -86,10 +87,6 @@ export const ContactForm = ({
 
   return (
     <section className="flex flex-col justify-center w-full">
-      <h2 className="text-center w-full pt-5 pb-5 text-slate-900 text-2xl">
-        Reach Out To Us!
-      </h2>
-
       <form
         onSubmit={sendEmail}
         id="contactForm"
@@ -203,6 +200,11 @@ export const ContactModal = ({ location }: { location: string }) => {
           className=""
           // size="xl"
         >
+          <ModalHeader>
+            <h2 className="text-center w-full pt-5 pb-5 text-2xl">
+              Reach Out To Us!
+            </h2>
+          </ModalHeader>
           <ModalContent>
             {(onClose) => {
               return (

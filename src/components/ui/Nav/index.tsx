@@ -155,10 +155,11 @@ const Nav = () => {
             </div>
           </NavbarMenuItem>
         ))}
-        <div className="flex justify-end items-end h-full">
-          <NavbarMenuItem>
-            <ContactModal location="navMobile" />
-          </NavbarMenuItem>
+        <div className="flex hover:translate-x-2">
+          <IconComet className=" hover:text-blue-900 -rotate-45 text-yellow-300" />
+          <Link href="/contact-us" className="w-full text-white ps-1" size="lg">
+            Contact Us!
+          </Link>
         </div>
       </NavbarMenu>
     </Navbar>
