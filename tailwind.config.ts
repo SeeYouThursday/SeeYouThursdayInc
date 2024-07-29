@@ -1,19 +1,25 @@
 import type { Config } from 'tailwindcss';
 const defaultTheme = require('tailwindcss/defaultTheme');
 const { nextui } = require('@nextui-org/react');
-const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default;
+const flattenColorPalette =
+  require('tailwindcss/lib/util/flattenColorPalette').default;
 
-
-const addVariablesForColors = ({ addBase, theme }: { addBase: any, theme: any }) => {
-  let allColors = flattenColorPalette(theme("colors"));
+const addVariablesForColors = ({
+  addBase,
+  theme,
+}: {
+  addBase: any;
+  theme: any;
+}) => {
+  let allColors = flattenColorPalette(theme('colors'));
   let newVars = Object.fromEntries(
     Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
   );
- 
+
   addBase({
-    ":root": newVars,
+    ':root': newVars,
   });
-}
+};
 
 const config: Config = {
   content: [
@@ -36,8 +42,6 @@ const config: Config = {
           900: '#0F172A',
           950: '#020617',
         },
-      
-       
       },
       typography: {
         DEFAULT: {
@@ -71,16 +75,16 @@ const config: Config = {
         'fade-left': 'fade-left 3s ease-in-out forwards',
         'fade-right': 'fade-right 3s ease-in-out forwards',
         scroll:
-          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+          'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
       },
       keyframes: {
-        'fadeIn': {
+        fadeIn: {
           from: { opacity: '0' },
           to: { opacity: '1' },
-        }, 
+        },
         scroll: {
           to: {
-            transform: "translate(calc(-50% - 0.5rem))",
+            transform: 'translate(calc(-50% - 0.5rem))',
           },
         },
         'fade-left': {
@@ -135,11 +139,11 @@ const config: Config = {
   },
   darkMode: 'class',
   plugins: [
-      require('@tailwindcss/typography'),
-      require('tailwindcss-debug-screens'),
-      nextui(),
-      addVariablesForColors,
-      require('daisyui'),
-    ],
+    require('@tailwindcss/typography'),
+    require('tailwindcss-debug-screens'),
+    nextui(),
+    addVariablesForColors,
+    require('daisyui'),
+  ],
 };
 export default config;
