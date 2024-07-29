@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "generate-sitemap": "tsx generate-sitemap.ts"
+    "generate-sitemap": "tsx generate-sitemap.ts",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.2.8",
     "@emailjs/browser": "^4.3.3",
     "@nextui-org/react": "^2.4.0",
     "@prisma/client": "^5.17.0",
