@@ -18,7 +18,7 @@ type Team = FlipCardProps[];
 
 const team: Team = [
   { key: 1, description: 'Lead Developer', image: '/BrianG.webp', rotate: 'y', subtitle: 'Founder', title: 'Brian Galyen', fact: 'I\'m a huge anime fan.' },
-  { key: 2, description: 'Developer', image: '/devon-thinks.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Devon Whitaker', fact: 'My favorite college football team is The Oregon Ducks... Sco Ducks!!!' },
+  { key: 2, description: 'Developer', image: '/devon-thinks.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Devon Whitaker', fact: 'My favorite college football team is The Oregon Ducks... Go Ducks!!!' },
   { key: 3, description: 'Designer', image: '/JojoU.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Joanna Underwood', fact: 'I love to read books.' }
 ];
 
