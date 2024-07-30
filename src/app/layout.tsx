@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 };
 
 const links = [
-  { url: '/about', title: 'About us', id: '1' },
-  { url: '/services', title: 'Service', id: '2' },
+  { url: '/#mission', title: 'About us', id: '1' },
+  { url: '/#services', title: 'Service', id: '2' },
   { url: '/contact', title: 'Contact', id: '3' },
 ];
 
