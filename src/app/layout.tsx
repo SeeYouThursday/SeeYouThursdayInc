@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'SeeYouThursday Web Dev',
-  description: 'SeeYouThursday Web Development',
+  description: 'SeeYouThursdays Web Dev: Creating innovative, high-quality web solutions tailored to your needs. Our passionate team of experts delivers exceptional websites, applications, and digital experiences.',
 };
 
 const links = [
