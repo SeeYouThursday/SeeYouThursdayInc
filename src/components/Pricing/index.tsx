@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react";
+import React, {useMemo} from "react";
 import ShootingStars from "../ui/shooting-star";
 import { StarsBackground } from "../ui/stars-background";
 
@@ -51,12 +51,41 @@ type PricingPlanProps = {
   };
 };
 
-const PricingPlan: React.FC<PricingPlanProps> = React.memo(({ plan }) => (
-  <div
+const CheckIcon = React.memo(() => (
+  <svg
+    className="w-5 h-5 mr-2 font-semibold leading-7 text-blue-600 sm:h-5 sm:w-5 md:h-6 md:w-6"
+    data-primary="blue-600"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M5 13l4 4L19 7"
+    ></path>
+  </svg>
+));
+
+CheckIcon.displayName = 'CheckIcon';
+
+const PricingPlan: React.FC<PricingPlanProps> = React.memo(({ plan }) => {
+  const features = useMemo(() => plan.features.map((feature, idx) => (
+    <li
+      key={idx}
+      className="inline-flex items-center block w-full mb-2 ml-5 font-semibold text-left border-solid"
+    >
+      <CheckIcon />
+      {feature}
+    </li>
+  )), [plan.features]);
+
+  return (
+    <div
     className={`relative z-10 flex flex-col items-center w-full max-w-sm p-4 mx-auto my-2 border border-solid rounded-lg sm:my-0 sm:p-6 md:my-4 md:p-6
-      lg:p-8 ${
-      plan.highlight ? 'bg-white border-4 border-blue-600' : ''
-    }`}
+      lg:p-8 ${plan.highlight ? 'bg-white border-4 border-blue-600' : ''}`}
     data-rounded="rounded-lg"
     data-rounded-max="rounded-full"
   >
@@ -78,38 +107,22 @@ const PricingPlan: React.FC<PricingPlanProps> = React.memo(({ plan }) => (
       {plan.description}
     </p>
     <ul className={`flex-1 p-0 mt-4 ml-5 leading-7 border-0 border-gray-200 ${plan.textBlack ? 'text-black' : 'text-white'}`}>
-      {plan.features.map((feature, idx) => (
-        <li
-          key={idx}
-          className="inline-flex items-center block w-full mb-2 ml-5 font-semibold text-left border-solid"
-        >
-          <svg
-            className="w-5 h-5 mr-2 font-semibold leading-7 text-blue-600 sm:h-5 sm:w-5 md:h-6 md:w-6"
-            data-primary="blue-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 13l4 4L19 7"
-            ></path>
-          </svg>
-          {feature}
-        </li>
-      ))}
+      {features}
     </ul>
   </div>
-));
+);
+});
 
 PricingPlan.displayName = 'PricingPlan';
 
 const Pricing = () => {
+  const pricingPlanComponents = useMemo(() => 
+    pricingPlans.map((plan, index) => (
+      <PricingPlan key={index} plan={plan} />
+    )),
+  []);
+
   return (
-    <>
       <div className="pb-24">
         <div className="flex justify-center items-center text-center mt-20">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-sky-300 pb-5 sm:pb-10">Our Pricing</h2>
@@ -124,17 +137,14 @@ const Pricing = () => {
                 Pricing to fit the needs of any company size.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-4 mt-4 leading-7 text-gray-900 border-0 border-gray-200 sm:mt-6 sm:gap-6 md:mt-8 md:gap-0 lg:grid-cols-3 sm:grid-cols-2">
-              {pricingPlans.map((plan, index) => (
-                <PricingPlan key={index} plan={plan} />
-              ))}
-            </div>
+            <div className="grid grid-cols-1 gap-4 mt-4 leading-7 text-gray-900 border-0 border-gray-200 sm:mt-6 sm:gap-6 md:mt-8 md:gap-3 lg:grid-cols-3 sm:grid-cols-2">
+            {pricingPlanComponents}
           </div>
-        </section>
-          <ShootingStars />
-      <StarsBackground />
         </div>
-    </>
+      </section>
+      <ShootingStars />
+      <StarsBackground />
+    </div>
   );
 };
 
