@@ -1,10 +1,12 @@
 -- CreateTable
 CREATE TABLE "Admin" (
     "id" SERIAL NOT NULL,
+    "clerk_id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "funFact" TEXT NOT NULL,
-    "position" TEXT NOT NULL,
+    "funFact" TEXT,
+    "position" TEXT,
+    "img_url" TEXT,
 
     CONSTRAINT "Admin_pkey" PRIMARY KEY ("id")
 );
@@ -17,8 +19,8 @@ CREATE TABLE "Product" (
     "href" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "shortDescrip" TEXT NOT NULL,
-    "img_url" TEXT NOT NULL,
-    "icon_url" TEXT NOT NULL,
+    "img_url" TEXT,
+    "icon_url" TEXT,
     "stack" TEXT[],
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
