@@ -10,10 +10,12 @@ datasource db {
 
 model Admin {
   id        Int      @id @default(autoincrement())
+  clerk_id  String
   email     String   @unique
   createdAt DateTime @default(now())
-  funFact   String
-  position  String
+  funFact   String?
+  position  String?
+  img_url   String?
 }
 
 model Product {
@@ -23,8 +25,8 @@ model Product {
   href         String
   description  String
   shortDescrip String
-  img_url      String
-  icon_url     String
+  img_url      String?
+  icon_url     String?
   stack        String[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
