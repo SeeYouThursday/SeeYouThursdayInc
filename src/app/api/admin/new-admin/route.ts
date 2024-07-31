@@ -1,21 +1,24 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { getAuth } from '@clerk/nextjs/server';
+import { error } from 'console';
+import { stat } from 'fs';
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextRequest, res: NextResponse) {
   const { userId } = getAuth(req);
 
   if (!userId) {
-    return res.status(401).json({ error: 'Unauthorized' });
+    return NextResponse.json ({error}, { status: 401 });
   }
 
   if (req.method === 'POST') {
-    const { email, password } = req.body;
+    const body = await req.json();
+    const { email, password } = body;
 
     if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password are required' });
+      return NextResponse.json({ error }, {status: 400});
     }
 
     try {
@@ -25,21 +28,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           password,
         },
       });
-      res.status(201).json(newAdmin);
+      NextResponse.json(newAdmin);
     } catch (error) {
       console.error('Error creating admin:', error);
-      res.status(500).json({ error: 'An error occurred while creating the admin' });
+      NextResponse.json({ error }, {status: 500 });
     }
   } else if (req.method === 'GET') {
     try {
       const admins = await prisma.admin.findMany();
-      res.status(200).json(admins);
+      NextResponse.json(admins);
     } catch (error) {
       console.error('Error fetching admins:', error);
-      res.status(500).json({ error: 'An error occurred while fetching the admins' });
-    }
-  } else {
-    res.setHeader('Allow', ['POST', 'GET']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+      NextResponse.json({ error } , {status: 500});
+    } finally {
+    prisma.$disconnect();
   }
+}
 }

@@ -1,35 +1,20 @@
 import { PrismaClient } from "@prisma/client";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
 export const productsRoutes = {
-    getAllProducts: async (req: NextApiRequest, res: NextApiResponse) => {
+    getAllProducts: async (req: NextRequest, res: NextResponse) => {
         try {
             const products = await prisma.product.findMany();
-            res.status(200).json(products);
+           NextResponse.json(products);
         } catch (error) {
-            res.status(500).json({ error: 'Failed to load products' });
+            NextResponse.json({ error } , {status: 500});
         }
     },
 
-    getProduct: async (req: NextApiRequest, res: NextApiResponse) => {
-        try {
-            const id = req.query.id;
-            const product = await prisma.product.findUnique({
-                where: { id: Number(id) },
-            });
-            if (product) {
-                res.status(200).json(product);
-            } else {
-                res.status(404).json({ error: 'Product not found' });
-            }
-        } catch (error) {
-            res.status(500).json({ error: 'Failed to load product' });
-        }
-    },
 
-    createProduct: async (req: NextApiRequest, res: NextApiResponse) => {
+    createProduct: async (req: NextRequest, res: NextResponse) => {
         try {
             const product = await prisma.product.create({ 
                 data: {
@@ -43,13 +28,13 @@ export const productsRoutes = {
                     stack: req.body.stack,
                 } 
             });
-            res.status(201).json(product);
+           NextResponse.(201).json(product);
         } catch (error) {
-            res.status(500).json({ error: 'Failed to create product' });
+           NextResponse.(500).json({ error: 'Failed to create product' });
         }
     },
 
-    updateProduct: async (req: NextApiRequest, res: NextApiResponse) => {
+    updateProduct: async (req: NextRequest, res: NextResponse) => {
         try {
             const id = req.query.id;
             const product = await prisma.product.update({
@@ -65,21 +50,21 @@ export const productsRoutes = {
                     stack: req.body.stack,
                 },
             });
-            res.status(200).json(product);
+           NextResponse.(200).json(product);
         } catch (error) {
-            res.status(500).json({ error: 'Failed to update product' });
+           NextResponse.(500).json({ error: 'Failed to update product' });
         }
     },
 
-    deleteProduct: async (req: NextApiRequest, res: NextApiResponse) => {
+    deleteProduct: async (req: NextRequest, res: NextResponse) => {
         try {
             const id = req.query.id;
             await prisma.product.delete({
                 where: { id: Number(id) },
             });
-            res.status(204).end();
+           NextResponse.(204).end();
         } catch (error) {
-            res.status(500).json({ error: 'Failed to delete product' });
+           NextResponse.(500).json({ error: 'Failed to delete product' });
         }
     },
 };
