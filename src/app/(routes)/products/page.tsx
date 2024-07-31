@@ -2,18 +2,10 @@
 
 import PortfolioCard from '@/components/PortfolioCard';
 import { ContactModal } from '@/components/ContactForm';
-import { ProductProps } from '@/util/types';
+import { ProductProps } from '@/util/types/product';
 
 const Products = () => {
-  const projects: ProductProps[] = [
-    {
-      title: 'iBall247',
-      description: 'Basketball Training Program and Merch Site.',
-      type: 'E-commerce',
-      stack: 'Shopify CMS, PushPress',
-      img: '/iball247/SYT-projects-laptop.png',
-      link: 'https://www.iball247.com',
-    },
+  const projects:any[] = [
     // {
     //   title: 'Wizard of Pawz',
     //   description: 'Pet Grooming',
