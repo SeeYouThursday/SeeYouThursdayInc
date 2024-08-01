@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/util/cn"
+import { cn } from "@/lib/util/cn";
 import React, { useEffect, useState, useRef } from "react";
 
 interface ShootingStar {

@@ -1,12 +1,12 @@
-import Image from 'next/image';
+import Image from "next/image";
 import {
   Card,
   CardHeader,
   CardBody,
   Accordion,
   AccordionItem,
-} from '@nextui-org/react';
-import { ProductProps } from '@/util/types/product';
+} from "@nextui-org/react";
+import { ProductProps } from "@/lib/util/types/product";
 const PortfolioCard = ({
   id,
   title,
