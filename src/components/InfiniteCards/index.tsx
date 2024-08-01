@@ -1,5 +1,5 @@
 'use client';
-import { cn } from '@/libs/util/cn';
+import { cn } from '@/lib/util/cn';
 import React, { useEffect, useState } from 'react';
 
 export const InfiniteCards = ({
@@ -46,6 +46,7 @@ export const InfiniteCards = ({
 
   const getDirection = () => {
     if (containerRef.current) {
+
       if (direction === 'left') {
         containerRef.current.style.setProperty(
           '--animation-direction',
@@ -91,9 +92,9 @@ export const InfiniteCards = ({
           <ul
             ref={scrollerRef}
             className={cn(
-              'flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap',
-              start && 'animate-scroll',
-              pauseOnHover && 'hover:[animation-play-state:paused]'
+              "flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
+              start && "animate-scroll",
+              pauseOnHover && "hover:[animation-play-state:paused]"
             )}
           >
             {items.map((item, idx) => (

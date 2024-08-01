@@ -1,6 +1,6 @@
-import { cn } from '@/libs/util/cn';
-import Image from 'next/image';
-import React from 'react'; // Add this line
+import { cn } from "@/lib/util/cn";
+import Image from "next/image";
+import React from "react"; // Add this line
 
 interface FlipCardProps extends React.HTMLAttributes<HTMLDivElement> {
   image: string;
@@ -23,24 +23,24 @@ export default function FlipCard({
 }: FlipCardProps) {
   const rotationClass = {
     x: [
-      'group-hover:[transform:rotateX(180deg)]',
-      '[transform:rotateX(180deg)]',
+      "group-hover:[transform:rotateX(180deg)]",
+      "[transform:rotateX(180deg)]",
     ],
     y: [
-      'group-hover:[transform:rotateY(180deg)]',
-      '[transform:rotateY(180deg)]',
+      "group-hover:[transform:rotateY(180deg)]",
+      "[transform:rotateY(180deg)]",
     ],
   };
   const self = rotationClass[rotate];
 
   return (
     <div
-      className={cn('group h-72 w-56 [perspective:1000px]', className)}
+      className={cn("group h-72 w-56 [perspective:1000px]", className)}
       {...props}
     >
       <div
         className={cn(
-          'relative h-full rounded-2xl transition-all duration-500 [transform-style:preserve-3d]',
+          "relative h-full rounded-2xl transition-all duration-500 [transform-style:preserve-3d]",
           self[0]
         )}
       >
@@ -57,7 +57,7 @@ export default function FlipCard({
         {/* Back */}
         <div
           className={cn(
-            'absolute h-full w-full rounded-2xl bg-black/80 p-4 text-slate-200 [backface-visibility:hidden] flex flex-col',
+            "absolute h-full w-full rounded-2xl bg-black/80 p-4 text-slate-200 [backface-visibility:hidden] flex flex-col",
             self[1]
           )}
         >

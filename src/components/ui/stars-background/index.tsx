@@ -1,5 +1,5 @@
-'use client';
-import { cn } from '@/libs/util/cn';
+"use client";
+import { cn } from "@/lib/util/cn";
 import React, {
   useState,
   useEffect,

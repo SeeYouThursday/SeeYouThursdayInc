@@ -1,8 +1,7 @@
 'use client';
-
 import PortfolioCard from '@/components/PortfolioCard';
 import { ContactModal } from '@/components/ContactForm';
-import { ProductProps } from '@/libs/util/types/product';
+import { ProductProps } from '@/lib/util/types/product';
 
 const Products = () => {
   const projects: ProductProps[] = [
