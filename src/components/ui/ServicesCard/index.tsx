@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/util/cn';
+import { cn } from '@/libs/util/cn';
 import {
   IconBrandShopee,
   IconUxCircle,

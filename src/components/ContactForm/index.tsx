@@ -2,7 +2,7 @@
 import { useState, useRef, Suspense, ChangeEvent } from 'react';
 import Image from 'next/image';
 
-import { validateEmail } from '@/util/helpers';
+import { validateEmail } from '@/app/util/helpers';
 import ContactToast from '@/components/ui/ContactToast';
 import { LetsConnect } from '@/components/ContactForm/ContactHeadings';
 import emailjs from '@emailjs/browser';

@@ -23,7 +23,7 @@
     "react-dom": "^18",
     "react-responsive-carousel": "^3.2.23",
     "react-scroll-parallax": "^3.4.5",
-    "svix": "^1.25.0",
+    "svix": "^1.27.0",
     "tailwind-merge": "^2.3.0",
     "ts-node": "^10.9.2"
   },

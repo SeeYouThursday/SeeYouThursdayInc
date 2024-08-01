@@ -20,6 +20,7 @@ import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ContactModal } from '@/components/ContactForm';
 import { IconChevronDown, IconHome, IconComet } from '@tabler/icons-react';
+import { SignOutButton, SignedIn } from '@clerk/nextjs';
 
 interface navItem {
   href: string;
@@ -128,6 +129,11 @@ const Nav = () => {
         <NavbarItem>
           <ContactModal location="nav" />
         </NavbarItem>
+        <SignedIn>
+          <NavbarItem>
+            <SignOutButton />
+          </NavbarItem>
+        </SignedIn>
       </NavbarContent>
       {/* Mobile Menu */}
       <NavbarContent justify="end">

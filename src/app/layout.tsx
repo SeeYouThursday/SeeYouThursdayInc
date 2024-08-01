@@ -5,12 +5,14 @@ import Footer, { FooterProps } from '../components/ui/Footer/footer';
 import Nav from '@/components/ui/Nav';
 import { NextUIProvider } from '@nextui-org/react';
 import { Providers } from './providers';
+import { ClerkProvider } from '@clerk/nextjs';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'SeeYouThursday Web Dev',
-  description: 'SeeYouThursdays Web Dev: Creating innovative, high-quality web solutions tailored to your needs. Our passionate team of experts delivers exceptional websites, applications, and digital experiences.',
+  description:
+    'SeeYouThursdays Web Dev: Creating innovative, high-quality web solutions tailored to your needs. Our passionate team of experts delivers exceptional websites, applications, and digital experiences.',
 };
 
 const links = [
@@ -27,13 +29,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NextUIProvider>
-          <Providers>
-            <Nav />
-            {children}
-            <Footer links={links} />
-          </Providers>
-        </NextUIProvider>
+        <ClerkProvider>
+          <NextUIProvider>
+            <Providers>
+              <Nav />
+              {children}
+              <Footer links={links} />
+            </Providers>
+          </NextUIProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

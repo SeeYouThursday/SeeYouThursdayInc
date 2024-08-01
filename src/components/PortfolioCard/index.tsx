@@ -6,7 +6,7 @@ import {
   Accordion,
   AccordionItem,
 } from '@nextui-org/react';
-import { ProductProps } from '@/util/types/product';
+import { ProductProps } from '@/app/util/types/product';
 const PortfolioCard = ({
   id,
   title,
