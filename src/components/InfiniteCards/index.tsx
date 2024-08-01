@@ -1,11 +1,11 @@
-"use client";
-import { cn } from "../../lib/util/cn";
-import React, { useEffect, useState } from "react";
+'use client';
+import { cn } from '@/lib/util/cn';
+import React, { useEffect, useState } from 'react';
 
 export const InfiniteCards = ({
   items,
-  direction = "left",
-  speed = "fast",
+  direction = 'left',
+  speed = 'fast',
   pauseOnHover = true,
   className,
 }: {
@@ -13,8 +13,8 @@ export const InfiniteCards = ({
     text: string;
     author: string;
   }[];
-  direction?: "left" | "right";
-  speed?: "fast" | "normal" | "slow";
+  direction?: 'left' | 'right';
+  speed?: 'fast' | 'normal' | 'slow';
   pauseOnHover?: boolean;
   className?: string;
 }) => {
@@ -46,15 +46,16 @@ export const InfiniteCards = ({
 
   const getDirection = () => {
     if (containerRef.current) {
-      if (direction === "left") {
+
+      if (direction === 'left') {
         containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards"
+          '--animation-direction',
+          'forwards'
         );
       } else {
         containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse"
+          '--animation-direction',
+          'reverse'
         );
       }
     }
@@ -62,12 +63,12 @@ export const InfiniteCards = ({
 
   const getSpeed = () => {
     if (containerRef.current) {
-      if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "50s");
-      } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
+      if (speed === 'fast') {
+        containerRef.current.style.setProperty('--animation-duration', '50s');
+      } else if (speed === 'normal') {
+        containerRef.current.style.setProperty('--animation-duration', '80s');
       } else {
-        containerRef.current.style.setProperty("--animation-duration", "140s");
+        containerRef.current.style.setProperty('--animation-duration', '140s');
       }
     }
   };
@@ -84,7 +85,7 @@ export const InfiniteCards = ({
         <div
           ref={containerRef}
           className={cn(
-            "scroller flex relative z-20 overflow-hidden lg:max-w-7xl mt-8 mb-8 [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+            'scroller flex relative z-20 overflow-hidden lg:max-w-7xl mt-8 mb-8 [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]',
             className
           )}
         >
@@ -101,7 +102,7 @@ export const InfiniteCards = ({
                 className="w-[350px] max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-slate-700 px-8 py-6 md:w-[450px]"
                 style={{
                   background:
-                    "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
+                    'linear-gradient(180deg, var(--slate-800), var(--slate-900)',
                 }}
                 key={idx}
               >

@@ -1,11 +1,10 @@
 "use client";
 import { useState, useRef, Suspense, ChangeEvent } from "react";
 import Image from "next/image";
-
 import { validateEmail } from "@/lib/util/helpers";
-import ContactToast from "@/components/ui/ContactToast";
-import { LetsConnect } from "@/components/ContactForm/ContactHeadings";
-import emailjs from "@emailjs/browser";
+import ContactToast from '@/components/ui/ContactToast';
+import { LetsConnect } from '@/components/ContactForm/ContactHeadings';
+import emailjs from '@emailjs/browser';
 import {
   Input,
   Button,
@@ -17,7 +16,6 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import RocketIcon from "./RocketIcon";
 export const ContactForm = ({
   onClose,
   location,

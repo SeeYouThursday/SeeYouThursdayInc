@@ -6,7 +6,7 @@ import React, {
   useRef,
   RefObject,
   useCallback,
-} from "react";
+} from 'react';
 
 interface StarProps {
   x: number;
@@ -115,7 +115,7 @@ export const StarsBackground: React.FC<StarsBackgroundProps> = ({
   return (
     <div
       ref={containerRef}
-      className={cn("h-full w-full absolute inset-0", className)}
+      className={cn('h-full w-full absolute inset-0', className)}
     >
       <svg preserveAspectRatio="none" className="h-full w-full bg-transparent">
         <rect width="100%" height="100%" fill="none" />

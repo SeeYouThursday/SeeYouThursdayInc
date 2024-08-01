@@ -7,7 +7,7 @@ interface FlipCardProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
   description: string;
   subtitle?: string;
-  rotate?: "x" | "y";
+  rotate?: 'x' | 'y';
   fact?: string;
 }
 
@@ -16,7 +16,7 @@ export default function FlipCard({
   title,
   description,
   subtitle,
-  rotate = "y",
+  rotate = 'y',
   fact,
   className,
   ...props

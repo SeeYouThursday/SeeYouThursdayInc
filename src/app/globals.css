@@ -154,3 +154,11 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.cl-footerAction__signIn {
+  display: none;
+}
+
+/* .cl-footer {
+  display: none;
+} */
