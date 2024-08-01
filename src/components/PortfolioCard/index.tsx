@@ -35,7 +35,7 @@ const PortfolioCard = ({
         <figure>
           <a href={href} target="blank" title="iball">
             <Image
-              src={img_url}
+              src={img_url ?? ""}
               height={400}
               width={400}
               quality={100}
