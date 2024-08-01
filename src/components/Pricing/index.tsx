@@ -99,9 +99,6 @@ const PricingPlan: React.FC<PricingPlanProps> = React.memo(({ plan }) => {
       <p className="box-border m-0 text-6xl font-semibold leading-none border-solid">
         ${plan.price}
       </p>
-      <p className="box-border m-0 border-solid" style={{ borderImage: 'initial' }}>
-        / month
-      </p>
     </div>
     <p className={`mt-6 mb-5 text-base leading-normal text-left border-0 border-gray-200 ${plan.textBlack ? 'text-black' : 'text-white'}`}>
       {plan.description}

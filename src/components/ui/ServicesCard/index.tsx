@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { cn } from '@/util/cn';
+import { cn } from "@/lib/util/cn";
 import {
   IconBrandShopee,
   IconUxCircle,
@@ -8,45 +8,45 @@ import {
   IconCodeCircle2,
   IconAutomation,
   IconDevicesCode,
-} from '@tabler/icons-react';
-import React from 'react';
+} from "@tabler/icons-react";
+import React from "react";
 
 export function Service() {
   const features = [
     {
-      title: 'Fullstack Web Development',
+      title: "Fullstack Web Development",
       description:
-        'We build robust, scalable web applications from the ground up, handling both frontend and backend development.',
+        "We build robust, scalable web applications from the ground up, handling both frontend and backend development.",
       icon: <IconCodeCircle2 />,
     },
     {
-      title: 'UX/UI Design',
+      title: "UX/UI Design",
       description:
-        'We create intuitive and visually appealing interfaces that enhance user experiences and satisfaction.',
+        "We create intuitive and visually appealing interfaces that enhance user experiences and satisfaction.",
       icon: <IconUxCircle />,
     },
     {
-      title: 'E-Commerce Sites',
+      title: "E-Commerce Sites",
       description:
-        'We develop secure, user-friendly online stores that drive sales and provide an enjoyable shopping experience.',
+        "We develop secure, user-friendly online stores that drive sales and provide an enjoyable shopping experience.",
       icon: <IconBrandShopee />,
     },
     {
-      title: 'Refactoring/Debugging Websites',
+      title: "Refactoring/Debugging Websites",
       description:
-        'We enhance your existing codebase by optimizing performance, fixing bugs, and improving maintainability.',
+        "We enhance your existing codebase by optimizing performance, fixing bugs, and improving maintainability.",
       icon: <IconCloud />,
     },
     {
-      title: 'Responsive Web Development',
+      title: "Responsive Web Development",
       description:
-        'We design and develop websites that look great and function seamlessly on all devices, from desktops to mobile phones.',
+        "We design and develop websites that look great and function seamlessly on all devices, from desktops to mobile phones.",
       icon: <IconDevicesCode />,
     },
     {
-      title: 'Web performance optimization',
+      title: "Web performance optimization",
       description:
-        'We improve your website’s speed and performance, ensuring faster load times and a smoother user experience.',
+        "We improve your website’s speed and performance, ensuring faster load times and a smoother user experience.",
       icon: <IconAutomation />,
     },
   ];
@@ -90,9 +90,9 @@ const Feature = ({
   return (
     <div
       className={cn(
-        'flex flex-col lg:border-r  py-10 relative group/feature dark:border-neutral-800',
-        (index === 0 || index === 3) && 'lg:border-l dark:border-neutral-800',
-        index < 3 && 'lg:border-b dark:border-neutral-800'
+        "flex flex-col lg:border-r  py-10 relative group/feature dark:border-neutral-800",
+        (index === 0 || index === 3) && "lg:border-l dark:border-neutral-800",
+        index < 3 && "lg:border-b dark:border-neutral-800"
       )}
     >
       {index < 3 && (

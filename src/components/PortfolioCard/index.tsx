@@ -1,12 +1,12 @@
-import Image from 'next/image';
+import Image from "next/image";
 import {
   Card,
   CardHeader,
   CardBody,
   Accordion,
   AccordionItem,
-} from '@nextui-org/react';
-import { ProductProps } from '@/util/types/product';
+} from "@nextui-org/react";
+import { ProductProps } from "@/lib/util/types/product";
 const PortfolioCard = ({
   id,
   title,
@@ -35,7 +35,7 @@ const PortfolioCard = ({
         <figure>
           <a href={href} target="blank" title="iball">
             <Image
-              src={img_url}
+              src={img_url ?? ""}
               height={400}
               width={400}
               quality={100}
