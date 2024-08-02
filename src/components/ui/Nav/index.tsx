@@ -178,7 +178,7 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => {
         <DropdownTrigger>
           <Button
             disableRipple
-            className="hover:bg-violet-600 p-2 px-3 rounded-3xl text-medium text-white font-semibold"
+            className="home-dropdown-button p-2 px-3 rounded-3xl text-medium text-white font-semibold transition-colors"
             endContent={<IconChevronDown stroke={2} />}
             radius="sm"
             variant="light"
