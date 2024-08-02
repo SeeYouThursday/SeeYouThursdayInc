@@ -162,3 +162,7 @@
 /* .cl-footer {
   display: none;
 } */
+
+.home-dropdown-button {
+  @apply hover:bg-violet-600 !important;
+}
