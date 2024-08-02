@@ -52,23 +52,27 @@ export async function POST(req: NextRequest, res: NextResponse) {
     });
   }
 
-  // Do something with the payload
-  // For this guide, you simply log the payload to the console
-  const { id } = evt.data;
-  const eventType = evt.type;
-  const clerk_id: string = id!;
-  console.log(id);
+  // Type guard to ensure evt.data has the expected properties
+  if ('id' in evt.data && 'email_addresses' in evt.data) {
+    const { id, email_addresses } = evt.data as {
+      id: string;
+      email_addresses: { email_address: string }[];
+    };
+    const clerk_id: string = id!;
+    const email = email_addresses[0].email_address;
+    console.log(id);
 
-  try {
-    //TODO Write Prisma create new Admin
-    // const result = await prisma.admin.create({
-    //   data: {
-    //     clerk_id,
-    //     email,
-    //   },
-    // });
-    return NextResponse.json({}, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    try {
+      //TODO Write Prisma create new Admin
+      const result = await prisma.admin.create({
+        data: {
+          clerk_id,
+          email,
+        },
+      });
+      return NextResponse.json({ result }, { status: 200 });
+    } catch (error: any) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
   }
 }
