@@ -16,6 +16,22 @@ export type ProductProps = {
   updatedAt: string;
 };
 
+type FormField = {
+  name: keyof ProductProps;
+  label: string;
+  type: 'input' | 'textarea' | 'stack';
+};
+
+const formFields: FormField[] = [
+  { name: 'title', label: 'Title', type: 'input' },
+  { name: 'href', label: 'Href', type: 'input' },
+  { name: 'description', label: 'Description', type: 'textarea' },
+  { name: 'shortDescrip', label: 'Short Description', type: 'input' },
+  { name: 'img_url', label: 'Image URL', type: 'input' },
+  { name: 'icon_url', label: 'Icon URL', type: 'input' },
+  { name: 'stack', label: 'Stack (comma-separated)', type: 'stack' },
+];
+
 export default function ProductFormPage() {
   const [product, setProduct] = useState<Partial<ProductProps>>({});
 
@@ -35,53 +51,47 @@ export default function ProductFormPage() {
     
   };
 
+  const renderField = (field: FormField) => {
+    switch (field.type) {
+      case 'textarea':
+        return (
+          <Textarea 
+            key={field.name}
+            label={field.label} 
+            name={field.name} 
+            onChange={handleInputChange} 
+            className="mb-2"
+          />
+        );
+      case 'stack':
+        return (
+          <Input 
+            key={field.name}
+            label={field.label} 
+            name={field.name} 
+            onChange={handleStackChange} 
+            className="mb-2"
+          />
+        );
+      default:
+        return (
+          <Input 
+            key={field.name}
+            label={field.label} 
+            name={field.name} 
+            onChange={handleInputChange} 
+            className="mb-2"
+          />
+        );
+    }
+  };
+
   return (
     <div className="max-w-2xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Product Form</h1>
       <p className="mb-4">Welcome to your product form.</p>
       <form onSubmit={handleSubmit}>
-        <Input 
-          label="Title" 
-          name="title" 
-          onChange={handleInputChange} 
-          className="mb-2"
-        />
-        <Input 
-          label="Href" 
-          name="href" 
-          onChange={handleInputChange} 
-          className="mb-2"
-        />
-        <Textarea 
-          label="Description" 
-          name="description" 
-          onChange={handleInputChange} 
-          className="mb-2"
-        />
-        <Input 
-          label="Short Description" 
-          name="shortDescrip" 
-          onChange={handleInputChange} 
-          className="mb-2"
-        />
-        <Input 
-          label="Image URL" 
-          name="img_url" 
-          onChange={handleInputChange} 
-          className="mb-2"
-        />
-        <Input 
-          label="Icon URL" 
-          name="icon_url" 
-          onChange={handleInputChange} 
-          className="mb-2"
-        />
-        <Input 
-          label="Stack (comma-separated)" 
-          name="stack" 
-          onChange={handleStackChange} 
-          className="mb-2"
-        />
+        {formFields.map(renderField)}
         <Spacer y={4} />
         <Button type="submit" color="primary">Submit</Button>
       </form>
