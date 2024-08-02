@@ -3,14 +3,12 @@ import { inngest } from '@/inngest/client';
 import { syncUser } from '@/inngest/sync-user';
 
 // Create an API that serves zero functions
-const { POST } = serve({
+export const { POST } = serve({
   client: inngest,
   functions: [
     syncUser, // <-- This is where you'll always add all your functions
   ],
 });
-
-export default POST;
 
 // const inngest = new Inngest({ name: 'My App' });
 // const fn = inngest.createFunction(
