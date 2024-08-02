@@ -54,7 +54,7 @@ const AdminSignUp = () => {
         </Button>
       </form>
       <div className={verified ? 'block' : 'hidden'}>
-        <SignUpButton>
+        <SignUpButton mode="modal">
           <Button
             type="button"
             color="secondary"
