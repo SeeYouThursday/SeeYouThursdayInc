@@ -11,6 +11,7 @@ export const syncUser = inngest.createFunction(
       (e: { id: string }) => e.id === user.primary_email_address_id
     ).email;
 
+    console.log('help me');
     const prisma = new PrismaClient();
     const clerk_id = id;
 
