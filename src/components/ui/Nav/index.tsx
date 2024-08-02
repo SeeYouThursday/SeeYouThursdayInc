@@ -39,7 +39,6 @@ const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const pathname = usePathname();
-  console.log(pathname);
 
   const navItems: navItem[] = [
     { href: '/pricing', name: 'Pricing', isActive: false },
