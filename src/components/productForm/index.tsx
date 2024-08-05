@@ -32,7 +32,7 @@ const formFields: FormField[] = [
   { name: 'stack', label: 'Stack (comma-separated)', type: 'stack' },
 ];
 
-export default function ProductFormPage() {
+export default function ProductForm() {
   const [product, setProduct] = useState<Partial<ProductProps>>({});
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
