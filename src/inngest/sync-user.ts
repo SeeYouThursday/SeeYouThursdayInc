@@ -11,7 +11,6 @@ export const syncUser = inngest.createFunction(
       (e: { id: string }) => e.id === user.primary_email_address_id
     ).email;
 
-    console.log('help me');
     const prisma = new PrismaClient();
     const clerk_id = id;
 
@@ -19,12 +18,15 @@ export const syncUser = inngest.createFunction(
       const result = await prisma.admin.create({
         data: {
           clerk_id,
-          email,
+          email, // Assuming you want to store the email as well
         },
       });
-      return result;
-    } catch (error: any) {
-      console.log(error);
+      console.log('User synced successfully:', result);
+    } catch (error) {
+      console.error('Error syncing user:', error);
+      throw new Error('Failed to sync user');
+    } finally {
+      await prisma.$disconnect();
     }
   }
 );
