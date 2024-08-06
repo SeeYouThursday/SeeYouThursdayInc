@@ -6,13 +6,17 @@ import Nav from '@/components/ui/Nav';
 import { NextUIProvider } from '@nextui-org/react';
 import { Providers } from './providers';
 import { ClerkProvider } from '@clerk/nextjs';
-
+import Head from 'next/head';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'SeeYouThursday Web Dev',
   description:
     'SeeYouThursdays Web Dev: Creating innovative, high-quality web solutions tailored to your needs. Our passionate team of experts delivers exceptional websites, applications, and digital experiences.',
+  robots: {
+    follow: true,
+    index: true,
+  },
 };
 
 const links = [
@@ -28,6 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </Head>
       <body className={inter.className}>
         <ClerkProvider>
           <NextUIProvider>
