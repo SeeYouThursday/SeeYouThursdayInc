@@ -14,6 +14,7 @@ interface Links {
 interface SidebarContextProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  className?: string;
   animate: boolean;
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useUser } from "@clerk/nextjs";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import {
@@ -12,8 +12,6 @@ import {
 
 export default function DashboardLayout({ children }: { children: React.ReactNode; }) {
   const { user } = useUser();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [isCalendarModalOpen, setIsCalendarModalOpen] = useState(false);
 
   const links = [
     {
@@ -39,26 +37,26 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   ];
 
   return (
-    <div className="flex w-full bg-[#4527a0] text-white">
-      <main className="flex-1 bg-white text-black p-6">
-        <div className="flex justify-between items-center mb-6">
-        <div className="p-4 font-bold text-black text-xl">SEEYOUTHURSDAY</div>
-        </div>
-        <div className="flex h-screen bg-[#4527a0] text-white">
-    
-          <Sidebar open={isSidebarOpen} setOpen={setIsSidebarOpen}>
-            <SidebarBody>
-              {links.map((link) => (
-                <SidebarLink
-                  key={link.label}
-                  link={link}
-                />
-              ))}
-            </SidebarBody>
-          </Sidebar>
+    <div className="flex w-full bg-[#4527a0] text-white min-h-screen">
+      <aside className="hidden lg:block lg:w-64 bg-[#4527a0]">
+        <Sidebar open={true}>
+          
+          <SidebarBody>
+          <div className="font-bold text-xl text-black pt-3 pb-10 ">SEEYOUTHURSDAY</div>
+            {links.map((link) => (
+              <SidebarLink key={link.label} link={link} />
+            ))}
+          </SidebarBody>
+        </Sidebar>
+      </aside>
+
+      <div className="flex-1 flex flex-col min-h-screen">
+        <header className="flex justify-between items-center p-6 bg-white shadow-md lg:hidden">
+        </header>
+        <main className="flex-1 p-6">
           {children}
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }
