@@ -6,7 +6,9 @@ import ProductForm from "@/components/productForm";
 export default function DashboardPage() {
   return (
     <div className="container mx-auto py-12">
+      
       <main>
+      <h1 className="text-4xl font-semibold pb-14">Welcome</h1>
         <Accordion>
           <AccordionItem title={<span className="text-white">Add a Product</span>} key="1"
           className="border-b border-white">

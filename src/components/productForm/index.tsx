@@ -19,7 +19,7 @@ export type ProductProps = {
 type FormField = {
   name: keyof ProductProps;
   label: string;
-  type: 'input' | 'textarea' | 'stack';
+  type: 'input' | 'textarea' | 'stack' | 'file';
 };
 
 const formFields: FormField[] = [
@@ -27,13 +27,15 @@ const formFields: FormField[] = [
   { name: 'href', label: 'Href', type: 'input' },
   { name: 'description', label: 'Description', type: 'textarea' },
   { name: 'shortDescrip', label: 'Short Description', type: 'input' },
-  { name: 'img_url', label: 'Image URL', type: 'input' },
-  { name: 'icon_url', label: 'Icon URL', type: 'input' },
+  { name: 'img_url', label: 'Image Upload', type: 'file' },
+  { name: 'icon_url', label: 'Icon Upload', type: 'file' },
   { name: 'stack', label: 'Stack (comma-separated)', type: 'stack' },
 ];
 
 export default function ProductForm() {
   const [product, setProduct] = useState<Partial<ProductProps>>({});
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [iconFile, setIconFile] = useState<File | null>(null);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -45,11 +47,31 @@ export default function ProductForm() {
     setProduct(prev => ({ ...prev, stack: stackArray }));
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, fieldName: keyof ProductProps) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      if (fieldName === 'img_url') {
+        setImageFile(file);
+      } else if (fieldName === 'icon_url') {
+        setIconFile(file);
+      }
+      setProduct(prev => ({ ...prev, [fieldName]: file.name }));
+    }
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     console.log(product);
-    
-  };
+
+    if (imageFile) {
+      console.log('Uploading image:', imageFile.name);
+      // put actual file upload logic here
+    }
+    if (iconFile) {
+      console.log('Uploading icon:', iconFile.name);
+      // put actual file upload logic here
+    }
+  }
 
   const renderField = (field: FormField) => {
     switch (field.type) {
@@ -73,6 +95,23 @@ export default function ProductForm() {
             className="mb-2"
           />
         );
+      case 'file':
+        return (
+          <div key={field.name} className="mb-2">
+            <label className="block text-sm font-medium text-white">{field.label}</label>
+            <input
+              type="file"
+              name={field.name}
+              onChange={(e) => handleFileChange(e, field.name as keyof ProductProps)}
+              className="mt-1 block w-full text-sm text-white
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-full file:border-0
+                file:text-sm file:font-semibold
+                file:bg-violet-50 file:text-violet-700
+                hover:file:bg-violet-100"
+            />
+          </div>
+        );
       default:
         return (
           <Input 
@@ -80,7 +119,7 @@ export default function ProductForm() {
             label={field.label} 
             name={field.name} 
             onChange={handleInputChange} 
-            className="mb-2"
+            className="mb-2  hover: bg-purple text-white"
           />
         );
     }
@@ -91,7 +130,17 @@ export default function ProductForm() {
       <h1 className="text-2xl font-bold mb-4">Product Form</h1>
       <p className="mb-4">Welcome to your product form.</p>
       <form onSubmit={handleSubmit}>
-        {formFields.map(renderField)}
+        {formFields.map(field => {
+          if (field.name === 'img_url' || field.name === 'icon_url') {
+            return null; 
+          }
+          return renderField(field);
+        })}
+        <div className="flex justify-center mb-2">
+          {renderField(formFields.find(field => field.name === 'img_url')!)}
+          <Spacer x={6} />
+          {renderField(formFields.find(field => field.name === 'icon_url')!)}
+        </div>
         <Spacer y={4} />
         <Button type="submit" color="primary">Submit</Button>
       </form>
