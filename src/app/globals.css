@@ -140,8 +140,8 @@
 }
 
 .bg-nav {
-  background-color: transparent;
-  background-image: url('/heroimage.webp');
+  /* background-color: ; */
+  /* background-image: url('/heroimage.webp'); */
   /* background-position: center; */
   background-repeat: no-repeat;
   background-size: cover;
@@ -164,5 +164,5 @@
 } */
 
 .home-dropdown-button {
-  @apply hover:bg-violet-600 !important;
+  @apply hover:text-white !important;
 }

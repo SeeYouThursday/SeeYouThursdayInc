@@ -221,7 +221,7 @@ export const ContactModal = ({ location }: { location: string }) => {
   // Shared Styling of Components
   const divStyle = `flex justify-start items-center`;
   const buttonStyle = `group relative overflow-hidden transition-all`;
-  const animationStyle = `absolute bottom-0 left-0 w-full origin-bottom translate-y-full transform overflow-hidden rounded-full bg-white/15 transition-all duration-300 ease-out group-hover:translate-y-14`;
+  const animationStyle = `absolute bottom-0 left-0 w-full origin-bottom translate-y-full transform overflow-hidden rounded-full transition-all duration-300 ease-out hover:underline`;
 
   return (
     <>
@@ -232,22 +232,23 @@ export const ContactModal = ({ location }: { location: string }) => {
         <button
           className={
             location === "nav"
-              ? `${buttonStyle} hover:bg-violet-600 p-2 px-3 rounded-3xl text-white`
+              ? `${buttonStyle} p-2 px-3 rounded-3xl text-violet-100 text-lg poppins-medium hover:underline underline-offset-4`
               : location === "navMobile"
-                ? `${buttonStyle} hover:bg-violet-600 p-2 px-3 rounded-3xl text-white bg-purple-800`
-                : `${buttonStyle} rounded-full bg-purple-800 px-14 py-4 text-lg`
+                ? `${buttonStyle} p-2 px-3 rounded-3xl text-violet-100`
+                : `${buttonStyle} rounded-full px-14 py-4 text-lg`
           }
           onClick={onOpen}
           id={location === "nav" ? "navContact" : "contact"}
         >
-          <span
+          Work with us
+          {/* <span
             className={
               location === "nav"
-                ? `${animationStyle} h-36`
+                ? `${animationStyle} h-36 hover:underline`
                 : `${animationStyle} h-48`
             }
-          ></span>
-          <span className="font-semibold text-white text-md">Work with Us</span>
+          ></span> */}
+          {/* <span className="text-violet-100 text-lg poppins-medium hover:underline"></span> */}
         </button>
       </div>
       <Suspense fallback={<div>loading...</div>}>

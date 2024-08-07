@@ -5,11 +5,11 @@ import React from 'react';
 const Mission = () => {
   return (
     <div
-      className="text-white overflow-y-auto max-h-screen flex flex-col mt-10 text-balance text-center bg-slate-900"
+      className="text-white overflow-y-auto max-h-screen flex flex-col text-balance text-center bg-slate-900"
       id="mission"
     >
       {/* <ScrollAnimation animateIn="fadeIn" delay={0.1 * 2000} animateOnce> */}
-      <h2 className="text-5xl font-bold text-center text-sky-300 mt-7 mb-7">Our Mission</h2>
+      <h2 className="text-5xl poppins-medium text-transparent bg-gradient-to-b from-sky-600/80 via-sky-300 to-sky-400/60 text-center text-edge-outline whitespace-nowrap bg-clip-text mt-7 mb-7">Our Mission</h2>
       {/* </ScrollAnimation> */}
       {/* <ScrollAnimation
         animateIn="fadeIn"
