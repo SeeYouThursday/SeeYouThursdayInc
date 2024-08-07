@@ -75,7 +75,7 @@ const Nav = () => {
       isBordered
       maxWidth="full"
       position="static"
-      className="bg-nav md:bg-nav bg-center bg-gradient-to-b from-blue-950 via-violet-700/40 to-violet-400/50"
+      className="bg-nav md:bg-nav bg-center bg-gradient-to-b from-blue-950 via-blue-700/40 to-fuchsia-400/30"
       height={'8rem'}
       classNames={{
         toggleIcon: ['text-slate-800 font-bolder p-2'],
@@ -116,7 +116,7 @@ const Nav = () => {
               isActive={pathname === item.href}
               className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-violet-100 text-primary"
             >
-              <Link color="primary" href={item.href} className="text-violet-100">
+              <Link  href={item.href} className="text-sky-200 poppins-medium text-lg">
                 {item.name}
               </Link>
             </NavbarItem>
@@ -150,7 +150,7 @@ const Nav = () => {
             <div className="flex hover:translate-x-2">
               <IconComet className=" hover:text-blue-900 -rotate-45 text-yellow-300" />
               <Link
-                className="w-full text-violet-100 ps-1"
+                className="w-full text-violet-100 ps-1 poppins-medium"
                 href={item.href}
                 size="lg"
               >
@@ -161,7 +161,7 @@ const Nav = () => {
         ))}
         <div className="flex hover:translate-x-2">
           <IconComet className=" hover:text-blue-900 -rotate-45 text-yellow-300" />
-          <Link href="/contact-us" className="w-full text-violet-100 ps-1" size="lg">
+          <Link href="/contact-us" className="w-full text-violet-100 ps-1 poppins-medium" size="lg">
             Contact Us!
           </Link>
         </div>
@@ -177,7 +177,7 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => {
         <DropdownTrigger>
           <Button
             disableRipple
-            className="home-dropdown-button p-2 px-3 rounded-3xl text-medium text-violet-100 font-semibold transition-colors"
+            className="home-dropdown-button p-2 px-3 rounded-3xl text-lg text-violet-100 font-semibold transition-colors poppins-medium"
             endContent={<IconChevronDown stroke={2} />}
             radius="sm"
             variant="light"
@@ -191,7 +191,8 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => {
           aria-label="ACME features"
           className="w-[340px]"
           itemClasses={{
-            base: 'gap-4',
+            base: 'gap-4 bg-violet-200',
+            wrapper: 'bg-violet-200',
           }}
         >
           {dropdown.map((item) => {
@@ -224,7 +225,7 @@ const NavDropConditional = ({
           className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-violet-100 text-primary"
         >
           <div className="flex items-start">
-            <Link color="primary" href="/" className="text-violet-100 ">
+            <Link color="primary" href="/" className="text-violet-100 poppins-medium">
               Home
             </Link>
           </div>
