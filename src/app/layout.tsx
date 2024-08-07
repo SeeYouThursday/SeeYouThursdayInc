@@ -20,9 +20,10 @@ export const metadata: Metadata = {
 };
 
 const links = [
-  { url: '/#mission', title: 'About us', id: '1' },
+  { url: '/#mission', title: 'About Us', id: '1' },
   { url: '/#services', title: 'Service', id: '2' },
   { url: '/#contact', title: 'Contact', id: '3' },
+  { url: '/terms', title: 'Terms', id: '4' },
 ];
 
 export default function RootLayout({

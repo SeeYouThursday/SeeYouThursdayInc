@@ -43,7 +43,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <aside className={`hidden lg:block lg:w-64 bg-[#4527a0] ${isSidebarOpen ? 'block' : 'hidden'}`}>
         <Sidebar open={true}>
           <SidebarBody>
-            <div className="font-bold text-xl text-black pt-3 pb-10">SEEYOUTHURSDAY</div>
+            <div className="font-bold text-xl pt-3 pb-10">SEEYOUTHURSDAY</div>
             {links.map((link) => (
               <SidebarLink key={link.label} link={link} />
             ))}
@@ -70,7 +70,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <button onClick={() => setIsSidebarOpen(true)} className="text-black">
             <IconMenu className="h-8 w-8" />
           </button>
-          <div className="font-bold text-xl text-black">SEEYOUTHURSDAY</div>
+          <div className="font-bold text-xl">SEEYOUTHURSDAY</div>
         </header>
         <main className="flex-1 p-6">
           {children}
