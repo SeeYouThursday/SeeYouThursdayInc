@@ -114,9 +114,9 @@ const Nav = () => {
             <NavbarItem
               key={item.name}
               isActive={pathname === item.href}
-              className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-violet-100 text-primary"
+              className="p-2 px-3 rounded-3xl hover:text-white"
             >
-              <Link  href={item.href} className="text-sky-200 poppins-medium text-lg">
+              <Link  href={item.href} underline="hover" className="text-violet-100 hover:text-white poppins-medium text-lg">
                 {item.name}
               </Link>
             </NavbarItem>
@@ -175,15 +175,15 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => {
     <Dropdown className="navLinkStyle">
       <NavbarItem>
         <DropdownTrigger>
-          <Button
-            disableRipple
-            className="home-dropdown-button p-2 px-3 rounded-3xl text-lg text-violet-100 font-semibold transition-colors poppins-medium"
-            endContent={<IconChevronDown stroke={2} />}
-            radius="sm"
-            variant="light"
+          <button
+            // disableRipple
+            className="home-dropdown-button p-2 px-3 rounded-3xl text-lg text-violet-100 transition-colors poppins-medium hover:underline flex outline-none underline-offset-4"
+            // endContent={<IconChevronDown stroke={2} />}
+            // radius="sm"
+            // variant='faded'
           >
-            Home
-          </Button>
+            Home <IconChevronDown stroke={2} />
+          </button>
         </DropdownTrigger>
       </NavbarItem>
       <NavbarItem>
@@ -191,8 +191,8 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => {
           aria-label="ACME features"
           className="w-[340px]"
           itemClasses={{
-            base: 'gap-4 bg-violet-200',
-            wrapper: 'bg-violet-200',
+            base: 'gap-4 bg-sky-200',
+            wrapper: 'bg-sky-200',
           }}
         >
           {dropdown.map((item) => {
@@ -222,7 +222,7 @@ const NavDropConditional = ({
       ) : (
         <NavbarItem
           // isActive={pathname === item.href}
-          className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-violet-100 text-primary"
+          className="hover:bg-sky-300/60 p-2 px-3 rounded-3xl hover:text-white"
         >
           <div className="flex items-start">
             <Link color="primary" href="/" className="text-violet-100 poppins-medium">
