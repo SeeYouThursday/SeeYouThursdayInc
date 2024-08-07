@@ -5,11 +5,11 @@
     "skipLibCheck": true,
     "strict": true,
     "outDir": "dist",
-    "sourceMap":true,
+    "sourceMap": true,
     "noEmit": true,
     "esModuleInterop": true,
     "target": "es2020",
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -25,6 +25,13 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "generate-sitemap.ts","next-sitemap.config.ts" ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "generate-sitemap.ts",
+    "next-sitemap.config.ts"
+  ],
   "exclude": ["node_modules"]
 }

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Accordion, AccordionItem } from "@nextui-org/react";
-import ProductForm from "@/components/productForm";
+import ProductForm from "@/components/ProductForms/productForm";
 
 export default function DashboardPage() {
   return (
