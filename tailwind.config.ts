@@ -1,3 +1,4 @@
+import { Vollkorn } from 'next/font/google';
 import type { Config } from 'tailwindcss';
 const defaultTheme = require('tailwindcss/defaultTheme');
 const { nextui } = require('@nextui-org/react');
@@ -62,8 +63,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
-        display: ['var(--font-calsans)'],
+        poppins: ['var(--font-poppins)', ...defaultTheme.fontFamily.sans],
+        // display: ['var(--font-calsans)'],
+        vollkorn: ['var(--font-vollkorn)',]
       },
       backgroundImage: {
         'gradient-radial':
