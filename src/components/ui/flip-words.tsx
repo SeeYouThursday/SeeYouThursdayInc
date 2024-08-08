@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
 import { cn } from "@/lib/util/cn";
+import { vollkorn } from "@/app/layout";
 
 export const FlipWords = ({
   words,
@@ -60,7 +61,7 @@ export const FlipWords = ({
           position: 'absolute',
         }}
         className={cn(
-          'z-10 inline-block relative text-left text-sky-300 px-2 vollkorn',
+          'z-10 inline-block relative text-left text-sky-300 px-2 font-vollkorn italic',
           className
         )}
         key={currentWord}

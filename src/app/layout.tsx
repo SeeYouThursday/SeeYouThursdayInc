@@ -7,7 +7,9 @@ import { NextUIProvider } from '@nextui-org/react';
 import { Providers } from './providers';
 import { ClerkProvider } from '@clerk/nextjs';
 import Head from 'next/head';
-const inter = Inter({ subsets: ['latin'] });
+import { Poppins, Vollkorn} from 'next/font/google';
+const poppins = Poppins({ subsets: ['latin'], weight:['300', '500',], variable:'--font-poppins' });
+export const vollkorn = Vollkorn({ subsets: ['latin'], weight:['400'], style: ['italic'], variable:'--font-vollkorn' });
 
 export const metadata: Metadata = {
   title: 'SeeYouThursday Web Dev',
@@ -36,7 +38,7 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </Head>
-      <body className={inter.className}>
+      <body className={`${poppins.variable} ${vollkorn.variable}`}>
         <ClerkProvider>
           <NextUIProvider>
             <Providers>
