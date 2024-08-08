@@ -95,32 +95,6 @@ export default function ProductForm() {
             className="mb-2"
           />
         );
-      case 'file':
-        return (
-          <div key={field.name} className="mb-2">
-            <label
-              className="block text-sm font-medium text-white"
-              htmlFor={field.name}
-            >
-              {field.label}
-            </label>
-            <input
-              id={field.name}
-              ref={inputFileRef}
-              type="file"
-              name={field.name}
-              onChange={(e) =>
-                handleFileChange(e, field.name as keyof ProductProps)
-              }
-              className="mt-1 block w-full text-sm text-white
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-full file:border-0
-                file:text-sm file:font-semibold
-                file:bg-violet-50 file:text-violet-700
-                hover:file:bg-violet-100"
-            />
-          </div>
-        );
       default:
         return (
           <Input
