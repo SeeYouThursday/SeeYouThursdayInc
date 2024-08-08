@@ -75,7 +75,7 @@ const Nav = () => {
       isBordered
       maxWidth="full"
       position="static"
-      className="bg-nav md:bg-nav bg-center bg-gradient-to-b from-blue-950 via-blue-700/40 to-fuchsia-400/30"
+      className="bg-nav md:bg-nav bg-center"
       height={'8rem'}
       classNames={{
         toggleIcon: ['text-slate-800 font-bolder p-2'],
@@ -104,7 +104,8 @@ const Nav = () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent
-        className="hidden sm:flex gap-4  p-3 m-3 h-12 ps-10 pe-10 font-bold"
+        className="hidden sm:flex gap-4 bg-violet-200 bg-opacity-40
+          rounded-3xl p-3 m-3 h-12 ps-10 pe-10 font-bold shadow-inner backdrop-blur-sm"
         justify="center"
       >
         <NavDropConditional pathname={pathname} dropdown={dropdown} />
@@ -114,9 +115,9 @@ const Nav = () => {
             <NavbarItem
               key={item.name}
               isActive={pathname === item.href}
-              className="p-2 px-3 rounded-3xl hover:text-white"
+              className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary"
             >
-              <Link  href={item.href} underline="hover" className="text-violet-100 hover:text-white poppins-medium text-lg">
+              <Link color="primary" href={item.href} className="text-white">
                 {item.name}
               </Link>
             </NavbarItem>
@@ -150,7 +151,7 @@ const Nav = () => {
             <div className="flex hover:translate-x-2">
               <IconComet className=" hover:text-blue-900 -rotate-45 text-yellow-300" />
               <Link
-                className="w-full text-violet-100 ps-1 poppins-medium"
+                className="w-full text-white ps-1"
                 href={item.href}
                 size="lg"
               >
@@ -161,7 +162,7 @@ const Nav = () => {
         ))}
         <div className="flex hover:translate-x-2">
           <IconComet className=" hover:text-blue-900 -rotate-45 text-yellow-300" />
-          <Link href="/contact-us" className="w-full text-violet-100 ps-1 poppins-medium" size="lg">
+          <Link href="/contact-us" className="w-full text-white ps-1" size="lg">
             Contact Us!
           </Link>
         </div>
@@ -175,15 +176,15 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => {
     <Dropdown className="navLinkStyle">
       <NavbarItem>
         <DropdownTrigger>
-          <button
-            // disableRipple
-            className="home-dropdown-button p-2 px-3 rounded-3xl text-lg text-violet-100 transition-colors poppins-medium hover:underline flex outline-none underline-offset-4"
-            // endContent={<IconChevronDown stroke={2} />}
-            // radius="sm"
-            // variant='faded'
+          <Button
+            disableRipple
+            className="home-dropdown-button p-2 px-3 rounded-3xl text-medium text-white font-semibold transition-colors"
+            endContent={<IconChevronDown stroke={2} />}
+            radius="sm"
+            variant="light"
           >
-            Home <IconChevronDown stroke={2} />
-          </button>
+            Home
+          </Button>
         </DropdownTrigger>
       </NavbarItem>
       <NavbarItem>
@@ -191,8 +192,7 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => {
           aria-label="ACME features"
           className="w-[340px]"
           itemClasses={{
-            base: 'gap-4 bg-sky-200',
-            wrapper: 'bg-sky-200',
+            base: 'gap-4',
           }}
         >
           {dropdown.map((item) => {
@@ -222,10 +222,10 @@ const NavDropConditional = ({
       ) : (
         <NavbarItem
           // isActive={pathname === item.href}
-          className="hover:bg-sky-300/60 p-2 px-3 rounded-3xl hover:text-white"
+          className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary"
         >
           <div className="flex items-start">
-            <Link color="primary" href="/" className="text-violet-100 poppins-medium">
+            <Link color="primary" href="/" className="text-white ">
               Home
             </Link>
           </div>
