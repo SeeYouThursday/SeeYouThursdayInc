@@ -2,6 +2,9 @@ import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
+  
+  const prisma = new PrismaClient();
+  
   try {
     const product = await prisma.product.findMany({});
 
