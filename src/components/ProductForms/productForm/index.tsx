@@ -56,21 +56,6 @@ export default function ProductForm() {
     setProduct((prev) => ({ ...prev, stack: stackArray }));
   };
 
-  const handleFileChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    fieldName: keyof ProductProps
-  ) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      if (fieldName === 'img_url') {
-        setImageFile(file);
-      } else if (fieldName === 'icon_url') {
-        setIconFile(file);
-      }
-      setProduct((prev) => ({ ...prev, [fieldName]: file.name }));
-    }
-  };
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
