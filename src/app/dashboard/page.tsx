@@ -1,10 +1,20 @@
 "use client";
-import React from "react";
+import React, {useEffect} from "react";
 import Image from "next/image";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 import ProductForm from '@/components/ProductForms/productForm';
+import { useUser } from '@clerk/nextjs';
+import { redirect } from 'next/navigation';
 
 export default function DashboardPage() {
+  const { isSignedIn } = useUser();
+
+  useEffect(() => {
+    if (!isSignedIn) {
+      redirect('/admin-login');
+      
+}
+});
   return (
     <div className="container mx-auto py-12 px-8 lg:px-16 flex flex-col min-h-screen">
       <main className="ml-4 lg:ml-8 flex-grow">
