@@ -2,6 +2,7 @@
 import { put } from '@vercel/blob';
 import { revalidatePath } from 'next/cache';
 import { PrismaClient } from '@prisma/client';
+import { redirect } from 'next/navigation';
 
 export const getAllProducts = async () => {
   const prisma = new PrismaClient();
@@ -29,11 +30,12 @@ export async function handleFormSubmission(formData: FormData) {
   }
 
   try {
+    // handling uploads for Vercel Blob
     const imgBlob = await put(imageFile.name, imageFile, {
       access: 'public',
     });
     const iconBlob = await put(iconFile.name, iconFile, { access: 'public' });
-    console.log(typeof imgBlob.url);
+    // update img_url and icon_url on Product
     const update = await prisma.product.update({
       where: { id: id },
       data: {
@@ -47,5 +49,8 @@ export async function handleFormSubmission(formData: FormData) {
   } catch (error) {
     console.error('Error uploading files:', error);
     throw new Error('Error uploading files');
+  } finally {
+    prisma.$disconnect();
+    redirect('/dashboard');
   }
 }

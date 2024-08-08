@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Input, Textarea, Button, Spacer } from '@nextui-org/react';
+import { Input, Textarea, Button, Spacer, Link } from '@nextui-org/react';
 import { useUser } from '@clerk/nextjs';
 
 export type ProductProps = {
@@ -172,6 +172,7 @@ export default function ProductForm() {
           Submit
         </Button>
       </form>
+      <Link href="/upload-img">Upload Images Here</Link>
     </div>
   );
 }
