@@ -38,8 +38,6 @@ const formFields: FormField[] = [
 export default function ProductForm() {
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [product, setProduct] = useState<Partial<ProductProps>>({});
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [iconFile, setIconFile] = useState<File | null>(null);
 
   const user = useUser();
   if (!user.isSignedIn) {
