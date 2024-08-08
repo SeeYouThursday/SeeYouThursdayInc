@@ -39,6 +39,8 @@ const Products = async () => {
   //   link: 'https://www.wizardofpawz.co',
   // };
 
+  // TODO: projects needs to be copied to the dashboard
+  // TODO: projectTitles needs to be MOVED to the dashboard with the UpdateImgForm
   const projects = await getAllProducts();
   const projectTitles = projects.map((project) => project.title);
 
@@ -49,7 +51,7 @@ const Products = async () => {
           <PortfolioCard key={index} {...project} />
         ))}
       </div>
-      <UpdateImgForm productTitle={projectTitles} />
+    
     </>
   );
 };

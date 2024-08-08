@@ -1,39 +1,36 @@
 'use server';
 
-import { Select, option, Button, Input } from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
 import { put } from '@vercel/blob';
 import { revalidatePath } from 'next/cache';
-import { PrismaClient } from '@prisma/client';
 import { getAllProducts } from '@/lib/actions';
+import { PrismaClient } from '@prisma/client';
 
-export const UpdateImgForm = async ({
-  productTitle,
-}: {
-  productTitle: string[];
-}) => {
+export const UpdateImgForm = async () => {
   //   const { getToken, isLoaded, isSignedIn } = useAuth();
+  const prisma = new PrismaClient();
+  const projects = await getAllProducts();
+  const projectTitle = projects.map((project) => project.title);
+
   async function uploadImage(formData: FormData) {
     'use server';
+
+    const imageFile = formData.get('img') as File;
+    const iconFile = formData.get('icon') as File;
     try {
-      const imageFile = formData.get('img') as File;
-      const iconFile = formData.get('icon') as File;
       const imgBlob = await put(imageFile.name, imageFile, {
         access: 'public',
       });
       const iconBlob = await put(iconFile.name, iconFile, { access: 'public' });
       revalidatePath('/dashboard');
-      return { img: imgBlob, icon: iconBlob };
+      const result = { img: imgBlob, icon: iconBlob };
+      return result;
     } catch (error) {
       throw new Error('error uploading');
+    } finally {
+        //write a prisma function to update the selected client with the image File and iconFile 
     }
   }
-
-  const productTitles = await getAllProducts();
-
-  console.log(Array.isArray(productTitles));
-  console.log(productTitles[0]);
-  const titleString = productTitles.toString();
-  console.log(titleString);
 
   return (
     <div className="flex justify-center items-center">
@@ -43,9 +40,10 @@ export const UpdateImgForm = async ({
       >
         <select
           title="Client Name"
+          name="client"
           className="select select-secondary w-full max-w-xs"
         >
-          {productTitle.map((title) => {
+          {projectTitle.map((title) => {
             return <option key={title}>{title}</option>;
           })}
         </select>
@@ -54,7 +52,6 @@ export const UpdateImgForm = async ({
             Upload Img
           </label>
           <input
-            // id={field.name}
             title="img"
             type="file"
             name="img"
@@ -66,16 +63,10 @@ export const UpdateImgForm = async ({
             Upload Icon
           </label>
           <input
-            // id={field.name}
             title="icon"
             type="file"
             name="icon"
-            className="mt-1 block w-full text-sm text-white
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-full file:border-0
-                file:text-sm file:font-semibold
-                file:bg-violet-50 file:text-violet-700
-                hover:file:bg-violet-100"
+            className="file-input file-input-bordered file-input-secondary w-full max-w-xs"
           />
         </div>
         <Button type="submit">Submit</Button>
