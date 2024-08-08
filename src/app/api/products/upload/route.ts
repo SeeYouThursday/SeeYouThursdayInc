@@ -1,47 +1,47 @@
+// pages/api/upload.ts
+import { NextApiRequest, NextApiResponse } from 'next';
 import { put } from '@vercel/blob';
-import { NextResponse, NextRequest } from 'next/server';
-import { useAuth } from '@clerk/nextjs';
-import { handleUpload, type HandleUploadBody } from '@vercel/blob/client';
+import { PrismaClient } from '@prisma/client';
 
-export async function POST(request: Request): Promise<NextResponse> {
-  const body = (await request.json()) as HandleUploadBody;
-  const auth = useAuth();
-  const token = await auth.getToken();
+const prisma = new PrismaClient();
 
-  try {
-    const jsonResponse = await handleUpload({
-      body,
-      request,
-      onBeforeGenerateToken: async (pathname) => {
-        if (!auth.isSignedIn) {
-          throw new Error('user must be signed in');
-        }
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method === 'POST') {
+    const formData = req.body;
+    const imageFile = formData.img as File;
+    const iconFile = formData.icon as File;
 
-        return {
-          allowedContentTypes: ['image/webp', 'image/png', 'image/gif'],
-          tokenPayload: JSON.stringify({
-            token,
-          }),
-        };
-      },
-      onUploadCompleted: async ({ blob, tokenPayload }) => {
-        console.log('blob upload completed', blob, tokenPayload);
+    try {
+      const imgBlob = await put(imageFile.name, imageFile, {
+        access: 'public',
+      });
+      const iconBlob = await put(iconFile.name, iconFile, { access: 'public' });
 
-        try {
-          // Run any logic after the file upload completed
-          // const { userId } = JSON.parse(tokenPayload);
-          // await db.update({ avatar: blob.url, userId });
-        } catch (error) {
-          throw new Error('Could not update user');
-        }
-      },
-    });
+      const client = formData.client?.toString();
+      const id = client ? parseInt(client) : 0;
 
-    return NextResponse.json(jsonResponse);
-  } catch (error) {
-    return NextResponse.json(
-      { error: (error as Error).message },
-      { status: 400 }
-    );
+      if (!client) {
+        return res.status(400).json({ error: 'Client not specified' });
+      }
+
+      const update = await prisma.product.update({
+        where: { id: id },
+        data: {
+          img_url: imgBlob.toString(),
+          icon_url: iconBlob.toString(),
+        },
+      });
+
+      return res.status(200).json(update);
+    } catch (error) {
+      console.log('error uploading', error);
+      return res.status(500).json({ error: 'Error uploading files' });
+    }
+  } else {
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

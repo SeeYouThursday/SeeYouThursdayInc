@@ -13,8 +13,9 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'see-you-thursday-inc-blob.public.blob.vercel-storage.com',
+        hostname: 'ta0g4axiwsztasg1.public.blob.vercel-storage.com',
         port: '',
+        pathname: '/**', // Allow all paths under this hostname
       },
     ],
   },

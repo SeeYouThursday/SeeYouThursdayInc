@@ -1,35 +1,7 @@
 import PortfolioCard from '@/components/PortfolioCard';
-import { ProductProps } from '@/lib/util/types/product';
-import { UpdateImgForm } from '@/components/ProductForms/img-form';
 import { getAllProducts } from '@/lib/actions';
-const Products = async () => {
-  // const projects: ProductProps[] = [
-  //   // {
-  //   //   title: 'iBall247',
-  //   //   description: 'Basketball Training Program and Merch Site.',
-  //   //   type: 'E-commerce',
-  //   //   stack: ['Shopify CMS', 'PushPress'],
-  //   //   img: '/iball247/SYT-projects-laptop.png',
-  //   //   link: 'https://www.iball247.com',
-  //   // },
-  //   // {
-  //   //   title: 'Wizard of Pawz',
-  //   //   description: 'Pet Grooming',
-  //   //   type: 'Marketing',
-  //   //   stack: 'Nextjs, Tailwind',
-  //   //   img: '/PH-SYT-projects-laptop.png',
-  //   //   link: 'https://www.wizardofpawz.co',
-  //   // },
-  // ];
-  // const iball: ProductProps = {
-  //   title: 'iBall247',
-  //   description: 'Basketball Training Program and Merch Site.',
-  //   type: 'E-commerce',
-  //   stack: 'Shopify CMS, PushPress',
-  //   img: '/iball247/SYT-projects-laptop.png',
-  //   link: 'https://www.iball247.com',
-  // };
 
+const Products = async () => {
   // const wizardPawz: ProductProps = {
   //   title: 'Wizard of Pawz',
   //   description: 'Pet Grooming',
@@ -39,10 +11,7 @@ const Products = async () => {
   //   link: 'https://www.wizardofpawz.co',
   // };
 
-  // TODO: projects needs to be copied to the dashboard
-  // TODO: projectTitles needs to be MOVED to the dashboard with the UpdateImgForm
   const projects = await getAllProducts();
-  const projectTitles = projects.map((project) => project.title);
 
   return (
     <>
@@ -51,7 +20,6 @@ const Products = async () => {
           <PortfolioCard key={index} {...project} />
         ))}
       </div>
-    
     </>
   );
 };

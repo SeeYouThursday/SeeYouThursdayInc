@@ -1,10 +1,9 @@
-import { UpdateImgForm } from '@/components/ProductForms/img-form';
-import { getAllProducts } from '@/lib/actions';
+'use server';
 
 const Page = async () => {
   return (
     <main className="flex flex-col justify-center items-center p-10">
-      <UpdateImgForm />
+      <p>Let Brian Make Things Ridiculous.</p>
     </main>
   );
 };

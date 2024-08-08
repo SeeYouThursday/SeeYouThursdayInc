@@ -1,51 +1,36 @@
 'use server';
-
 import { Button } from '@nextui-org/react';
-import { put } from '@vercel/blob';
-import { revalidatePath } from 'next/cache';
 import { getAllProducts } from '@/lib/actions';
 import { PrismaClient } from '@prisma/client';
-
+import { put } from '@vercel/blob';
+import { revalidatePath } from 'next/cache';
+import { handleFormSubmission } from '@/lib/actions';
 export const UpdateImgForm = async () => {
-  //   const { getToken, isLoaded, isSignedIn } = useAuth();
-  const prisma = new PrismaClient();
+  'use server';
   const projects = await getAllProducts();
-  const projectTitle = projects.map((project) => project.title);
-
-  async function uploadImage(formData: FormData) {
-    'use server';
-
-    const imageFile = formData.get('img') as File;
-    const iconFile = formData.get('icon') as File;
-    try {
-      const imgBlob = await put(imageFile.name, imageFile, {
-        access: 'public',
-      });
-      const iconBlob = await put(iconFile.name, iconFile, { access: 'public' });
-      revalidatePath('/dashboard');
-      const result = { img: imgBlob, icon: iconBlob };
-      return result;
-    } catch (error) {
-      throw new Error('error uploading');
-    } finally {
-        //write a prisma function to update the selected client with the image File and iconFile 
-    }
-  }
+  const projectDetails = projects.map((project) => ({
+    id: project.id,
+    title: project.title,
+  }));
 
   return (
     <div className="flex justify-center items-center">
       <form
         className="flex justify-center flex-col max-w-96"
-        action={uploadImage}
+        action={handleFormSubmission}
+        method="post"
+        encType="multipart/form-data"
       >
         <select
           title="Client Name"
           name="client"
           className="select select-secondary w-full max-w-xs"
         >
-          {projectTitle.map((title) => {
-            return <option key={title}>{title}</option>;
-          })}
+          {projectDetails.map((project) => (
+            <option key={project.id} value={project.id}>
+              {project.title}
+            </option>
+          ))}
         </select>
         <div className="mb-2">
           <label className="block text-sm font-medium text-white" htmlFor="img">
@@ -59,7 +44,10 @@ export const UpdateImgForm = async () => {
           />
         </div>
         <div className="mb-2">
-          <label className="block text-sm font-medium text-white" htmlFor="img">
+          <label
+            className="block text-sm font-medium text-white"
+            htmlFor="icon"
+          >
             Upload Icon
           </label>
           <input
