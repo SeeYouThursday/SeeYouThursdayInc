@@ -3,7 +3,7 @@ import { cn } from "@/lib/util/cn";
 import Link, { LinkProps } from "next/link";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { IconMenu2, IconX } from "@tabler/icons-react";
+import { IconMenu2 } from "@tabler/icons-react";
 
 interface Links {
   label: string;
@@ -144,7 +144,6 @@ export const MobileSidebar = ({
                 className="absolute right-10 top-10 z-50 text-neutral-800 dark:text-neutral-200"
                 onClick={() => setOpen(!open)}
               >
-                <IconX />
               </div>
               {children}
             </motion.div>

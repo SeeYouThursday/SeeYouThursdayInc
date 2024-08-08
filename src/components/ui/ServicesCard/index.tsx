@@ -51,14 +51,14 @@ export function Service() {
     },
   ];
   return (
-    <section id="services">
+    <section id="services" className="bg-purple-200/80 w-screen flex justify-center flex-col">
       <div className="flex justify-center items-center text-center">
-        <h2 className="text-5xl mt-20 font-bold tracking-wide text-sky-300">
+        <h2 className="text-5xl mt-20 font-bold tracking-wide text-slate-900">
           Our Services
         </h2>
       </div>
       <div className="flex justify-center items-center text-center">
-        <p className="text-xl text-white mt-4 mb-14">
+        <p className="text-xl text-slate-900 mt-4 mb-14">
           We offer a wide range of services to help you create a beautiful,
           user-friendly website.
         </p>
@@ -69,7 +69,7 @@ export function Service() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative z-10 py-10 max-w-7xl mx-auto">
         {features.map((feature, index) => (
-          <Feature key={feature.title} {...feature} index={index} />
+          <Feature key={feature.title} {...feature} index={index} /> 
         ))}
       </div>
     </section>
@@ -90,9 +90,9 @@ const Feature = ({
   return (
     <div
       className={cn(
-        "flex flex-col lg:border-r  py-10 relative group/feature dark:border-neutral-800",
-        (index === 0 || index === 3) && "lg:border-l dark:border-neutral-800",
-        index < 3 && "lg:border-b dark:border-neutral-800"
+        "flex flex-col lg:border-r  py-10 relative group/feature dark:border-neutral-800 border-slate-900",
+        (index === 0 || index === 3) && "lg:border-l dark:border-neutral-800 border-slate-900 ms-2",
+        index < 3 && "lg:border-b dark:border-neutral-800 border-slate-900"
       )}
     >
       {index < 3 && (
@@ -106,11 +106,11 @@ const Feature = ({
       </div>
       <div className="text-lg font-bold mb-2 relative z-10 px-10">
         <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-neutral-300 dark:bg-neutral-700 group-hover/feature:bg-blue-500 transition-all duration-200 origin-center" />
-        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-white dark:text-neutral-100">
+        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-slate-900 dark:text-neutral-100">
           {title}
         </span>
       </div>
-      <p className="text-sm text-white dark:text-white max-w-xs relative z-10 px-10">
+      <p className="text-sm text-slate-900 dark:text-white max-w-xs relative z-10 px-10">
         {description}
       </p>
     </div>
