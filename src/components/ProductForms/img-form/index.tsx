@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client';
 import { put } from '@vercel/blob';
 import { revalidatePath } from 'next/cache';
 import { handleFormSubmission } from '@/lib/actions';
+import Image from 'next/image';
 
 export const UpdateImgForm = async () => {
   'use server';
@@ -15,9 +16,20 @@ export const UpdateImgForm = async () => {
   }));
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-evenly items-center m-3 p-3 md:rounded-box bg-slate-50">
+      <div className="flex flex-col justify-center items-center m-3">
+        <h2 className="text-primary text-2xl m-2 font-bold text-center text-balance">
+          Client Photo Upload
+        </h2>
+        <Image
+          src="/upload/space-admin-upload.png"
+          alt="spaceman on a computer working"
+          height="180"
+          width="180"
+        />
+      </div>
       <form
-        className="flex justify-center flex-col max-w-96"
+        className="flex text-balance justify-center flex-col max-w-96"
         action={handleFormSubmission}
         method="post"
         encType="multipart/form-data"
