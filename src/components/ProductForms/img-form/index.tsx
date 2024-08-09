@@ -22,7 +22,7 @@ export const UpdateImgForm = async () => {
           Client Photo Upload
         </h2>
         <Image
-          src="/upload/space-admin-upload.png"
+          src="/upload/space-admin-upload.webp"
           alt="spaceman on a computer working"
           height="180"
           width="180"

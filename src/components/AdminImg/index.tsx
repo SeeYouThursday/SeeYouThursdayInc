@@ -25,7 +25,7 @@ export const AdminImgUpload = async () => {
           Admin Photo Upload
         </h2>
         <Image
-          src="/upload/space-upload.png"
+          src="/upload/space-upload.webp"
           alt="spaceman on a computer working"
           height="180"
           width="180"
