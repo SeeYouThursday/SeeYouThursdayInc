@@ -6,8 +6,8 @@ import Nav from '@/components/ui/Nav';
 import { NextUIProvider } from '@nextui-org/react';
 import { Providers } from './providers';
 import { ClerkProvider } from '@clerk/nextjs';
-import Head from 'next/head';
 import { Poppins, Vollkorn} from 'next/font/google';
+
 const poppins = Poppins({ subsets: ['latin'], weight:['300', '500',], variable:'--font-poppins' });
 export const vollkorn = Vollkorn({ subsets: ['latin'], weight:['400'], style: ['italic'], variable:'--font-vollkorn' });
 
@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   robots: {
     follow: true,
     index: true,
+  },
+  icons: {
+    icon: '/favicon.ico',
   },
 };
 
@@ -35,9 +38,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </Head>
       <body className={`${poppins.variable} ${vollkorn.variable}`}>
         <ClerkProvider>
           <NextUIProvider>
