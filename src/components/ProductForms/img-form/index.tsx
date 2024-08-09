@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client';
 import { put } from '@vercel/blob';
 import { revalidatePath } from 'next/cache';
 import { handleFormSubmission } from '@/lib/actions';
+
 export const UpdateImgForm = async () => {
   'use server';
   const projects = await getAllProducts();
