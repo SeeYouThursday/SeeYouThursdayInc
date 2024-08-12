@@ -65,7 +65,7 @@ const config: Config = {
       fontFamily: {
         poppins: ['var(--font-poppins)', ...defaultTheme.fontFamily.sans],
         // display: ['var(--font-calsans)'],
-        vollkorn: ['var(--font-vollkorn)',]
+        vollkorn: ['var(--font-vollkorn)'],
       },
       backgroundImage: {
         'gradient-radial':
@@ -136,6 +136,9 @@ const config: Config = {
             opacity: '100%',
           },
         },
+      },
+      screens: {
+        laptop: { raw: '(min-width: 1440px)' },
       },
     },
   },

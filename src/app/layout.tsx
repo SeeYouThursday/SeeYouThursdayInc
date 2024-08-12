@@ -6,10 +6,19 @@ import Nav from '@/components/ui/Nav';
 import { NextUIProvider } from '@nextui-org/react';
 import { Providers } from './providers';
 import { ClerkProvider } from '@clerk/nextjs';
-import { Poppins, Vollkorn} from 'next/font/google';
+import { Poppins, Vollkorn } from 'next/font/google';
 
-const poppins = Poppins({ subsets: ['latin'], weight:['300', '500',], variable:'--font-poppins' });
-export const vollkorn = Vollkorn({ subsets: ['latin'], weight:['400'], style: ['italic'], variable:'--font-vollkorn' });
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '500'],
+  variable: '--font-poppins',
+});
+const vollkorn = Vollkorn({
+  subsets: ['latin'],
+  weight: ['400'],
+  style: ['italic'],
+  variable: '--font-vollkorn',
+});
 
 export const metadata: Metadata = {
   title: 'SeeYouThursday Web Dev',
