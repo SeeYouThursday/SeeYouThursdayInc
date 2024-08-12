@@ -31,7 +31,7 @@ export const UpdateImgForm = async () => {
       <form
         className="flex text-balance justify-center flex-col max-w-96"
         action={handleFormSubmission}
-        method="post"
+        method="POST"
         encType="multipart/form-data"
       >
         <select
