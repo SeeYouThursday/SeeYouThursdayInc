@@ -1,10 +1,11 @@
-"use client";
-import { useState, useRef, Suspense, ChangeEvent } from "react";
-import Image from "next/image";
-import { validateEmail } from "@/lib/util/helpers";
+'use client';
+import { useState, useRef, Suspense } from 'react';
+import Image from 'next/image';
+import { validateEmail } from '@/lib/util/helpers';
 import ContactToast from '@/components/ui/ContactToast';
 import { LetsConnect } from '@/components/ContactForm/ContactHeadings';
 import emailjs from '@emailjs/browser';
+import { FormInputEvent } from '@/lib/util/types/types';
 import {
   Input,
   Button,
@@ -15,7 +16,7 @@ import {
   useDisclosure,
   Select,
   SelectItem,
-} from "@nextui-org/react";
+} from '@nextui-org/react';
 export const ContactForm = ({
   onClose,
   location,
@@ -25,32 +26,25 @@ export const ContactForm = ({
 }) => {
   // const [validated, setValidated] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [name, setName] = useState({ firstName: "", lastName: "" });
-  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [name, setName] = useState({ firstName: '', lastName: '' });
+  const [phone, setPhone] = useState('');
   const [error, setError] = useState(false);
   const [submitted, setSubmit] = useState(false);
-  const [plan, setPlan] = useState("");
-  const plans: string[] = ["Lite", "Basic", "Pro"];
-
-  interface FormInputEvent
-    extends React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> {
-    target: HTMLInputElement | HTMLTextAreaElement;
-  }
 
   const handleInputChange = (e: FormInputEvent) => {
     const inputValue: string = e.target.value;
     const inputName: string = e.target.name;
 
-    if (inputName === "firstName" || inputName === "lastName") {
+    if (inputName === 'firstName' || inputName === 'lastName') {
       setName((prevName) => ({
         ...prevName,
         [inputName]: inputValue,
       }));
-    } else if (inputName === "email") {
+    } else if (inputName === 'email') {
       setEmail(inputValue);
-    } else if (inputName === "phone") {
+    } else if (inputName === 'phone') {
       setPhone(inputValue);
     } else {
       setMessage(inputValue);
@@ -71,23 +65,22 @@ export const ContactForm = ({
       e.preventDefault();
       e.stopPropagation();
       emailjs
-        .sendForm(serviceId, templateId, "#contactForm", {
+        .sendForm(serviceId, templateId, '#contactForm', {
           publicKey: publicKey,
         })
         .then(
           () => {
             setSubmit(true);
-            if (location === "modal") {
+            if (location === 'modal') {
               onClose();
             }
-            setName({ firstName: "", lastName: "" });
-            setEmail("");
-            setPhone("");
-            setMessage("");
+            setName({ firstName: '', lastName: '' });
+            setEmail('');
+            setPhone('');
+            setMessage('');
           },
           (error) => {
             setError(true);
-            console.log(error);
           }
         );
     }
@@ -126,7 +119,7 @@ export const ContactForm = ({
             variant="faded"
             size="sm"
             name="lastName"
-            color={error ? "danger" : "default"}
+            color={error ? 'danger' : 'default'}
             className="text-black h-[45px]"
           >
             Enter Your Name:
@@ -140,7 +133,7 @@ export const ContactForm = ({
           value={email}
           variant="faded"
           size="sm"
-          color={error ? "danger" : "default"}
+          color={error ? 'danger' : 'default'}
           name="email"
           className="h-[45px]"
         >
@@ -154,7 +147,7 @@ export const ContactForm = ({
           value={phone}
           variant="faded"
           size="sm"
-          color={error ? "danger" : "default"}
+          color={error ? 'danger' : 'default'}
           name="phone"
           className="h-[45px]"
         >
@@ -191,15 +184,15 @@ export const ContactForm = ({
           className="hover:bg-purple-800 hover:text-white"
           type="submit"
           isDisabled={
-            email === "" ||
-            name.firstName === "" ||
-            name.lastName === "" ||
-            message === ""
+            email === '' ||
+            name.firstName === '' ||
+            name.lastName === '' ||
+            message === ''
               ? true
               : false
           }
         >
-          Send it to the moon{" "}
+          Send it to the moon{' '}
           <Image
             src="/contact/rocket.png"
             alt="spaceship"
@@ -226,23 +219,23 @@ export const ContactModal = ({ location }: { location: string }) => {
   return (
     <>
       <div
-        className={location === "nav" ? divStyle : `${divStyle} pb-5`}
+        className={location === 'nav' ? divStyle : `${divStyle} pb-5`}
         id="ContactUs"
       >
         <button
           className={
-            location === "nav"
+            location === 'nav'
               ? `${buttonStyle} hover:bg-violet-600 p-2 px-3 rounded-3xl text-white`
-              : location === "navMobile"
+              : location === 'navMobile'
                 ? `${buttonStyle} hover:bg-violet-600 p-2 px-3 rounded-3xl text-white bg-purple-800`
                 : `${buttonStyle} rounded-full bg-purple-800 px-14 py-4 text-lg`
           }
           onClick={onOpen}
-          id={location === "nav" ? "navContact" : "contact"}
+          id={location === 'nav' ? 'navContact' : 'contact'}
         >
           <span
             className={
-              location === "nav"
+              location === 'nav'
                 ? `${animationStyle} h-36`
                 : `${animationStyle} h-48`
             }
