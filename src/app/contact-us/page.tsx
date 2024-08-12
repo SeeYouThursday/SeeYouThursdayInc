@@ -7,7 +7,9 @@ const ContactUs = () => {
   return (
     <section className="flex flex-col bg-[url('/contact/purple-bg.webp')] bg-no-repeat bg-cover h-full justify-center items-center">
       {/* Heading */}
-      <h1 className="text-5xl font-bold text-center p-2">Get in Touch</h1>
+      <h1 className="text-5xl font-bold text-center p-2 text-white">
+        Get in Touch
+      </h1>
       <p className="italic text-center">
         Reach out, and let&apos;s create a universe of possibilities together!
       </p>

@@ -70,6 +70,8 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial':
           'radial-gradient(50% 50% at 50% 50%, var(--tw-gradient-stops))',
+        'custom-gradient':
+          'linear-gradient(to right, #ffffff 48%, #763AF5 90%, #a604f2 99%)',
       },
       animation: {
         fadeIn: 'fadeIn .3s ease-in-out',
