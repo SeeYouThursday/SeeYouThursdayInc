@@ -65,11 +65,13 @@ const config: Config = {
       fontFamily: {
         poppins: ['var(--font-poppins)', ...defaultTheme.fontFamily.sans],
         // display: ['var(--font-calsans)'],
-        vollkorn: ['var(--font-vollkorn)',]
+        vollkorn: ['var(--font-vollkorn)'],
       },
       backgroundImage: {
         'gradient-radial':
           'radial-gradient(50% 50% at 50% 50%, var(--tw-gradient-stops))',
+        'custom-gradient':
+          'linear-gradient(to right, #ffffff 48%, #763AF5 90%, #a604f2 99%)',
       },
       animation: {
         fadeIn: 'fadeIn .3s ease-in-out',
@@ -136,6 +138,9 @@ const config: Config = {
             opacity: '100%',
           },
         },
+      },
+      screens: {
+        laptop: { raw: '(min-width: 1440px)' },
       },
     },
   },
