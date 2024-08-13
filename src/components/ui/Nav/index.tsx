@@ -40,7 +40,8 @@ const Nav = () => {
 
   const navItems: navItem[] = [
     { href: '/pricing', name: 'Pricing', isActive: false },
-    { href: '/products', name: 'Recent Clients', isActive: false },
+    { href: '/products', name: 'Our Work', isActive: false },
+    { href: '/contact-us', name: 'Contact Us', isActive: false },
   ];
 
   const dropdown = [
@@ -73,7 +74,7 @@ const Nav = () => {
       isBordered
       maxWidth="full"
       position="static"
-      className="bg-nav md:bg-nav bg-center"
+      className="bg-gradient-to-b from-blue-950 via-blue-700/40 to-fuchsia-400/30"
       height={'8rem'}
       classNames={{
         toggleIcon: ['text-slate-800 font-bolder p-2'],
@@ -82,6 +83,7 @@ const Nav = () => {
         base: ['bg-slate-900 h-auto min-h-[8rem]'],
         menu: ['bg-violet-200 max-h-48'],
       }}
+      id="home"
     >
       <NavbarContent justify="start">
         <NavbarItem>
@@ -100,8 +102,8 @@ const Nav = () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent
-        className="hidden sm:flex gap-4 bg-violet-200 bg-opacity-40
-          rounded-3xl p-3 m-3 h-auto ps-10 pe-10 font-bold shadow-inner backdrop-blur-sm flex-wrap"
+        className="hidden sm:flex gap-4 
+       p-3 m-3 h-auto ps-10 pe-10 font-bold flex-wrap"
         justify="center"
       >
         <NavDropConditional pathname={pathname} dropdown={dropdown} />
@@ -110,22 +112,20 @@ const Nav = () => {
           <NavbarItem
             key={item.name}
             isActive={pathname === item.href}
-            className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary m-1"
+            className="p-2 px-3 rounded-3xl hover:text-white"
           >
-            <Link color="primary" href={item.href} className="text-white">
+            <Link
+              href={item.href}
+              underline="hover"
+              className="text-violet-100 hover:text-white poppins-medium text-lg"
+            >
               {item.name}
             </Link>
           </NavbarItem>
         ))}
-
-        <NavbarItem>
-          <ContactModal location="nav" />
-        </NavbarItem>
-
+        {/* ADMIN USE */}
         <SignedIn>
-          <NavbarItem
-            className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary"
-          >
+          <NavbarItem className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary">
             <Link color="primary" href="/dashboard" className="text-white">
               Dashboard
             </Link>
@@ -135,7 +135,6 @@ const Nav = () => {
           </NavbarItem>
         </SignedIn>
       </NavbarContent>
-
       <NavbarContent justify="end">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -148,7 +147,11 @@ const Nav = () => {
           <NavbarMenuItem key={`${item}-${index}`}>
             <div className="flex hover:translate-x-2">
               <IconComet className="hover:text-blue-900 -rotate-45 text-yellow-300" />
-              <Link className="w-full text-white ps-1" href={item.href} size="lg">
+              <Link
+                className="w-full text-white ps-1"
+                href={item.href}
+                size="lg"
+              >
                 {item.name}
               </Link>
             </div>
@@ -166,18 +169,22 @@ const Nav = () => {
 };
 
 const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => (
-  <Dropdown className="navLinkStyle">
+  <Dropdown
+    className="navLinkStyle"
+    showArrow
+    classNames={{
+      base: 'before:bg-default-200', // change arrow background
+      content: 'bg-violet-300 text-black',
+    }}
+  >
     <NavbarItem>
       <DropdownTrigger>
-        <Button
-          disableRipple
-          className="home-dropdown-button p-2 px-3 rounded-3xl text-medium text-white font-semibold transition-colors"
-          endContent={<IconChevronDown stroke={2} />}
-          radius="sm"
-          variant="light"
-        >
-          Home
-        </Button>
+        <div className="home-dropdown-button p-2 px-3 rounded-3xl text-violet-100 poppins-medium hover:underline flex outline-none underline-offset-4 text-lg hover:text-white/80 tap-highlight-transparent hover:cursor-pointer">
+          Home{' '}
+          <span className="mt-[3px]">
+            <IconChevronDown stroke={1} />
+          </span>
+        </div>
       </DropdownTrigger>
     </NavbarItem>
     <NavbarItem>
@@ -185,11 +192,16 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => (
         aria-label="ACME features"
         className="w-[340px]"
         itemClasses={{
-          base: 'gap-4',
+          base: 'gap-4 bg-violet-300 text-black',
         }}
       >
         {dropdown.map((item) => (
-          <DropdownItem key={item.key} href={item.href}>
+          <DropdownItem
+            key={item.key}
+            href={item.href}
+            className="dropdownitem"
+            textValue={item.name}
+          >
             {item.name}
           </DropdownItem>
         ))}
@@ -209,9 +221,7 @@ const NavDropConditional = ({
     {pathname === '/' ? (
       <NavDropDown dropdown={dropdown} />
     ) : (
-      <NavbarItem
-        className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary"
-      >
+      <NavbarItem className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary">
         <div className="flex items-start">
           <Link color="primary" href="/" className="text-white">
             Home
