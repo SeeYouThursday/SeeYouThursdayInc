@@ -3,6 +3,8 @@
 import React, { useState, useRef } from 'react';
 import { Input, Textarea, Button, Spacer, Link } from '@nextui-org/react';
 import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
+
 
 export type ProductProps = {
   id: number;
@@ -30,14 +32,14 @@ const formFields: FormField[] = [
   { name: 'href', label: 'Href', type: 'input' },
   { name: 'description', label: 'Description', type: 'textarea' },
   { name: 'shortDescrip', label: 'Short Description', type: 'input' },
-  // { name: 'img_url', label: 'Image Upload', type: 'file' },
-  // { name: 'icon_url', label: 'Icon Upload', type: 'file' },
   { name: 'stack', label: 'Stack (comma-separated)', type: 'stack' },
 ];
 
 export default function ProductForm() {
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [product, setProduct] = useState<Partial<ProductProps>>({});
+  const [shortDescripCount, setShortDescripCount] = useState(0);
+  const router = useRouter();
 
   const user = useUser();
   if (!user.isSignedIn) {
@@ -49,6 +51,12 @@ export default function ProductForm() {
   ) => {
     const { name, value } = event.target;
     setProduct((prev) => ({ ...prev, [name]: value }));
+    if (name === 'shortDescrip') {
+      setShortDescripCount(value.length);
+      setProduct((prev) => ({ ...prev, [name]: value }));
+    } else {
+      setProduct((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleStackChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,9 +75,13 @@ export default function ProductForm() {
         },
       });
       setProduct({});
-      return upload;
+      if (upload.ok) {
+        router.push('/upload-img');
+      } else {
+        throw new Error('Whoops, failed to upload the product');
+      }
     } catch (err) {
-      throw new Error('whoops, something went wrong');
+      throw new Error('Whoops, something went wrong');
     }
   };
 
@@ -97,13 +109,22 @@ export default function ProductForm() {
         );
       default:
         return (
-          <Input
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            onChange={handleInputChange}
-            className="mb-2  hover: bg-purple text-white"
-          />
+          <div key={field.name} className="mb-2 relative">
+            <Input
+              key={field.name}
+              label={field.label}
+              name={field.name}
+              onChange={handleInputChange}
+              maxLength={field.name === 'shortTitle' ? 15 : 30}
+              value={product[field.name as keyof ProductProps]?.toString() || ''}
+              className="mb-2 justify-start items-start hover:bg-purple text-white"
+            />
+            {field.name === 'shortDescrip' && (
+              <span className="absolute bottom-1 right-2 text-sm text-gray-500">
+                {shortDescripCount}/30
+              </span>
+            )}
+          </div>
         );
     }
   };
@@ -112,18 +133,19 @@ export default function ProductForm() {
     <div className="max-w-2xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Product Form</h1>
       <p className="mb-4">Welcome to your product form.</p>
-      <form onSubmit={handleSubmit} className="flex flex-wrap">
-        {formFields.map((field) => {
-          if (field.name === 'img_url' || field.name === 'icon_url') {
-            return null;
-          }
-          return renderField(field);
-        })}
-        {/* <div className="flex justify-center mb-2">
-          {renderField(formFields.find((field) => field.name === 'img_url')!)}
-          <Spacer x={6} />
-          {renderField(formFields.find((field) => field.name === 'icon_url')!)}
-        </div> */}
+      <form onSubmit={handleSubmit} className="flex flex-col">
+        <div className="mb-4">
+          {renderField(formFields.find((field) => field.name === 'title')!)}
+        </div>
+        <div className="flex mb-4 space-x-4">
+          <div className="flex-1">
+            {renderField(formFields.find((field) => field.name === 'shortTitle')!)}
+          </div>
+          <div className="flex-1">
+            {renderField(formFields.find((field) => field.name === 'href')!)}
+          </div>
+        </div>
+        {formFields.filter((field) => !['title', 'shortTitle', 'href'].includes(field.name)).map(renderField)}
         <Spacer y={4} />
         <Button type="submit" color="primary">
           Submit

@@ -1,26 +1,34 @@
 'use server';
+
 import { useUser } from '@clerk/nextjs';
 import { ReactNode } from 'react';
 import { UpdateImgForm } from '@/components/ProductForms/img-form';
 import { redirect } from 'next/navigation';
-
+import { AdminImgUpload } from '@/components/AdminImg';
+import { Divider } from '@nextui-org/react';
+import { auth } from '@clerk/nextjs/server';
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const user = useUser();
-  if (!user.isSignedIn) {
-    redirect('/admin-login');
-  }
+
+  const autho = auth();
+  autho.protect();
 
   return (
-    <div className="container mx-auto p-4">
-      <header className="mb-4">
-        <h1 className="text-2xl font-bold">Image Upload</h1>
-      </header>
-      <main>
-        <UpdateImgForm />
+    <div className="flex justify-between items-center bg-[url('/upload/bg-img-upload.webp')] bg-cover overflow-hidden bg-no-repeat mt-2 max-w-full">
+      <main className="flex flex-col w-full h-full">
+        <section className="flex items-start justify-center w-full m-2">
+          <div className="bg-slate-900 bg-opacity-30 md:rounded-box p-1">
+            <h1 className="text-2xl font-bold text-center text-violet-200">
+              Image Upload
+            </h1>
+            <UpdateImgForm />
+            <AdminImgUpload />
+          </div>
+        </section>
+
         {children}
       </main>
     </div>

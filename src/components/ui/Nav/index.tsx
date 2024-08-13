@@ -40,7 +40,7 @@ const Nav = () => {
 
   const navItems: navItem[] = [
     { href: '/pricing', name: 'Pricing', isActive: false },
-    { href: '/products', name: 'Recent Projects', isActive: false },
+    { href: '/products', name: 'Recent Clients', isActive: false },
   ];
 
   const dropdown = [
@@ -79,7 +79,7 @@ const Nav = () => {
         toggleIcon: ['text-slate-800 font-bolder p-2'],
         toggle: ['bg-violet-200 h-8 w-auto'],
         brand: ['rounded-full'],
-        base: ['bg-slate-900'],
+        base: ['bg-slate-900 h-auto min-h-[8rem]'],
         menu: ['bg-violet-200 max-h-48'],
       }}
     >
@@ -101,7 +101,7 @@ const Nav = () => {
       </NavbarContent>
       <NavbarContent
         className="hidden sm:flex gap-4 bg-violet-200 bg-opacity-40
-          rounded-3xl p-3 m-3 h-12 ps-10 pe-10 font-bold shadow-inner backdrop-blur-sm"
+          rounded-3xl p-3 m-3 h-auto ps-10 pe-10 font-bold shadow-inner backdrop-blur-sm flex-wrap"
         justify="center"
       >
         <NavDropConditional pathname={pathname} dropdown={dropdown} />
@@ -110,7 +110,7 @@ const Nav = () => {
           <NavbarItem
             key={item.name}
             isActive={pathname === item.href}
-            className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary"
+            className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary m-1"
           >
             <Link color="primary" href={item.href} className="text-white">
               {item.name}
