@@ -5,6 +5,7 @@ import { Input, Textarea, Button, Spacer, Link } from '@nextui-org/react';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 
+
 export type ProductProps = {
   id: number;
   title: string;

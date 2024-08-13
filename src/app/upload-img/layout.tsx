@@ -1,6 +1,9 @@
 'use server';
+
+import { useUser } from '@clerk/nextjs';
 import { ReactNode } from 'react';
 import { UpdateImgForm } from '@/components/ProductForms/img-form';
+import { redirect } from 'next/navigation';
 import { AdminImgUpload } from '@/components/AdminImg';
 import { Divider } from '@nextui-org/react';
 import { auth } from '@clerk/nextjs/server';
@@ -9,6 +12,7 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+
   const autho = auth();
   autho.protect();
 

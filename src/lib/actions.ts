@@ -115,3 +115,4 @@ export async function updateAdmin({
     throw new Error('Error uploading files');
   }
 }
+

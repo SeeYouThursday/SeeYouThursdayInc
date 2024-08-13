@@ -14,10 +14,10 @@ export default function Home() {
       <Title />
       {/* <Hero /> */}
       <Suspense fallback={<div>Loading...</div>}>
-        <Mission />
+        <Service />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
-        <Service />
+        <Mission />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
         <FlipCard />
