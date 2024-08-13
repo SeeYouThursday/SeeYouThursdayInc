@@ -4,7 +4,7 @@ import Image from 'next/image';
 export const AdminImgUpload = async () => {
   return (
     <div className="flex flex-col md:flex-row justify-center flex-wrap items-center m-3 bg-slate-50 p-3 md:rounded-box">
-      <form action={handleAdminImgSubmit} method="post" className="m-3">
+      <form action={handleAdminImgSubmit} method="POST" className="m-3">
         <div className="mb-2">
           <label className="block text-sm font-medium text-white" htmlFor="img">
             Upload Img

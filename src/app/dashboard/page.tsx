@@ -23,6 +23,8 @@ export default function DashboardPage() {
           <AccordionItem
             title={<span className="text-white">Add a Product</span>}
             key="1"
+            aria-label="Add a Product"
+            textValue="Add Product Form"
             className="border-b border-white"
           >
             <ProductForm />
@@ -30,11 +32,13 @@ export default function DashboardPage() {
           <AccordionItem
             title={<span className="text-white">Update Product Form</span>}
             key="2"
+            textValue="Update Product Form"
             className="border-b border-white"
           ></AccordionItem>
           <AccordionItem
             title={<span className="text-white">Update Admin Form</span>}
             key="3"
+            textValue="Update Admin Form"
             className="border-b border-white"
           ></AccordionItem>
         </Accordion>
