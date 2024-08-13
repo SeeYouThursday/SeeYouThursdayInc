@@ -53,7 +53,8 @@ export function Service() {
   return (
     <section id="services" className="bg-gradient-to-b from-violet-300 to-blue-200 w-screen flex justify-center flex-col">
       <div className="flex justify-center items-center text-center">
-        <h2 className="text-5xl mt-20 font-bold tracking-wide text-slate-900">
+        <h2 className="text-5xl mt-20 font-poppins
+         font-bold tracking-wide text-slate-900">
           Our Services
         </h2>
       </div>
@@ -99,7 +100,7 @@ const Feature = ({
         <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-violet-100/50 to transparent pointer-events-none" />
       )}
       {index >= 3 && (
-        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-violet-100/50 dark:from-neutral-800 to-transparent pointer-events-none" />
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-violet-100/50 to-transparent pointer-events-none" />
       )}
       <div className="mb-4 relative z-10 px-10 text-sky-800">
         {icon}
