@@ -29,4 +29,7 @@ CREATE TABLE "Product" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Admin_clerk_id_key" ON "Admin"("clerk_id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Admin_email_key" ON "Admin"("email");
