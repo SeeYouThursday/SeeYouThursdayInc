@@ -3,8 +3,6 @@
 import React, { useState, useRef } from 'react';
 import { Input, Textarea, Button, Spacer, Link } from '@nextui-org/react';
 import { useUser } from '@clerk/nextjs';
-import { useRouter } from 'next/navigation';
-
 
 export type ProductProps = {
   id: number;
@@ -36,27 +34,23 @@ const formFields: FormField[] = [
 ];
 
 export default function ProductForm() {
-  const inputFileRef = useRef<HTMLInputElement>(null);
   const [product, setProduct] = useState<Partial<ProductProps>>({});
   const [shortDescripCount, setShortDescripCount] = useState(0);
-  const router = useRouter();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { isSignedIn } = useUser();
 
-  const user = useUser();
-  if (!user.isSignedIn) {
-    return <></>;
+  if (!isSignedIn) {
+    return null;
   }
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-    setProduct((prev) => ({ ...prev, [name]: value }));
     if (name === 'shortDescrip') {
       setShortDescripCount(value.length);
-      setProduct((prev) => ({ ...prev, [name]: value }));
-    } else {
-      setProduct((prev) => ({ ...prev, [name]: value }));
     }
+    setProduct((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleStackChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,21 +61,22 @@ export default function ProductForm() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const upload = await fetch('/api/products/createProduct', {
+      const response = await fetch('/api/products/createProduct', {
         method: 'POST',
-        body: JSON.stringify({ ...product }),
+        body: JSON.stringify(product),
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      setProduct({});
-      if (upload.ok) {
-        router.push('/upload-img');
-      } else {
-        throw new Error('Whoops, failed to upload the product');
+      
+      if (!response.ok) {
+        throw new Error('Failed to upload the product');
       }
+      
+      setProduct({});
+      setIsSubmitted(true);
     } catch (err) {
-      throw new Error('Whoops, something went wrong');
+      console.error('Error uploading product:', err);
     }
   };
 
@@ -94,6 +89,7 @@ export default function ProductForm() {
             label={field.label}
             name={field.name}
             onChange={handleInputChange}
+            value={product[field.name] as string || ''}
             className="mb-2"
           />
         );
@@ -104,6 +100,7 @@ export default function ProductForm() {
             label={field.label}
             name={field.name}
             onChange={handleStackChange}
+            value={product.stack?.join(', ') || ''}
             className="mb-2"
           />
         );
@@ -111,7 +108,6 @@ export default function ProductForm() {
         return (
           <div key={field.name} className="mb-2 relative">
             <Input
-              key={field.name}
               label={field.label}
               name={field.name}
               onChange={handleInputChange}
@@ -128,6 +124,18 @@ export default function ProductForm() {
         );
     }
   };
+
+  if (isSubmitted) {
+    return (
+      <div className="max-w-2xl mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-4">Product Submitted Successfully</h1>
+        <p className="mb-4">Your product has been created. You can now upload images.</p>
+        <Link href="/upload-img">
+          <Button color="primary">Upload Images</Button>
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-2xl mx-auto p-4">
@@ -151,7 +159,6 @@ export default function ProductForm() {
           Submit
         </Button>
       </form>
-      <Link href="/upload-img">Upload Images Here</Link>
     </div>
   );
 }
