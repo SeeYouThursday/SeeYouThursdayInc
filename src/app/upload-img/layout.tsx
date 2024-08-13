@@ -13,7 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
   autho.protect();
 
   return (
-    <div className="flex flex-full justify-between items-center bg-[url('/upload/bg-img-upload.webp')] bg-cover overflow-hidden bg-no-repeat mt-2 max-w-full">
+    <div className="flex justify-between items-center bg-[url('/upload/bg-img-upload.webp')] bg-cover overflow-hidden bg-no-repeat mt-2 max-w-full">
       <main className="flex flex-col w-full h-full">
         <section className="flex items-start justify-center w-full m-2">
           <div className="bg-slate-900 bg-opacity-30 md:rounded-box p-1">
