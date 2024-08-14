@@ -46,7 +46,7 @@ export const UpdateImgForm = async () => {
           ))}
         </select>
         <div className="mb-2">
-          <label className="block text-sm font-medium text-white" htmlFor="img">
+          <label className="block text-sm font-medium text-black" htmlFor="img">
             Upload Img
           </label>
           <input
@@ -58,7 +58,7 @@ export const UpdateImgForm = async () => {
         </div>
         <div className="mb-2">
           <label
-            className="block text-sm font-medium text-white"
+            className="block text-sm font-medium text-black"
             htmlFor="icon"
           >
             Upload Icon
