@@ -18,8 +18,7 @@ import {
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { ContactModal } from '@/components/ContactForm';
-import { IconChevronDown, IconHome, IconComet } from '@tabler/icons-react';
+import { IconChevronDown, IconComet } from '@tabler/icons-react';
 import { UserButton, SignedIn } from '@clerk/nextjs';
 
 interface navItem {
@@ -37,6 +36,8 @@ const Nav = () => {
   const [isActive, setIsActive] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+
+  const navLinkSize = `text-2xl`;
 
   const navItems: navItem[] = [
     { href: '/pricing', name: 'Pricing', isActive: false },
@@ -71,16 +72,16 @@ const Nav = () => {
   return (
     <Navbar
       isBlurred
-      isBordered
+      // isBordered
       maxWidth="full"
       position="static"
-      className="bg-gradient-to-b from-blue-950 via-blue-700/40 to-fuchsia-400/30"
-      height={'8rem'}
+      className="bg-blue-400/50"
+      // height={'5rem'}
       classNames={{
         toggleIcon: ['text-slate-800 font-bolder p-2'],
         toggle: ['bg-violet-200 h-8 w-auto'],
         brand: ['rounded-full'],
-        base: ['bg-slate-900 h-auto min-h-[8rem]'],
+        base: ['bg-slate-900'],
         menu: ['bg-violet-200 max-h-48'],
       }}
       id="home"
@@ -88,41 +89,41 @@ const Nav = () => {
       <NavbarContent justify="start">
         <NavbarItem>
           <NavbarBrand>
-            <a href="/" title="Home">
+            <a href="/" title="Home" className="">
               <Image
-                height={100}
-                width={100}
+                height={50}
+                width={50}
                 quality={100}
                 src="/revised-logo.webp"
                 alt="SeeYouThursday"
-                className="w-auto min-w-24 h-auto mt-3 mb-3"
+                className="w-auto min-w-16 h-auto mt-3 mb-3"
               />
             </a>
           </NavbarBrand>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent
-        className="hidden sm:flex gap-4 
-       p-3 m-3 h-auto ps-10 pe-10 font-bold flex-wrap"
-        justify="center"
-      >
-        <NavDropConditional pathname={pathname} dropdown={dropdown} />
-
-        {navItems.map((item) => (
-          <NavbarItem
-            key={item.name}
-            isActive={pathname === item.href}
-            className="p-2 px-3 rounded-3xl hover:text-white"
-          >
-            <Link
-              href={item.href}
-              underline="hover"
-              className="text-violet-100 hover:text-white poppins-medium text-lg"
+      <NavbarContent className="" justify="center">
+        <div
+          className="hidden sm:flex gap-4 
+        m-3 font-bold justify-center items-center flex-wrap"
+        >
+          <NavDropConditional pathname={pathname} dropdown={dropdown} />
+          {navItems.map((item) => (
+            <NavbarItem
+              key={item.name}
+              isActive={pathname === item.href}
+              className="px-3"
             >
-              {item.name}
-            </Link>
-          </NavbarItem>
-        ))}
+              <Link
+                href={item.href}
+                underline="hover"
+                className="text-violet-100 hover:text-white poppins-medium text-xl"
+              >
+                {item.name}
+              </Link>
+            </NavbarItem>
+          ))}{' '}
+        </div>
         {/* ADMIN USE */}
         <SignedIn>
           <NavbarItem className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary">
@@ -135,13 +136,21 @@ const Nav = () => {
           </NavbarItem>
         </SignedIn>
       </NavbarContent>
+      {/* Mobile Menu */}
       <NavbarContent justify="end">
+        {/* <Image
+          alt=""
+          src="/nav/make-wife-happy.png"
+          height={607}
+          width={207}
+          quality={100}
+          className="hidden sm:block"
+        /> */}
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           className="sm:hidden"
         />
       </NavbarContent>
-
       <NavbarMenu className="bg-blue-950">
         {navItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
@@ -174,12 +183,12 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => (
     showArrow
     classNames={{
       base: 'before:bg-default-200', // change arrow background
-      content: 'bg-violet-300 text-black',
+      content: 'bg-blue-200 text-black', //change the overall bg of dropdown menu
     }}
   >
     <NavbarItem>
       <DropdownTrigger>
-        <div className="home-dropdown-button p-2 px-3 rounded-3xl text-violet-100 poppins-medium hover:underline flex outline-none underline-offset-4 text-lg hover:text-white/80 tap-highlight-transparent hover:cursor-pointer">
+        <div className="home-dropdown-button p-2 px-3 rounded-3xl text-violet-100 poppins-medium hover:underline flex outline-none underline-offset-4  text-xl hover:text-white/80 tap-highlight-transparent hover:cursor-pointer">
           Home{' '}
           <span className="mt-[3px]">
             <IconChevronDown stroke={1} />
