@@ -39,18 +39,20 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   ];
 
   return (
-    <div className="flex w-full bg-[#4527a0] text-black min-h-screen">
-      <aside className={`hidden lg:block lg:w-64 bg-[#4527a0] ${isSidebarOpen ? 'block' : 'hidden'}`}>
+    // Change right side of screen
+    <div className="flex w-full bg-slate-900 text-black min-h-screen">
+      <aside className={`hidden lg:block lg:w-64 ${isSidebarOpen ? 'block' : 'hidden'}`}>
         <Sidebar open={true}>
-          <SidebarBody>
-            <div className="font-bold text-xl pt-3 pb-10">SEEYOUTHURSDAY</div>
+          {/* change background of sidebar */}
+          <SidebarBody className='bg-violet-200/80'>
+            <div className="font-bold text-xl pt-3 pb-10 ">SEEYOUTHURSDAY</div>
             {links.map((link) => (
               <SidebarLink key={link.label} link={link} />
             ))}
           </SidebarBody>
         </Sidebar>
       </aside>
-      <div className={`lg:hidden fixed inset-0 bg-[#4527a0] text-black z-40 transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`lg:hidden fixed inset-0 text-black z-40 transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <Sidebar open={true}>
           <SidebarBody>
             <div className="flex justify-between items-center p-4">

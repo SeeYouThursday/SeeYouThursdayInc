@@ -18,7 +18,7 @@ export default function DashboardPage() {
   return (
     <div className="container mx-auto py-12 px-8 lg:px-16 flex flex-col min-h-screen">
       <main className="ml-4 lg:ml-8 flex-grow">
-      <h1 className="text-4xl font-semibold pb-14 text-white">Welcome</h1>
+      <h1 className="text-4xl font-semibold pb-14 text-violet-200">Welcome</h1>
         <Accordion>
           <AccordionItem
             title={<span className="text-white">Add a Product</span>}
