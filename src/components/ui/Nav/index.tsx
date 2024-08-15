@@ -37,7 +37,7 @@ const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const navLinkSize = `text-2xl`;
+  const navLinkSize = `text-violet-100 hover:text-white poppins-medium lg:text-xl sm:text-md md:text-lg text-center`;
 
   const navItems: navItem[] = [
     { href: '/pricing', name: 'Pricing', isActive: false },
@@ -83,42 +83,49 @@ const Nav = () => {
         brand: ['rounded-full'],
         base: ['bg-slate-900'],
         menu: ['bg-violet-200 max-h-48'],
+        content: [
+          'flex justify-center items-center md:data-[justify=start]:justify-center',
+        ],
       }}
       id="home"
     >
       <NavbarContent justify="start">
         <NavbarItem>
-          <NavbarBrand>
-            <a href="/" title="Home" className="">
+          <NavbarBrand className="flex justify-center items-center">
+            <a
+              href="/"
+              title="Home"
+              className="flex justify-center items-center"
+            >
               <Image
                 height={50}
                 width={50}
                 quality={100}
-                src="/revised-logo.webp"
+                src="/logo/revised-logo.webp"
                 alt="SeeYouThursday"
-                className="w-auto min-w-16 h-auto mt-3 mb-3"
+                className="w-auto min-w-16 h-auto mt-3 mb-3 lg:ms-10 xl:ms-72 2xl:ms-[300px]"
               />
             </a>
           </NavbarBrand>
         </NavbarItem>
-      </NavbarContent>
+      </NavbarContent>{' '}
       <NavbarContent className="" justify="center">
         <div
-          className="hidden sm:flex gap-4 
-        m-3 font-bold justify-center items-center flex-wrap"
+          className="hidden sm:grid grid-cols-4 gap-4
+        lg:font-bold justify-center items-center flex-wrap"
         >
-          <NavDropConditional pathname={pathname} dropdown={dropdown} />
+          <NavDropConditional
+            pathname={pathname}
+            dropdown={dropdown}
+            navLinkSize={navLinkSize}
+          />
           {navItems.map((item) => (
             <NavbarItem
               key={item.name}
               isActive={pathname === item.href}
-              className="px-3"
+              className="px-3 flex justify-center items-center"
             >
-              <Link
-                href={item.href}
-                underline="hover"
-                className="text-violet-100 hover:text-white poppins-medium text-xl"
-              >
+              <Link href={item.href} underline="hover" className={navLinkSize}>
                 {item.name}
               </Link>
             </NavbarItem>
@@ -157,7 +164,7 @@ const Nav = () => {
             <div className="flex hover:translate-x-2">
               <IconComet className="hover:text-blue-900 -rotate-45 text-yellow-300" />
               <Link
-                className="w-full text-white ps-1"
+                className="w-full text-white ps-1 text-center"
                 href={item.href}
                 size="lg"
               >
@@ -166,20 +173,20 @@ const Nav = () => {
             </div>
           </NavbarMenuItem>
         ))}
-        <div className="flex hover:translate-x-2">
-          <IconComet className="hover:text-blue-900 -rotate-45 text-yellow-300" />
-          <Link href="/contact-us" className="w-full text-white ps-1" size="lg">
-            Contact Us!
-          </Link>
-        </div>
       </NavbarMenu>
     </Navbar>
   );
 };
 
-const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => (
+const NavDropDown = ({
+  dropdown,
+  navLinkStyle,
+}: {
+  dropdown: dropDown[];
+  navLinkStyle: string;
+}) => (
   <Dropdown
-    className="navLinkStyle"
+    className={`${navLinkStyle}`}
     showArrow
     classNames={{
       base: 'before:bg-default-200', // change arrow background
@@ -188,8 +195,10 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => (
   >
     <NavbarItem>
       <DropdownTrigger>
-        <div className="home-dropdown-button p-2 px-3 rounded-3xl text-violet-100 poppins-medium hover:underline flex outline-none underline-offset-4  text-xl hover:text-white/80 tap-highlight-transparent hover:cursor-pointer">
-          Home{' '}
+        <div
+          className={`home-dropdown-button rounded-3xl text-violet-100 poppins-medium hover:underline flex justify-center items-center outline-none underline-offset-4 hover:text-white/80 tap-highlight-transparent hover:cursor-pointer ${navLinkStyle}`}
+        >
+          Home
           <span className="mt-[3px]">
             <IconChevronDown stroke={1} />
           </span>
@@ -198,8 +207,8 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => (
     </NavbarItem>
     <NavbarItem>
       <DropdownMenu
-        aria-label="ACME features"
-        className="w-[340px]"
+        aria-label="Home Links"
+        className="w-[240px]"
         itemClasses={{
           base: 'gap-4 bg-violet-300 text-black',
         }}
@@ -208,7 +217,7 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => (
           <DropdownItem
             key={item.key}
             href={item.href}
-            className="dropdownitem"
+            className={`dropdownitem`}
             textValue={item.name}
           >
             {item.name}
@@ -222,17 +231,19 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => (
 const NavDropConditional = ({
   pathname,
   dropdown,
+  navLinkSize,
 }: {
   pathname: string;
   dropdown: dropDown[];
+  navLinkSize: string;
 }) => (
   <>
     {pathname === '/' ? (
-      <NavDropDown dropdown={dropdown} />
+      <NavDropDown dropdown={dropdown} navLinkStyle={navLinkSize} />
     ) : (
       <NavbarItem className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary">
         <div className="flex items-start">
-          <Link color="primary" href="/" className="text-white">
+          <Link color="primary" href="/" className={`${navLinkSize} m-0`}>
             Home
           </Link>
         </div>
