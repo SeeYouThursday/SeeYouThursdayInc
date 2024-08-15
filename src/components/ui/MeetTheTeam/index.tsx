@@ -1,8 +1,7 @@
-'use client'
+'use client';
 
 import React from 'react';
 import FlipCard from '@/components/MeetTeam';
-
 
 type FlipCardProps = {
   key: number;
@@ -17,9 +16,33 @@ type FlipCardProps = {
 type Team = FlipCardProps[];
 
 const team: Team = [
-  { key: 1, description: 'Lead Developer', image: '/BrianG.webp', rotate: 'y', subtitle: 'Founder', title: 'Brian Galyen', fact: 'I\'m a huge anime fan.' },
-  { key: 2, description: 'Developer', image: '/devon-thinks.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Devon Whitaker', fact: 'My favorite college football team is The Oregon Ducks... Go Ducks!!!' },
-  { key: 3, description: 'Designer', image: '/JojoU.webp', rotate: 'y', subtitle: 'Co-Founder', title: 'Joanna Underwood', fact: 'I love to read books.' }
+  {
+    key: 1,
+    description: 'Lead Developer',
+    image: '/meet-the-team/BrianG.webp',
+    rotate: 'y',
+    subtitle: 'Founder',
+    title: 'Brian Galyen',
+    fact: "I'm a huge anime fan.",
+  },
+  {
+    key: 2,
+    description: 'Developer',
+    image: '/meet-the-team/devon-thinks.webp',
+    rotate: 'y',
+    subtitle: 'Co-Founder',
+    title: 'Devon Whitaker',
+    fact: 'My favorite college football team is The Oregon Ducks... Go Ducks!!!',
+  },
+  {
+    key: 3,
+    description: 'Designer',
+    image: '/meet-the-team/JojoU.webp',
+    rotate: 'y',
+    subtitle: 'Co-Founder',
+    title: 'Joanna Underwood',
+    fact: 'I love to read books.',
+  },
 ];
 
 const MeetTheTeam: React.FC = () => {
@@ -33,19 +56,20 @@ const MeetTheTeam: React.FC = () => {
           Meet The Team
         </h2>
         <p className="mt-4 mb-16 max-w-2xl text-xl text-white md:mx-auto lg:mx-auto">
-          We&apos;re passionate about our work and grateful for the incredible people we collaborate with. Meet our amazing team below.
+          We&apos;re passionate about our work and grateful for the incredible
+          people we collaborate with. Meet our amazing team below.
         </p>
       </div>
       <div className="flex flex-wrap justify-center gap-12 object-left-bottom">
         {team.map((team, index) => (
           <FlipCard
-           key={index} 
+            key={index}
             description={team.description}
             image={team.image}
             rotate={team.rotate}
             subtitle={team.subtitle}
             title={team.title}
-            fact={team.fact} 
+            fact={team.fact}
           />
         ))}
       </div>
