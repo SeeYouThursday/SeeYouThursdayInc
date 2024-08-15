@@ -1,4 +1,4 @@
-import PortfolioCard from '@/components/PortfolioCard';
+import PortfolioCard, { WorkCards } from '@/components/WorkCard';
 import { getAllProducts } from '@/lib/actions';
 
 const Products = async () => {
@@ -11,14 +11,17 @@ const Products = async () => {
   //   link: 'https://www.wizardofpawz.co',
   // };
 
-  const projects = await getAllProducts();
+  // const projects = await getAllProducts();
 
   return (
     <>
-      <div className="flex justify-center items-center p-3 bg-gradient-to-br from-sky-300 to-indigo-600 flex-col md:flex-row">
+      {/* <div className="flex justify-center items-center p-3 bg-gradient-to-br from-sky-300 to-indigo-600 flex-col md:flex-row">
         {projects.map((project, index) => (
           <PortfolioCard key={index} {...project} />
         ))}
+      </div> */}
+      <div className="flex justify-center">
+        <WorkCards location="ourWork" />
       </div>
     </>
   );
