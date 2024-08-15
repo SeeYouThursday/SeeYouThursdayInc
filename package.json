@@ -12,7 +12,7 @@
   "dependencies": {
     "@clerk/nextjs": "^5.2.8",
     "@emailjs/browser": "^4.3.3",
-    "@nextui-org/react": "^2.4.0",
+    "@nextui-org/react": "^2.4.6",
     "@prisma/client": "^5.18.0",
     "@tabler/icons-react": "^3.11.0",
     "@vercel/blob": "^0.23.4",
