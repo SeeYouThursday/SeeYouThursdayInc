@@ -1,6 +1,6 @@
-'use client'
-
+'use client';
 import React from 'react';
+import { Divider } from '@nextui-org/react';
 
 export interface FooterProps {
   links: { url: string; title: string; id: string }[];
@@ -8,14 +8,15 @@ export interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ links }) => {
   return (
-    <footer className="footer footer-center bg-base-200 text-base-content rounded p-10">
+    <footer className="footer footer-center bg-blue-400/50 text-white rounded p-5">
       <nav className="grid grid-flow-col gap-4">
-        {links.map(link => (
+        {links.map((link) => (
           <a key={link.id} href={link.url} className="link link-hover">
             {link.title}
           </a>
-        ))}
+        ))}{' '}
       </nav>
+
       {/* <nav>
         <div className="grid grid-flow-col gap-4">
           <a>
@@ -53,7 +54,10 @@ const Footer: React.FC<FooterProps> = ({ links }) => {
           </a>
         </div>
       </nav> */}
-      <aside>
+      <div className="flex w-64 flex-col">
+        <Divider className="text-xl h-[2px] bg-neutral-700/50 rounded-box m-0 p-0"></Divider>
+      </div>
+      <aside className="m-0 p-0">
         <p>Copyright © {new Date().getFullYear()} - SeeYouThursday 😎</p>
       </aside>
     </footer>

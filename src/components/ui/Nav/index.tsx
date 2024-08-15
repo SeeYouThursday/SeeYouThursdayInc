@@ -18,8 +18,7 @@ import {
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { ContactModal } from '@/components/ContactForm';
-import { IconChevronDown, IconHome, IconComet } from '@tabler/icons-react';
+import { IconChevronDown, IconComet } from '@tabler/icons-react';
 import { UserButton, SignedIn } from '@clerk/nextjs';
 
 interface navItem {
@@ -38,9 +37,12 @@ const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  const navLinkSize = `text-violet-100 hover:text-white poppins-medium lg:text-xl sm:text-md md:text-lg text-center`;
+
   const navItems: navItem[] = [
     { href: '/pricing', name: 'Pricing', isActive: false },
-    { href: '/products', name: 'Recent Clients', isActive: false },
+    { href: '/products', name: 'Our Work', isActive: false },
+    { href: '/contact-us', name: 'Contact Us', isActive: false },
   ];
 
   const dropdown = [
@@ -70,62 +72,68 @@ const Nav = () => {
   return (
     <Navbar
       isBlurred
-      isBordered
+      // isBordered
       maxWidth="full"
       position="static"
-      className="bg-nav md:bg-nav bg-center"
-      height={'8rem'}
+      className="bg-blue-400/50"
+      // height={'5rem'}
       classNames={{
         toggleIcon: ['text-slate-800 font-bolder p-2'],
         toggle: ['bg-violet-200 h-8 w-auto'],
         brand: ['rounded-full'],
-        base: ['bg-slate-900 h-auto min-h-[8rem]'],
+        base: ['bg-slate-900'],
         menu: ['bg-violet-200 max-h-48'],
+        content: [
+          'flex justify-center items-center md:data-[justify=start]:justify-center',
+        ],
       }}
+      id="home"
     >
       <NavbarContent justify="start">
         <NavbarItem>
-          <NavbarBrand>
-            <a href="/" title="Home">
+          <NavbarBrand className="flex justify-center items-center">
+            <a
+              href="/"
+              title="Home"
+              className="flex justify-center items-center"
+            >
               <Image
-                height={100}
-                width={100}
+                height={50}
+                width={50}
                 quality={100}
-                src="/revised-logo.webp"
+                src="/logo/revised-logo.webp"
                 alt="SeeYouThursday"
-                className="w-auto min-w-24 h-auto mt-3 mb-3"
+                className="w-auto min-w-16 h-auto mt-3 mb-3 lg:ms-10 xl:ms-72 2xl:ms-[300px]"
               />
             </a>
           </NavbarBrand>
         </NavbarItem>
-      </NavbarContent>
-      <NavbarContent
-        className="hidden sm:flex gap-4 bg-violet-200 bg-opacity-40
-          rounded-3xl p-3 m-3 h-auto ps-10 pe-10 font-bold shadow-inner backdrop-blur-sm flex-wrap"
-        justify="center"
-      >
-        <NavDropConditional pathname={pathname} dropdown={dropdown} />
-
-        {navItems.map((item) => (
-          <NavbarItem
-            key={item.name}
-            isActive={pathname === item.href}
-            className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary m-1"
-          >
-            <Link color="primary" href={item.href} className="text-white">
-              {item.name}
-            </Link>
-          </NavbarItem>
-        ))}
-
-        <NavbarItem>
-          <ContactModal location="nav" />
-        </NavbarItem>
-
+      </NavbarContent>{' '}
+      <NavbarContent className="" justify="center">
+        <div
+          className="hidden sm:grid grid-cols-4 gap-4
+        lg:font-bold justify-center items-center flex-wrap"
+        >
+          <NavDropConditional
+            pathname={pathname}
+            dropdown={dropdown}
+            navLinkSize={navLinkSize}
+          />
+          {navItems.map((item) => (
+            <NavbarItem
+              key={item.name}
+              isActive={pathname === item.href}
+              className="px-3 flex justify-center items-center"
+            >
+              <Link href={item.href} underline="hover" className={navLinkSize}>
+                {item.name}
+              </Link>
+            </NavbarItem>
+          ))}{' '}
+        </div>
+        {/* ADMIN USE */}
         <SignedIn>
-          <NavbarItem
-            className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary"
-          >
+          <NavbarItem className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary">
             <Link color="primary" href="/dashboard" className="text-white">
               Dashboard
             </Link>
@@ -135,61 +143,83 @@ const Nav = () => {
           </NavbarItem>
         </SignedIn>
       </NavbarContent>
-
+      {/* Mobile Menu */}
       <NavbarContent justify="end">
+        {/* <Image
+          alt=""
+          src="/nav/make-wife-happy.png"
+          height={607}
+          width={207}
+          quality={100}
+          className="hidden sm:block"
+        /> */}
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           className="sm:hidden"
         />
       </NavbarContent>
-
       <NavbarMenu className="bg-blue-950">
         {navItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <div className="flex hover:translate-x-2">
               <IconComet className="hover:text-blue-900 -rotate-45 text-yellow-300" />
-              <Link className="w-full text-white ps-1" href={item.href} size="lg">
+              <Link
+                className="w-full text-white ps-1 text-center"
+                href={item.href}
+                size="lg"
+              >
                 {item.name}
               </Link>
             </div>
           </NavbarMenuItem>
         ))}
-        <div className="flex hover:translate-x-2">
-          <IconComet className="hover:text-blue-900 -rotate-45 text-yellow-300" />
-          <Link href="/contact-us" className="w-full text-white ps-1" size="lg">
-            Contact Us!
-          </Link>
-        </div>
       </NavbarMenu>
     </Navbar>
   );
 };
 
-const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => (
-  <Dropdown className="navLinkStyle">
+const NavDropDown = ({
+  dropdown,
+  navLinkStyle,
+}: {
+  dropdown: dropDown[];
+  navLinkStyle: string;
+}) => (
+  <Dropdown
+    className={`${navLinkStyle}`}
+    showArrow
+    classNames={{
+      base: 'before:bg-default-200', // change arrow background
+      content: 'bg-blue-200 text-black', //change the overall bg of dropdown menu
+    }}
+  >
     <NavbarItem>
       <DropdownTrigger>
-        <Button
-          disableRipple
-          className="home-dropdown-button p-2 px-3 rounded-3xl text-medium text-white font-semibold transition-colors"
-          endContent={<IconChevronDown stroke={2} />}
-          radius="sm"
-          variant="light"
+        <div
+          className={`home-dropdown-button rounded-3xl text-violet-100 poppins-medium hover:underline flex justify-center items-center outline-none underline-offset-4 hover:text-white/80 tap-highlight-transparent hover:cursor-pointer ${navLinkStyle}`}
         >
           Home
-        </Button>
+          <span className="mt-[3px]">
+            <IconChevronDown stroke={1} />
+          </span>
+        </div>
       </DropdownTrigger>
     </NavbarItem>
     <NavbarItem>
       <DropdownMenu
-        aria-label="ACME features"
-        className="w-[340px]"
+        aria-label="Home Links"
+        className="w-[240px]"
         itemClasses={{
-          base: 'gap-4',
+          base: 'gap-4 bg-violet-300 text-black',
         }}
       >
         {dropdown.map((item) => (
-          <DropdownItem key={item.key} href={item.href}>
+          <DropdownItem
+            key={item.key}
+            href={item.href}
+            className={`dropdownitem`}
+            textValue={item.name}
+          >
             {item.name}
           </DropdownItem>
         ))}
@@ -201,19 +231,19 @@ const NavDropDown = ({ dropdown }: { dropdown: dropDown[] }) => (
 const NavDropConditional = ({
   pathname,
   dropdown,
+  navLinkSize,
 }: {
   pathname: string;
   dropdown: dropDown[];
+  navLinkSize: string;
 }) => (
   <>
     {pathname === '/' ? (
-      <NavDropDown dropdown={dropdown} />
+      <NavDropDown dropdown={dropdown} navLinkStyle={navLinkSize} />
     ) : (
-      <NavbarItem
-        className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary"
-      >
+      <NavbarItem className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary">
         <div className="flex items-start">
-          <Link color="primary" href="/" className="text-white">
+          <Link color="primary" href="/" className={`${navLinkSize} m-0`}>
             Home
           </Link>
         </div>
