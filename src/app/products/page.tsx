@@ -1,4 +1,4 @@
-import PortfolioCard, { WorkCards } from '@/components/WorkCard';
+import { WorkCards } from '@/components/WorkCard';
 import { getAllProducts } from '@/lib/actions';
 
 const Products = async () => {
