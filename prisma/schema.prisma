@@ -10,7 +10,7 @@ datasource db {
 
 model Admin {
   id        Int      @id @default(autoincrement())
-  clerk_id  String
+  clerk_id  String   @unique
   email     String   @unique
   createdAt DateTime @default(now())
   funFact   String?
