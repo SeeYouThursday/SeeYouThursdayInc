@@ -75,7 +75,7 @@ export const InfiniteCards = ({
 
   return (
     <div className=" flex flex-col md:mx-auto w-screen text-center pt-10 text-white">
-      <h2 className="mb-8 mt-8 text-5xl font-bold text-sky-300 md:mb-4 md:text-xl lg:text-2xl">
+      <h2 className="text-5xl poppins-medium text-transparent bg-gradient-to-b from-sky-600/80 via-sky-300 to-sky-400/60 text-center text-edge-outline whitespace-nowrap bg-clip-text mt-7 mb-7">
         CLIENT TESTIMONIAL
       </h2>
       <p className="mb-4 text-xl text-white uppercase md:mb-8 md:text-sm">

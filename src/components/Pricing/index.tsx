@@ -122,7 +122,7 @@ const Pricing = () => {
   return (
       <div className="pb-24">
         <div className="flex justify-center items-center text-center mt-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-sky-300 pb-5 sm:pb-10">Our Pricing</h2>
+          <h2 className="text-5xl poppins-medium text-transparent bg-gradient-to-b from-sky-600/80 via-sky-300 to-sky-400/60 text-center text-edge-outline whitespace-nowrap bg-clip-text p-5">Our Pricing</h2>
         </div>
         <section className="py-8 leading-7 text-white sm:py-12 md:py-16 lg:py-8">
           <div className="box-border px-4 mx-auto border-solid sm:px-6 md:px-6 lg:px-8 max-w-7xl">
