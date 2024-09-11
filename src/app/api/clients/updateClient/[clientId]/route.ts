@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from '@prisma/client';
+import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
@@ -12,7 +12,16 @@ export async function PUT(req: NextRequest) {
 
   try {
     const body = await req.json();
-    const { title, shortTitle, href, description, shortDescrip, img_url, icon_url, stack } = body;
+    const {
+      title,
+      shortTitle,
+      href,
+      description,
+      shortDescrip,
+      img_url,
+      icon_url,
+      stack,
+    } = body;
 
     const product = await prisma.product.update({
       where: { id: Number(productId) },
@@ -27,6 +36,8 @@ export async function PUT(req: NextRequest) {
         stack,
       },
     });
+    
+    // upon updating, update the cookies entry for updated client
 
     return NextResponse.json(product);
   } catch (error) {

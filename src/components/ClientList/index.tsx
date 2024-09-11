@@ -1,5 +1,5 @@
 'use client';
-import React, { FormEventHandler, useEffect, useState } from 'react';
+import React, { FormEventHandler, Suspense, useEffect, useState } from 'react';
 import {
   Listbox,
   ListboxItem,
@@ -19,6 +19,7 @@ import { IconTrash, IconEdit } from '@tabler/icons-react';
 import Image from 'next/image';
 import { formFields } from '@/lib/util/forms';
 import { FormField, ProductProps } from '@/lib/util/types/product';
+import ClientDbList from './DbList';
 // type Title = {
 //   id: number;
 //   title: string;
@@ -28,9 +29,10 @@ import { FormField, ProductProps } from '@/lib/util/types/product';
 //   href: string;
 // };
 
-export default function ClientList() {
+export default function ClientList({ clients }: { clients: ProductProps[] }) {
   //   const [clients, setClients] = useState<Title[]>([{ id: 0, title: '' }]);
   const [selectedClient, setSelectedClient] = useState<number>(0);
+  const [errors, setError] = useState({ error: false, message: '' });
 
   //   useEffect(() => {
   //     const fetchClients = async () => {
@@ -41,47 +43,47 @@ export default function ClientList() {
   //     fetchClients();
   //   }, []);
 
-  const clients: ProductProps[] = [
-    {
-      title: 'BleepBloop',
-      shortTitle: 'Beep',
-      id: 1234,
-      href: 'www.yahoo.com',
-      description: '', // Add the 'description' property
-      shortDescrip: 'Hello there this is information',
-      icon_url: 'https://placehold.co/30/orange/white',
-      img_url: 'https://placehold.co/30/orange/white',
-      createdAt: '05/13/1990',
-      updatedAt: '05/13/1990',
-      stack: [''],
-    },
-    {
-      title: 'BleepBloop',
-      shortTitle: 'Beep',
-      id: 12334,
-      href: 'www.yahoo.com',
-      description: '', // Add the 'description' property
-      shortDescrip: 'Hello there this is information',
-      icon_url: 'https://placehold.co/30/orange/white',
-      img_url: 'https://placehold.co/30/orange/white',
-      createdAt: '05/13/1990',
-      updatedAt: '05/13/1990',
-      stack: [''],
-    },
-    {
-      title: 'BleepBloop',
-      shortTitle: 'Beep',
-      id: 12345,
-      href: 'www.yahoo.com',
-      description: '', // Add the 'description' property
-      shortDescrip: 'Hello there this is information',
-      icon_url: 'https://placehold.co/30/orange/white',
-      img_url: 'https://placehold.co/30/orange/white',
-      createdAt: '05/13/1990',
-      updatedAt: '05/13/1990',
-      stack: [''],
-    },
-  ];
+  // const clients: ProductProps[] = [
+  //   {
+  //     title: 'BleepBloop',
+  //     shortTitle: 'Beep',
+  //     id: 1234,
+  //     href: 'www.yahoo.com',
+  //     description: '', // Add the 'description' property
+  //     shortDescrip: 'Hello there this is information',
+  //     icon_url: 'https://placehold.co/30/orange/white',
+  //     img_url: 'https://placehold.co/30/orange/white',
+  //     createdAt: '05/13/1990',
+  //     updatedAt: '05/13/1990',
+  //     stack: [''],
+  //   },
+  //   {
+  //     title: 'BleepBloop',
+  //     shortTitle: 'Beep',
+  //     id: 12334,
+  //     href: 'www.yahoo.com',
+  //     description: '', // Add the 'description' property
+  //     shortDescrip: 'Hello there this is information',
+  //     icon_url: 'https://placehold.co/30/orange/white',
+  //     img_url: 'https://placehold.co/30/orange/white',
+  //     createdAt: '05/13/1990',
+  //     updatedAt: '05/13/1990',
+  //     stack: [''],
+  //   },
+  //   {
+  //     title: 'BleepBloop',
+  //     shortTitle: 'Beep',
+  //     id: 12345,
+  //     href: 'www.yahoo.com',
+  //     description: '', // Add the 'description' property
+  //     shortDescrip: 'Hello there this is information',
+  //     icon_url: 'https://placehold.co/30/orange/white',
+  //     img_url: 'https://placehold.co/30/orange/white',
+  //     createdAt: '05/13/1990',
+  //     updatedAt: '05/13/1990',
+  //     stack: [''],
+  //   },
+  // ];
 
   // TODO: Write Delete Function Here
   const deleteClient = () => {};
@@ -90,6 +92,7 @@ export default function ClientList() {
     <>
       <ListboxWrapper>
         {/* Wrapper is located below this function to style */}
+
         <Listbox
           items={clients}
           aria-label="Dynamic Actions"
@@ -98,13 +101,11 @@ export default function ClientList() {
           className="rounded-xl"
           variant="shadow"
         >
-          {/* Loop over client array - during dev will be hard coded - PROD will be dynamically retrieved from DB */}
-          {(client: ProductProps) => (
+          {clients.map((client: ProductProps) => (
             <ListboxItem
               key={client.id}
               textValue={client.title}
               description={client.shortDescrip}
-              // Logo
               startContent={
                 <Image
                   src={client.icon_url || ''}
@@ -113,25 +114,18 @@ export default function ClientList() {
                   alt={`${client.title}'s logo`}
                 />
               }
-              // Action Btns
               endContent={
                 client.id === selectedClient ? (
                   <ButtonGroup>
-                    {/* Edit Btn */}
-                    <UpdateModal
-                      client={client}
-                      // clientId={client.id}
-                    />
+                    <UpdateModal client={client} />
                     <DeleteModal clientName={client.title} />
-                    {/* Delete Btn */}{' '}
-                    {/* //TODO Add Modal OR Secondary Action for Confirmation to Delete */}
                   </ButtonGroup>
                 ) : null
               }
             >
               {client.title}
             </ListboxItem>
-          )}
+          ))}
         </Listbox>
       </ListboxWrapper>
     </>
@@ -144,7 +138,7 @@ const ListboxWrapper = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const DeleteModal = ({ clientName }: { clientName: string }) => {
+export const DeleteModal = ({ clientName }: { clientName: string }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [client, setClient] = useState('');
   const [verified, setVerified] = useState(false);
@@ -220,7 +214,7 @@ const DeleteModal = ({ clientName }: { clientName: string }) => {
   );
 };
 
-const UpdateModal = ({ client }: { client: ProductProps }) => {
+export const UpdateModal = ({ client }: { client: ProductProps }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [verified, setVerified] = useState(false);
@@ -246,7 +240,7 @@ const UpdateModal = ({ client }: { client: ProductProps }) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await fetch(`/api/products/updateClient/${client.id}`, {
+      const response = await fetch(`/api/clients/updateClient/${client.id}`, {
         method: 'POST',
         body: JSON.stringify(editClient),
         headers: {

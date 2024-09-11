@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from '@prisma/client';
+import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
@@ -14,6 +14,7 @@ export async function DELETE(req: NextRequest) {
     const product = await prisma.product.delete({
       where: { id: Number(productId) },
     });
+    // upon deleting, delete entry from cookies
 
     return NextResponse.json(product);
   } catch (error) {
