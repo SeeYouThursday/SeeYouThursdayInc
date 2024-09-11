@@ -19,7 +19,8 @@ import {
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { IconChevronDown, IconComet } from '@tabler/icons-react';
-import { UserButton, SignedIn } from '@clerk/nextjs';
+import {SignedIn } from '@clerk/nextjs';
+import ClerkMenu from '@/components/ui/ClerkMenu';
 
 interface navItem {
   href: string;
@@ -139,7 +140,7 @@ const Nav = () => {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <UserButton />
+            <ClerkMenu />
           </NavbarItem>
         </SignedIn>
       </NavbarContent>
