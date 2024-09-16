@@ -34,15 +34,14 @@ export default function ProductForm() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-     
-        const response = await fetch('/api/products/createProduct', {
-          method: 'POST',
-          body: JSON.stringify(product),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        return response;
+      const response = await fetch('/api/products/createProduct', {
+        method: 'POST',
+        body: JSON.stringify(product),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      return response;
 
       if (!response.ok) {
         throw new Error('Failed to upload the product');

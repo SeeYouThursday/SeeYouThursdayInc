@@ -74,8 +74,8 @@ export default function ClientList({ clients }: { clients: ProductProps[] }) {
   //     title: 'BleepBloop',
   //     shortTitle: 'Beep',
   //     id: 12345,
-  //     href: 'www.yahoo.com',
-  //     description: '', // Add the 'description' property
+  //     href: 'www.iball247.com',
+  //     description: 'Basketball Training and Merch site leveraging Shopify's headless storefront to provide a unique and stylish e-commerce experience.',
   //     shortDescrip: 'Hello there this is information',
   //     icon_url: 'https://placehold.co/30/orange/white',
   //     img_url: 'https://placehold.co/30/orange/white',
@@ -219,15 +219,19 @@ export const UpdateModal = ({ client }: { client: ProductProps }) => {
 
   const [verified, setVerified] = useState(false);
   const [editClient, setClientEdit] = useState<Partial<ProductProps>>({});
+  const [clientId, setClientId] = useState<number>();
   const [shortDescripCount, setShortDescripCount] = useState(0);
   const [error, setError] = useState(false);
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    setClientId(client.id);
     if (!editClient) {
-      const { title, shortTitle, href } = client;
-      setClientEdit((prev) => ({ ...prev, [name]: value }));
+      const { id, title, shortTitle, href } = client;
+      setClientEdit({ id, title, shortTitle, href });
+    } else {
+      setClientEdit((prev) => ({ ...prev, [name]: value, id: client.id }));
     }
 
     const { name, value } = event.target;
@@ -237,19 +241,30 @@ export const UpdateModal = ({ client }: { client: ProductProps }) => {
     setClientEdit((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleStackChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const stackArray = event.target.value.split(',').map((item) => item.trim());
+    setClientEdit((prev) => ({ ...prev, stack: stackArray }));
+  };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    console.log(editClient.id);
     try {
-      const response = await fetch(`/api/clients/updateClient/${client.id}`, {
-        method: 'POST',
-        body: JSON.stringify(editClient),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await fetch(
+        `http://localhost:3000/api/clients/updateClient`,
+        {
+          method: 'PUT',
+          body: JSON.stringify(editClient),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const result = await response.json();
       return response;
     } catch (err) {
       setError(true);
+      console.log(err);
     }
   };
 
@@ -285,6 +300,7 @@ export const UpdateModal = ({ client }: { client: ProductProps }) => {
                   <Input
                     type="text"
                     label="Client"
+                    name="title"
                     placeholder={client.title}
                     defaultValue={client.title}
                     onChange={handleInputChange}
@@ -293,6 +309,7 @@ export const UpdateModal = ({ client }: { client: ProductProps }) => {
                   <Input
                     type="text"
                     label="Short Title"
+                    name="shortTitle"
                     placeholder={client.shortTitle}
                     onChange={handleInputChange}
                     defaultValue={client.shortTitle}
@@ -300,9 +317,39 @@ export const UpdateModal = ({ client }: { client: ProductProps }) => {
                   <Input
                     type="text"
                     label="Href"
+                    name="href"
                     placeholder={client.href}
                     defaultValue={client.href}
                     onChange={handleInputChange}
+                    // value={client.href}
+                  />
+                  <Textarea
+                    type="text"
+                    label="Description"
+                    name="description"
+                    placeholder={client.description}
+                    defaultValue={client.description}
+                    onChange={handleInputChange}
+                    // value={client.href}
+                  />
+                  <Input
+                    type="text"
+                    label="Short Description"
+                    name="shortDescrip"
+                    placeholder={client.shortDescrip}
+                    defaultValue={client.shortDescrip}
+                    onChange={handleInputChange}
+                    max={30}
+                    // value={client.href}
+                  />
+                  <Input
+                    type="text"
+                    label="Stack"
+                    name="stack"
+                    placeholder={client.stack.toLocaleString()}
+                    defaultValue={client.stack.toLocaleString()}
+                    onChange={handleStackChange}
+                    max={30}
                     // value={client.href}
                   />
                 </ModalBody>
@@ -314,7 +361,7 @@ export const UpdateModal = ({ client }: { client: ProductProps }) => {
                     color="primary"
                     type="submit"
                     // onSubmit={handleClientValidation}
-                    isDisabled={error || !client.title}
+                    isDisabled={error}
                   >
                     Update!
                   </Button>
