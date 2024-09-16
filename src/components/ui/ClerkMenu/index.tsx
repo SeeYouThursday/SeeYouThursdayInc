@@ -15,12 +15,12 @@ export default function ClerkMenu() {
             href="/dashboard"
           />
             <UserButton.Link
-                label="Devon Playground"
+                label="Brian's Playground"
                 labelIcon={<IconMonkeybar className="w-4 h-4" />}
                 href="/devon-playground"
             />
              <UserButton.Link
-                label="Brian Playground"
+                label="Devon's Playground"
                 labelIcon={<IconMonkeybar className="w-4 h-4" />}
                 href="/Brian-playground"
             />

@@ -6,7 +6,7 @@ export const AdminImgUpload = async () => {
     <div className="flex flex-col md:flex-row justify-center flex-wrap items-center m-3 bg-slate-50 p-3 md:rounded-box">
       <form action={handleAdminImgSubmit} method="POST" className="m-3">
         <div className="mb-2">
-          <label className="block text-sm font-medium text-white" htmlFor="img">
+          <label className="block text-sm font-medium text-black" htmlFor="img">
             Upload Img
           </label>
           <input
