@@ -139,8 +139,8 @@ export default function ProductForm() {
 
   return (
     <div className="max-w-2xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Product Form</h1>
-      <p className="mb-4">Welcome to your product form.</p>
+      <h1 className="text-2xl font-bold mb-4 text-white">Product Form</h1>
+      <p className="mb-4 text-white">Welcome to your product form.</p>
       <form onSubmit={handleSubmit} className="flex flex-col">
         <div className="mb-4">
           {renderField(formFields.find((field) => field.name === 'title')!)}

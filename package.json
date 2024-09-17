@@ -10,7 +10,7 @@
     "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
-    "@clerk/nextjs": "^5.2.8",
+    "@clerk/nextjs": "^5.5.5",
     "@emailjs/browser": "^4.3.3",
     "@nextui-org/react": "^2.4.6",
     "@prisma/client": "^5.18.0",
