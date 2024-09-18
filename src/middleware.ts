@@ -1,6 +1,8 @@
 import { clerkMiddleware } from '@clerk/nextjs/server';
 
-export default clerkMiddleware({secretKey: process.env.NEXT_CLERK_SECRET_KEY,});
+export default clerkMiddleware({
+  secretKey: process.env.NEXT_CLERK_SECRET_KEY,
+});
 
 export const config = {
   matcher: [
@@ -12,6 +14,6 @@ export const config = {
     '/api/updateProduct',
     '/api/deleteProduct',
     // Require auth for the /dashboard route
-    '/dashboard',
+    '/dashboard/:path*',
   ],
 };

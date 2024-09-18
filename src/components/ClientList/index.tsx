@@ -14,7 +14,7 @@ import {
   Input,
   Textarea,
 } from '@nextui-org/react';
-import { getAllProducts } from '@/lib/actions';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { IconTrash, IconEdit } from '@tabler/icons-react';
 import Image from 'next/image';
 import { formFields } from '@/lib/util/forms';
@@ -33,60 +33,6 @@ export default function ClientList({ clients }: { clients: ProductProps[] }) {
   //   const [clients, setClients] = useState<Title[]>([{ id: 0, title: '' }]);
   const [selectedClient, setSelectedClient] = useState<number>(0);
   const [errors, setError] = useState({ error: false, message: '' });
-
-  //   useEffect(() => {
-  //     const fetchClients = async () => {
-  //       const clientsData = await getAllProducts('title');
-  //       setClients(clientsData);
-  //     };
-
-  //     fetchClients();
-  //   }, []);
-
-  // const clients: ProductProps[] = [
-  //   {
-  //     title: 'BleepBloop',
-  //     shortTitle: 'Beep',
-  //     id: 1234,
-  //     href: 'www.yahoo.com',
-  //     description: '', // Add the 'description' property
-  //     shortDescrip: 'Hello there this is information',
-  //     icon_url: 'https://placehold.co/30/orange/white',
-  //     img_url: 'https://placehold.co/30/orange/white',
-  //     createdAt: '05/13/1990',
-  //     updatedAt: '05/13/1990',
-  //     stack: [''],
-  //   },
-  //   {
-  //     title: 'BleepBloop',
-  //     shortTitle: 'Beep',
-  //     id: 12334,
-  //     href: 'www.yahoo.com',
-  //     description: '', // Add the 'description' property
-  //     shortDescrip: 'Hello there this is information',
-  //     icon_url: 'https://placehold.co/30/orange/white',
-  //     img_url: 'https://placehold.co/30/orange/white',
-  //     createdAt: '05/13/1990',
-  //     updatedAt: '05/13/1990',
-  //     stack: [''],
-  //   },
-  //   {
-  //     title: 'BleepBloop',
-  //     shortTitle: 'Beep',
-  //     id: 12345,
-  //     href: 'www.iball247.com',
-  //     description: 'Basketball Training and Merch site leveraging Shopify's headless storefront to provide a unique and stylish e-commerce experience.',
-  //     shortDescrip: 'Hello there this is information',
-  //     icon_url: 'https://placehold.co/30/orange/white',
-  //     img_url: 'https://placehold.co/30/orange/white',
-  //     createdAt: '05/13/1990',
-  //     updatedAt: '05/13/1990',
-  //     stack: [''],
-  //   },
-  // ];
-
-  // TODO: Write Delete Function Here
-  const deleteClient = () => {};
 
   return (
     <>
@@ -108,7 +54,11 @@ export default function ClientList({ clients }: { clients: ProductProps[] }) {
               description={client.shortDescrip}
               startContent={
                 <Image
-                  src={client.icon_url || ''}
+                  src={
+                    client.icon_url
+                      ? client.icon_url
+                      : 'https://placehold.co/300'
+                  }
                   height={30}
                   width={30}
                   alt={`${client.title}'s logo`}
@@ -118,7 +68,7 @@ export default function ClientList({ clients }: { clients: ProductProps[] }) {
                 client.id === selectedClient ? (
                   <ButtonGroup>
                     <UpdateModal client={client} />
-                    <DeleteModal clientName={client.title} />
+                    <DeleteModal client={client} />
                   </ButtonGroup>
                 ) : null
               }
@@ -138,21 +88,50 @@ const ListboxWrapper = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-export const DeleteModal = ({ clientName }: { clientName: string }) => {
+export const DeleteModal = ({ client }: { client: ProductProps }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [client, setClient] = useState('');
+  const [selectedClient, setClient] = useState('');
   const [verified, setVerified] = useState(false);
+  const [error, setError] = useState({ error: false, message: '' });
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputElement = e.target as HTMLInputElement;
     const newClientValue = inputElement.value;
     setClient(newClientValue);
-    setVerified(newClientValue === clientName);
+    setVerified(newClientValue === client.title);
   };
 
-  const handleClientValidation = (e: { preventDefault: () => void }) => {
+  const handleClientValidation = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    // TODO: Add in Logic for Deleting Client Here
+    //Logic for Deleting Client
+    if (verified) {
+      try {
+        //write logic here
+        const id = client.id;
+        const response = await fetch(`/api/clients/deleteClient/`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: client.id }),
+        });
+        const deleteClient = await response.json();
+        // if (!response.ok) {
+        //   throw new Error(`Failed to delete client ${response.status}`);
+        // }
+        // const deleteClient = response.json();
+        console.log(deleteClient);
+        setSuccessMessage(`Client ${id} deleted successfully.`);
+      } catch (err: any) {
+        setError((prev) => ({ ...prev, message: String(err) }));
+        setSuccessMessage('');
+      }
+    } else {
+      setVerified(false);
+
+      return;
+    }
   };
 
   return (
@@ -178,7 +157,7 @@ export const DeleteModal = ({ clientName }: { clientName: string }) => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {clientName}
+                {client.title}
               </ModalHeader>
               <form onSubmit={handleClientValidation}>
                 <ModalBody>
@@ -189,7 +168,7 @@ export const DeleteModal = ({ clientName }: { clientName: string }) => {
                   <Input
                     type="text"
                     onChange={handleInputChange}
-                    value={client}
+                    value={selectedClient}
                   />
                 </ModalBody>
                 <ModalFooter>
@@ -204,6 +183,8 @@ export const DeleteModal = ({ clientName }: { clientName: string }) => {
                   >
                     Delete
                   </Button>
+                  <p>{error.message}</p>
+                  <p>{successMessage}</p>
                 </ModalFooter>
               </form>
             </>
@@ -248,23 +229,18 @@ export const UpdateModal = ({ client }: { client: ProductProps }) => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(editClient.id);
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/clients/updateClient`,
-        {
-          method: 'PUT',
-          body: JSON.stringify(editClient),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`/api/clients/updateClient`, {
+        method: 'PUT',
+        body: JSON.stringify(editClient),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const result = await response.json();
       return response;
     } catch (err) {
       setError(true);
-      console.log(err);
     }
   };
 

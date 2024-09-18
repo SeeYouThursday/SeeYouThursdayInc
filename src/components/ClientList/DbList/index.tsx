@@ -1,18 +1,5 @@
 'use server';
-import {
-  Listbox,
-  ListboxItem,
-  Button,
-  ButtonGroup,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-  Input,
-  Textarea,
-} from '@nextui-org/react';
+
 import { getAllProducts } from '@/lib/actions';
 import { IconTrash, IconEdit } from '@tabler/icons-react';
 import Image from 'next/image';
@@ -28,7 +15,11 @@ const ClientDbList = async () => {
       ? 'http://localhost:3000'
       : 'https://seeyouthursday.dev';
 
-  const response = await fetch(`${baseUrl}/api/clients/getClient`);
+  const response = await fetch(`${baseUrl}/api/clients/getClient`, {
+    headers: {
+      'Cache-Control': 'no-store',
+    },
+  });
   const clients = await response.json();
 
   return (

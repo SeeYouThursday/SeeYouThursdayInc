@@ -34,7 +34,7 @@ export default function ProductForm() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await fetch('/api/products/createProduct', {
+      const response = await fetch('/api/clients/createClient', {
         method: 'POST',
         body: JSON.stringify(product),
         headers: {
@@ -43,9 +43,9 @@ export default function ProductForm() {
       });
       return response;
 
-      if (!response.ok) {
-        throw new Error('Failed to upload the product');
-      }
+      // if (!response.ok) {
+      //   throw new Error('Failed to upload the product');
+      // }
 
       setProduct({});
       setIsSubmitted(true);

@@ -1,5 +1,6 @@
 import { PrismaClient, Prisma } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
 export async function PUT(req: NextRequest) {
   const prisma = new PrismaClient();
@@ -9,7 +10,6 @@ export async function PUT(req: NextRequest) {
     console.log('Request body:', body); // Add logging to inspect the request body
 
     if (!body || !body.id) {
-      console.log('nobody');
       return NextResponse.json(
         { error: 'Invalid request body' },
         { status: 400 }
@@ -31,6 +31,10 @@ export async function PUT(req: NextRequest) {
     });
 
     // upon updating, update the cookies entry for updated client
+    // Invalidate cache
+    const cookieStore = cookies();
+    const clients = await prisma.product.findMany();
+    cookieStore.set('clients', JSON.stringify(clients));
 
     return NextResponse.json(client);
   } catch (error) {
