@@ -141,6 +141,7 @@ const config: Config = {
       },
       screens: {
         laptop: { raw: '(min-width: 1440px)' },
+        mobile : { raw: '(min-width: 639px)' },
       },
     },
   },
