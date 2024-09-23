@@ -113,7 +113,7 @@ const Nav = () => {
       </NavbarContent>{' '}
       <NavbarContent className="" justify="center">
         <div
-          className="hidden sm:grid grid-cols-4 gap-4
+          className="hidden sm:grid grid-cols-4 gap-2
         lg:font-bold justify-center items-center flex-wrap"
         >
           <NavDropConditional
@@ -192,7 +192,7 @@ const NavDropConditional = ({
     {pathname === '/' ? (
       <NavDropDown dropdown={dropdown} navLinkStyle={navLinkSize} />
     ) : (
-      <NavbarItem className="hover:underline p-2 px-3 rounded-3xl hover:text-white text-primary">
+      <NavbarItem className="hover:underline p-2 px-3 hover:text-white text-primary">
         <div className="flex items-start">
           <Link color="primary" href="/" className={`${navLinkSize} m-0`}>
             Home
