@@ -21,7 +21,7 @@ import { usePathname } from 'next/navigation';
 import { IconChevronDown, IconComet } from '@tabler/icons-react';
 import {SignedIn } from '@clerk/nextjs';
 import ClerkMenu from '@/components/ui/ClerkMenu';
-import { NavDropDown } from '@/components/navDropdown';
+// import { NavDropDown } from '@/components/navDropdown';
 
 interface navItem {
   href: string;
@@ -44,7 +44,7 @@ const Nav = () => {
   const navItems: navItem[] = [
     { href: '/pricing', name: 'Pricing', isActive: false },
     { href: '/products', name: 'Our Work', isActive: false },
-    // { href: '/contact-us', name: 'Contact Us', isActive: false },
+    { href: '/contact-us', name: 'Contact Us', isActive: false },
   ];
 
   const dropdown = [
@@ -116,11 +116,11 @@ const Nav = () => {
           className="hidden sm:grid grid-cols-4 gap-2
         lg:font-bold justify-center items-center flex-wrap"
         >
-          <NavDropConditional
+          {/* <NavDropConditional
             pathname={pathname}
             dropdown={dropdown}
             navLinkSize={navLinkSize}
-          />
+          /> */}
           {navItems.map((item) => (
             <NavbarItem
               key={item.name}
@@ -179,28 +179,28 @@ const Nav = () => {
     </Navbar>
   );
 };
-const NavDropConditional = ({
-  pathname,
-  dropdown,
-  navLinkSize,
-}: {
-  pathname: string;
-  dropdown: dropDown[];
-  navLinkSize: string;
-}) => (
-  <>
-    {pathname === '/' ? (
-      <NavDropDown dropdown={dropdown} navLinkStyle={navLinkSize} />
-    ) : (
-      <NavbarItem className="hover:underline p-2 px-3 hover:text-white text-primary">
-        <div className="flex items-start">
-          <Link color="primary" href="/" className={`${navLinkSize} m-0`}>
-            Home
-          </Link>
-        </div>
-      </NavbarItem>
-    )}
-  </>
-);
+// const NavDropConditional = ({
+//   pathname,
+//   dropdown,
+//   navLinkSize,
+// }: {
+//   pathname: string;
+//   dropdown: dropDown[];
+//   navLinkSize: string;
+// }) => (
+//   <>
+//     {pathname === '/' ? (
+//       <NavDropDown dropdown={dropdown} navLinkStyle={navLinkSize} />
+//     ) : (
+//       <NavbarItem className="hover:underline p-2 px-3 hover:text-white text-primary">
+//         <div className="flex items-start">
+//           <Link color="primary" href="/" className={`${navLinkSize} m-0`}>
+//             Home
+//           </Link>
+//         </div>
+//       </NavbarItem>
+//     )}
+//   </>
+// );
 
 export default Nav;
