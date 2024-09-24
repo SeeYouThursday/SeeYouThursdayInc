@@ -25,9 +25,6 @@ export default function Home() {
       <Suspense fallback={<div>Loading...</div>}>
         <Testimonials />
       </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
-        <ContactModal location="front" />
-      </Suspense>
     </main>
   );
 }

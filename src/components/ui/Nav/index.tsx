@@ -21,6 +21,7 @@ import { usePathname } from 'next/navigation';
 import { IconChevronDown, IconComet } from '@tabler/icons-react';
 import {SignedIn } from '@clerk/nextjs';
 import ClerkMenu from '@/components/ui/ClerkMenu';
+import { NavDropDown } from '@/components/navDropdown';
 
 interface navItem {
   href: string;
@@ -43,7 +44,7 @@ const Nav = () => {
   const navItems: navItem[] = [
     { href: '/pricing', name: 'Pricing', isActive: false },
     { href: '/products', name: 'Our Work', isActive: false },
-    { href: '/contact-us', name: 'Contact Us', isActive: false },
+    // { href: '/contact-us', name: 'Contact Us', isActive: false },
   ];
 
   const dropdown = [
@@ -61,13 +62,13 @@ const Nav = () => {
       key: 'Team',
       isActive: false,
     },
-    {
-      href: '#contact',
-      name: 'Contact Us',
-      icon: '',
-      key: 'Contact',
-      isActive: false,
-    },
+    // {
+    //   href: '#contact',
+    //   name: 'Contact Us',
+    //   icon: '',
+    //   key: 'Contact',
+    //   isActive: false,
+    // },
   ];
 
   return (
@@ -92,7 +93,7 @@ const Nav = () => {
     >
       <NavbarContent justify="start">
         <NavbarItem>
-          <NavbarBrand className="flex justify-center items-center">
+          <NavbarBrand className="flex items-center">
             <a
               href="/"
               title="Home"
@@ -104,7 +105,7 @@ const Nav = () => {
                 quality={100}
                 src="/logo/revised-logo.webp"
                 alt="SeeYouThursday"
-                className="w-auto min-w-16 h-auto mt-3 mb-3 lg:ms-10 xl:ms-72 2xl:ms-[300px]"
+                className="w-auto min-w-16 h-auto mt-3 mb-3 mobile:hidden"
               />
             </a>
           </NavbarBrand>
@@ -112,7 +113,7 @@ const Nav = () => {
       </NavbarContent>{' '}
       <NavbarContent className="" justify="center">
         <div
-          className="hidden sm:grid grid-cols-4 gap-4
+          className="hidden sm:grid grid-cols-4 gap-2
         lg:font-bold justify-center items-center flex-wrap"
         >
           <NavDropConditional
@@ -178,57 +179,6 @@ const Nav = () => {
     </Navbar>
   );
 };
-
-const NavDropDown = ({
-  dropdown,
-  navLinkStyle,
-}: {
-  dropdown: dropDown[];
-  navLinkStyle: string;
-}) => (
-  <Dropdown
-    className={`${navLinkStyle}`}
-    showArrow
-    classNames={{
-      base: 'before:bg-default-200', // change arrow background
-      content: 'bg-blue-200 text-black', //change the overall bg of dropdown menu
-    }}
-  >
-    <NavbarItem>
-      <DropdownTrigger>
-        <div
-          className={`home-dropdown-button rounded-3xl text-violet-100 poppins-medium hover:underline flex justify-center items-center outline-none underline-offset-4 hover:text-white/80 tap-highlight-transparent hover:cursor-pointer ${navLinkStyle}`}
-        >
-          Home
-          <span className="mt-[3px]">
-            <IconChevronDown stroke={1} />
-          </span>
-        </div>
-      </DropdownTrigger>
-    </NavbarItem>
-    <NavbarItem>
-      <DropdownMenu
-        aria-label="Home Links"
-        className="w-[240px]"
-        itemClasses={{
-          base: 'gap-4 bg-violet-300 text-black',
-        }}
-      >
-        {dropdown.map((item) => (
-          <DropdownItem
-            key={item.key}
-            href={item.href}
-            className={`dropdownitem`}
-            textValue={item.name}
-          >
-            {item.name}
-          </DropdownItem>
-        ))}
-      </DropdownMenu>
-    </NavbarItem>
-  </Dropdown>
-);
-
 const NavDropConditional = ({
   pathname,
   dropdown,
@@ -242,7 +192,7 @@ const NavDropConditional = ({
     {pathname === '/' ? (
       <NavDropDown dropdown={dropdown} navLinkStyle={navLinkSize} />
     ) : (
-      <NavbarItem className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary">
+      <NavbarItem className="hover:underline p-2 px-3 hover:text-white text-primary">
         <div className="flex items-start">
           <Link color="primary" href="/" className={`${navLinkSize} m-0`}>
             Home
