@@ -44,7 +44,7 @@ const Nav = () => {
   const navItems: navItem[] = [
     { href: '/pricing', name: 'Pricing', isActive: false },
     { href: '/products', name: 'Our Work', isActive: false },
-    { href: '/contact-us', name: 'Contact Us', isActive: false },
+    // { href: '/contact-us', name: 'Contact Us', isActive: false },
   ];
 
   const dropdown = [
@@ -62,13 +62,13 @@ const Nav = () => {
       key: 'Team',
       isActive: false,
     },
-    {
-      href: '#contact',
-      name: 'Contact Us',
-      icon: '',
-      key: 'Contact',
-      isActive: false,
-    },
+    // {
+    //   href: '#contact',
+    //   name: 'Contact Us',
+    //   icon: '',
+    //   key: 'Contact',
+    //   isActive: false,
+    // },
   ];
 
   return (
