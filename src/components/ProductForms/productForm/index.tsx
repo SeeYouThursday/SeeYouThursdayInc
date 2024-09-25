@@ -5,11 +5,13 @@ import { Input, Textarea, Button, Spacer, Link } from '@nextui-org/react';
 import { useUser } from '@clerk/nextjs';
 import { FormField, ProductProps } from '@/lib/util/types/product';
 import { formFields } from '@/lib/util/forms';
+// import Toast from '@/components/ui/Toast';
 
 export default function ProductForm() {
   const [product, setProduct] = useState<Partial<ProductProps>>({});
   const [shortDescripCount, setShortDescripCount] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
   const { isSignedIn } = useUser();
 
   if (!isSignedIn) {
@@ -41,14 +43,11 @@ export default function ProductForm() {
           'Content-Type': 'application/json',
         },
       });
+      if (response.ok) {
+        setProduct({});
+        setIsSubmitted(true);
+      }
       return response;
-
-      // if (!response.ok) {
-      //   throw new Error('Failed to upload the product');
-      // }
-
-      setProduct({});
-      setIsSubmitted(true);
     } catch (err) {
       console.error('Error uploading product:', err);
     }
@@ -118,8 +117,9 @@ export default function ProductForm() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Product Form</h1>
+    <div className="max-w-2xl mx-auto p-4 rounded-box border bg-green-300">
+      <h3 className="text-2xl font-semibold text-center">Add a Client</h3>
+      <hr></hr>
       <p className="mb-4">Welcome to your product form.</p>
       <form onSubmit={handleSubmit} className="flex flex-col">
         <div className="mb-4">
@@ -145,6 +145,19 @@ export default function ProductForm() {
           Submit
         </Button>
       </form>
+      {isSubmitted ? (
+        <div className="max-w-2xl mx-auto p-4 bg-slate-50">
+          <h1 className="text-2xl font-bold mb-4">
+            Client Submitted Successfully
+          </h1>
+          <p className="mb-4">
+            Your Client has been created. You can now upload images.
+          </p>
+          <Link href="/upload-img">
+            <Button color="primary">Upload Images</Button>
+          </Link>
+        </div>
+      ) : null}
     </div>
   );
 }

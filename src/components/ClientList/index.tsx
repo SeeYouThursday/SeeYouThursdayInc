@@ -1,5 +1,7 @@
 'use client';
 import React, { FormEventHandler, Suspense, useEffect, useState } from 'react';
+import { revalidatePath } from 'next/cache';
+
 import {
   Listbox,
   ListboxItem,
@@ -14,40 +16,165 @@ import {
   Input,
   Textarea,
 } from '@nextui-org/react';
-import { PrismaClient, Prisma } from '@prisma/client';
 import { IconTrash, IconEdit } from '@tabler/icons-react';
 import Image from 'next/image';
 import { formFields } from '@/lib/util/forms';
 import { FormField, ProductProps } from '@/lib/util/types/product';
-import ClientDbList from './DbList';
-// type Title = {
-//   id: number;
-//   title: string;
-//   shortTitle: string;
-//   shortDescrip: string;
-//   icon: string;
-//   href: string;
-// };
+import Toast from '../ui/Toast';
 
-export default function ClientList({ clients }: { clients: ProductProps[] }) {
-  //   const [clients, setClients] = useState<Title[]>([{ id: 0, title: '' }]);
+export default function ClientList() {
+  const [settingClients, setClients] = useState<ProductProps[]>([]);
   const [selectedClient, setSelectedClient] = useState<number>(0);
-  const [errors, setError] = useState({ error: false, message: '' });
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const refreshClients = async () => {
+    try {
+      const response = await fetch('/api/clients/getClient', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-cache',
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error ${response.statusText}`);
+      }
+
+      const updatedClients = await response.json();
+      setClients(updatedClients);
+    } catch (error) {
+      console.error('Failed to fetch clients:', error);
+    }
+  };
+  useEffect(() => {
+    refreshClients();
+  }, []);
+
+  useEffect(() => {
+    if (successMessage) {
+      refreshClients();
+    }
+  }, [successMessage]);
+
+  const DeleteModal = ({ client }: { client: ProductProps }) => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [selectedClient, setClient] = useState('');
+    const [verified, setVerified] = useState(false);
+    const [error, setError] = useState({ error: false, message: '' });
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const inputElement = e.target as HTMLInputElement;
+      const newClientValue = inputElement.value;
+      setClient(newClientValue);
+      setVerified(newClientValue === client.title);
+    };
+
+    const handleClientValidation = async (e: {
+      preventDefault: () => void;
+    }) => {
+      e.preventDefault();
+      //Logic for Deleting Client
+      if (verified) {
+        try {
+          const id = client.id;
+          const response = await fetch(`/api/clients/deleteClient/`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id }),
+          });
+          const updatedClients = await response.json();
+          if (response.ok) {
+            setSuccessMessage(`Client ${id} deleted successfully.`);
+          }
+        } catch (err: any) {
+          setError((prev) => ({ ...prev, message: String(err) }));
+          setSuccessMessage('');
+        }
+      } else {
+        setVerified(false);
+        return;
+      }
+    };
+
+    return (
+      <>
+        <Button
+          isIconOnly
+          role="Delete Button"
+          title="Delete Button"
+          size="sm"
+          variant="light"
+          color="danger"
+          onPress={onOpen}
+        >
+          <IconTrash stroke={2} className="h-5" />
+        </Button>
+        <Modal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          isDismissable={false}
+          isKeyboardDismissDisabled={true}
+        >
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1">
+                  {client.title}
+                </ModalHeader>
+                <form onSubmit={handleClientValidation}>
+                  <ModalBody>
+                    <p>
+                      To remove this client, confirm by typing the name of the
+                      client below:
+                    </p>
+                    <Input
+                      type="text"
+                      onChange={handleInputChange}
+                      value={selectedClient}
+                    />
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="primary" variant="light" onPress={onClose}>
+                      Close
+                    </Button>
+                    <Button
+                      color="danger"
+                      type="submit"
+                      onSubmit={handleClientValidation}
+                      isDisabled={!verified}
+                    >
+                      Delete
+                    </Button>
+                  </ModalFooter>
+                </form>
+                <Toast submit={verified} message={successMessage} />
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+        <p>{error.message}</p>
+      </>
+    );
+  };
 
   return (
     <>
       <ListboxWrapper>
         {/* Wrapper is located below this function to style */}
-
+        <h3 className="text-2xl font-semibold text-center">Clients</h3>
+        <hr></hr>
         <Listbox
-          items={clients}
+          items={settingClients}
           aria-label="Dynamic Actions"
           onAction={(key) => setSelectedClient(Number(key))}
           selectionMode="single"
           className="rounded-xl"
           variant="shadow"
         >
-          {clients.map((client: ProductProps) => (
+          {settingClients.map((client: ProductProps) => (
             <ListboxItem
               key={client.id}
               textValue={client.title}
@@ -83,117 +210,10 @@ export default function ClientList({ clients }: { clients: ProductProps[] }) {
 }
 
 const ListboxWrapper = ({ children }: { children: React.ReactNode }) => (
-  <div className="w-full max-w-[260px] bg-violet-200/80 border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100">
+  <div className="w-[300px]  bg-violet-200/80 border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100">
     {children}
   </div>
 );
-
-export const DeleteModal = ({ client }: { client: ProductProps }) => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [selectedClient, setClient] = useState('');
-  const [verified, setVerified] = useState(false);
-  const [error, setError] = useState({ error: false, message: '' });
-  const [successMessage, setSuccessMessage] = useState('');
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputElement = e.target as HTMLInputElement;
-    const newClientValue = inputElement.value;
-    setClient(newClientValue);
-    setVerified(newClientValue === client.title);
-  };
-
-  const handleClientValidation = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    //Logic for Deleting Client
-    if (verified) {
-      try {
-        //write logic here
-        const id = client.id;
-        const response = await fetch(`/api/clients/deleteClient/`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ id: client.id }),
-        });
-        const deleteClient = await response.json();
-        // if (!response.ok) {
-        //   throw new Error(`Failed to delete client ${response.status}`);
-        // }
-        // const deleteClient = response.json();
-        console.log(deleteClient);
-        setSuccessMessage(`Client ${id} deleted successfully.`);
-      } catch (err: any) {
-        setError((prev) => ({ ...prev, message: String(err) }));
-        setSuccessMessage('');
-      }
-    } else {
-      setVerified(false);
-
-      return;
-    }
-  };
-
-  return (
-    <>
-      <Button
-        isIconOnly
-        role="Delete Button"
-        title="Delete Button"
-        size="sm"
-        variant="light"
-        color="danger"
-        onPress={onOpen}
-      >
-        <IconTrash stroke={2} className="h-5" />
-      </Button>
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        isDismissable={false}
-        isKeyboardDismissDisabled={true}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                {client.title}
-              </ModalHeader>
-              <form onSubmit={handleClientValidation}>
-                <ModalBody>
-                  <p>
-                    To remove this client, confirm by typing the name of the
-                    client below:
-                  </p>
-                  <Input
-                    type="text"
-                    onChange={handleInputChange}
-                    value={selectedClient}
-                  />
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="primary" variant="light" onPress={onClose}>
-                    Close
-                  </Button>
-                  <Button
-                    color="danger"
-                    type="submit"
-                    onSubmit={handleClientValidation}
-                    isDisabled={!verified}
-                  >
-                    Delete
-                  </Button>
-                  <p>{error.message}</p>
-                  <p>{successMessage}</p>
-                </ModalFooter>
-              </form>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </>
-  );
-};
 
 export const UpdateModal = ({ client }: { client: ProductProps }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

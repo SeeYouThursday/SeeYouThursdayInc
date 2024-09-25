@@ -23,9 +23,9 @@ const ClientDbList = async () => {
   const clients = await response.json();
 
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <ClientList clients={clients} />
-    </>
+    </Suspense>
   );
 };
 

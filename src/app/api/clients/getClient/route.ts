@@ -2,24 +2,27 @@ import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { cookies } from 'next/headers';
 
-export async function GET(req: NextRequest) {
-  const prisma = new PrismaClient();
+// Singleton pattern for PrismaClient
+const prisma = new PrismaClient();
 
+export async function GET(req: NextRequest) {
   try {
-    // Initial load, should check the count of the db versus the cookies
-    // If count is less/more than count of cookies, then revalidate and update with new information from DB
-    const clientCount = await prisma.product.count();
     const cookieStore = cookies();
     const getCookies = cookieStore.get('clients');
     const clientCookies = getCookies ? JSON.parse(getCookies.value) : [];
 
-    if (!getCookies || clientCookies.length !== clientCount) {
-      const clients = await prisma.product.findMany();
-      cookieStore.set('clients', JSON.stringify(clients));
-      return NextResponse.json(clients);
+    // If cookies are present and valid, return them without querying the database
+    if (getCookies) {
+      const clientCount = await prisma.product.count();
+      if (clientCookies.length === clientCount) {
+        return NextResponse.json(clientCookies);
+      }
     }
 
-    return NextResponse.json(clientCookies);
+    // If cookies are not present or invalid, query the database and update cookies
+    const clients = await prisma.product.findMany();
+    cookieStore.set('clients', JSON.stringify(clients));
+    return NextResponse.json(clients);
   } catch (error) {
     console.error('Error fetching clients:', error);
     return NextResponse.json(

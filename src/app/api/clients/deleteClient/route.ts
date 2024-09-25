@@ -1,14 +1,12 @@
 import { PrismaClient, Prisma } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import { del } from '@vercel/blob';
-import { cookies } from 'next/headers';
 
 const prisma = new PrismaClient();
 
 export async function DELETE(req: NextRequest) {
   const body = await req.json();
   const { id } = body;
-  console.log(id);
 
   if (!id) {
     return NextResponse.json(
@@ -22,22 +20,23 @@ export async function DELETE(req: NextRequest) {
       where: { id: Number(id) },
     });
 
-    //Deleting icons/imgs from Blob storage
+    // Deleting icons/imgs from Blob storage
     const iconToDelete: string = client.icon_url ?? '';
     const imgToDelete: string = client.img_url ?? '';
 
-    const imgsToDelete = [];
+    if (iconToDelete || imgToDelete) {
+      const imgsToDelete = [];
 
-    if (iconToDelete) imgsToDelete.push(iconToDelete);
-    if (imgToDelete) imgsToDelete.push(imgToDelete);
+      if (iconToDelete) imgsToDelete.push(iconToDelete);
+      if (imgToDelete) imgsToDelete.push(imgToDelete);
 
-    await del(imgsToDelete);
+      await del(imgsToDelete);
+    }
 
     // Invalidate cache
-    const cookieStore = cookies();
     const clients = await prisma.product.findMany();
-    cookieStore.set('clients', JSON.stringify(clients));
-    return NextResponse.json(client, { status: 200 });
+
+    return NextResponse.json(clients, { status: 200 });
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2025') {

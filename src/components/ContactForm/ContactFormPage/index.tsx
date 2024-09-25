@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 import { useState, useRef, Suspense } from 'react';
 import Image from 'next/image';
 import { validateEmail } from '@/lib/util/helpers';
-import ContactToast from '@/components/ui/ContactToast';
+import Toast from '@/components/ui/Toast';
 import { LetsConnect } from '@/components/ContactForm/ContactHeadings';
 import { FormInputEvent } from '@/lib/util/types/types';
 import { Input, Button, Textarea } from '@nextui-org/react';
@@ -178,7 +178,7 @@ const ContactForm = () => {
       </form>
       {error.emailJsError ? <p>{error.emailJsErrorMessage}</p> : null}
       {/* </div> */}
-      <ContactToast submit={submitted} />
+      <Toast submit={submitted} message="Message sent successfully." />
     </>
   );
 };
