@@ -34,6 +34,7 @@ const links = [
   { url: '/#services', title: 'Service', id: '2' },
   { url: '/#contact', title: 'Contact', id: '3' },
   { url: '/terms', title: 'Terms', id: '4' },
+  { url: '/private-policy', title: 'Privacy', id: '5' },
 ];
 
 export default function RootLayout({
