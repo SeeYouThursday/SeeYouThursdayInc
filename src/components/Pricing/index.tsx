@@ -113,7 +113,7 @@ const Pricing = () => {
     <div className="min-h-screen bg-gray-900 text-white overflow-hidden">
       <div className="container mx-auto px-4 py-16 sm:py-24">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl mb-4 bg-gradient-to-b from-sky-600/80 via-sky-300 to-sky-400/60 bg-clip-text text-transparent p-5">
+          <h2 className="text-3xl font-bold sm:text-4xl md:text-5xl mb-4 bg-gradient-to-b from-sky-600/80 via-sky-300 to-sky-400/60 bg-clip-text text-transparent p-5">
             Our Pricing
           </h2>
           <p className="text-xl sm:text-2xl text-gray-300">

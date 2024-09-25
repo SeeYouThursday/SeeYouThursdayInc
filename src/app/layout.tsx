@@ -8,6 +8,7 @@ import { Providers } from './providers';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Poppins } from 'next/font/google';
 import { vollkorn } from '@/app/fonts';
+import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -48,6 +49,7 @@ export default function RootLayout({
             <Providers>
               <Nav />
               {children}
+              <ScrollToTopButton />
               <Footer links={links} />
             </Providers>
           </NextUIProvider>
