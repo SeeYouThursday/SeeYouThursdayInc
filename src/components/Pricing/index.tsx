@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useMemo} from "react";
+import React, { useMemo } from "react";
 import ShootingStars from "../ui/shooting-star";
 import { StarsBackground } from "../ui/stars-background";
 
@@ -53,8 +53,7 @@ type PricingPlanProps = {
 
 const CheckIcon = React.memo(() => (
   <svg
-    className="w-5 h-5 mr-2 font-semibold leading-7 text-blue-600 sm:h-5 sm:w-5 md:h-6 md:w-6"
-    data-primary="blue-600"
+    className="w-4 h-4 mr-2 text-blue-600 flex-shrink-0"
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
@@ -75,39 +74,30 @@ const PricingPlan: React.FC<PricingPlanProps> = React.memo(({ plan }) => {
   const features = useMemo(() => plan.features.map((feature, idx) => (
     <li
       key={idx}
-      className="inline-flex items-center block w-full mb-2 ml-5 font-semibold text-left border-solid"
+      className="flex items-start mb-2 text-sm sm:text-base"
     >
       <CheckIcon />
-      {feature}
+      <span>{feature}</span>
     </li>
   )), [plan.features]);
 
   return (
     <div
-    className={`relative z-10 flex flex-col items-center w-full max-w-sm p-4 mx-auto my-2 border border-solid rounded-lg sm:my-0 sm:p-6 md:my-4 md:p-6
-      lg:p-8 ${plan.highlight ? 'bg-white border-4 border-blue-600' : ''}`}
-    data-rounded="rounded-lg"
-    data-rounded-max="rounded-full"
-  >
-    <h3 className={`m-0 text-2xl font-semibold leading-tight tracking-tight border-0 border-gray-200 sm:text-3xl md:text-4xl ${plan.textBlack ? 'text-black' : 'text-white'}`}>
-      {plan.title}
-    </h3>
-    <div className={`flex items-end mt-6 leading-7 border-0 border-gray-200 ${plan.textBlack ? 'text-black' : 'text-white'}`}>
-      <p>starting at</p>
+      className={`flex flex-col h-full p-6 overflow-hidden rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105
+        ${plan.highlight ? 'bg-white border-4 border-blue-600' : 'bg-gray-800 border border-gray-700'}
+        ${plan.textBlack ? 'text-gray-900' : 'text-white'}`}
+    >
+      <h3 className="text-2xl font-semibold mb-2">{plan.title}</h3>
+      <div className="mb-4">
+        <span className="text-sm">starting at</span>
+        <p className="text-4xl font-bold">${plan.price}</p>
+      </div>
+      <p className="text-sm mb-6 flex-grow">{plan.description}</p>
+      <ul className="mb-6 flex-grow">
+        {features}
+      </ul>
     </div>
-    <div className={`flex items-end mt-6 leading-7 border-0 border-gray-200 ${plan.textBlack ? 'text-black' : 'text-white'}`}>
-      <p className="box-border m-0 text-6xl font-semibold leading-none border-solid">
-        ${plan.price}
-      </p>
-    </div>
-    <p className={`mt-6 mb-5 text-base leading-normal text-left border-0 border-gray-200 ${plan.textBlack ? 'text-black' : 'text-white'}`}>
-      {plan.description}
-    </p>
-    <ul className={`flex-1 p-0 mt-4 ml-5 leading-7 border-0 border-gray-200 ${plan.textBlack ? 'text-black' : 'text-white'}`}>
-      {features}
-    </ul>
-  </div>
-);
+  );
 });
 
 PricingPlan.displayName = 'PricingPlan';
@@ -120,25 +110,20 @@ const Pricing = () => {
   []);
 
   return (
-      <div className="pb-24">
-        <div className="flex justify-center items-center text-center mt-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-sky-300 pb-5 sm:pb-10">Our Pricing</h2>
+    <div className="min-h-screen bg-gray-900 text-white overflow-hidden">
+      <div className="container mx-auto px-4 py-16 sm:py-24">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-bold sm:text-4xl md:text-5xl mb-4 bg-gradient-to-b from-sky-600/80 via-sky-300 to-sky-400/60 bg-clip-text text-transparent p-5">
+            Our Pricing
+          </h2>
+          <p className="text-xl sm:text-2xl text-gray-300">
+            Simple, Transparent Pricing for Any Company Size
+          </p>
         </div>
-        <section className="py-8 leading-7 text-white sm:py-12 md:py-16 lg:py-8">
-          <div className="box-border px-4 mx-auto border-solid sm:px-6 md:px-6 lg:px-8 max-w-7xl">
-            <div className="flex flex-col items-center leading-7 text-center text-gray-900 border-0 border-gray-200">
-              <h3 className="box-border m-0 text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white font-semibold leading-tight tracking-tight border-solid">
-                Simple, Transparent Pricing
-              </h3>
-              <p className="box-border mt-2 text-xl text-white border-solid sm:text-2xl pt-5 pb-5">
-                Pricing to fit the needs of any company size.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 gap-4 mt-4 leading-7 text-gray-900 border-0 border-gray-200 sm:mt-6 sm:gap-6 md:mt-8 md:gap-3 lg:grid-cols-3 sm:grid-cols-2">
-            {pricingPlanComponents}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {pricingPlanComponents}
         </div>
-      </section>
+      </div>
       <ShootingStars />
       <StarsBackground />
     </div>

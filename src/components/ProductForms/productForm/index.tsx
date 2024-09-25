@@ -120,7 +120,7 @@ export default function ProductForm() {
     <div className="max-w-2xl mx-auto p-4 rounded-box border bg-green-300">
       <h3 className="text-2xl font-semibold text-center">Add a Client</h3>
       <hr></hr>
-      <p className="mb-4">Welcome to your product form.</p>
+      <p className="mb-4">Welcome to your client form.</p>
       <form onSubmit={handleSubmit} className="flex flex-col">
         <div className="mb-4">
           {renderField(formFields.find((field) => field.name === 'title')!)}

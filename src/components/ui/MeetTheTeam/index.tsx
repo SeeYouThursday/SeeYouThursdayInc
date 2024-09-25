@@ -21,7 +21,7 @@ const team: Team = [
     description: 'Lead Developer',
     image: '/meet-the-team/BrianG.webp',
     rotate: 'y',
-    subtitle: 'Founder',
+    subtitle: 'Founder/CEO',
     title: 'Brian Galyen',
     fact: "I'm a huge anime fan.",
   },
@@ -30,7 +30,7 @@ const team: Team = [
     description: 'Developer',
     image: '/meet-the-team/devon-thinks.webp',
     rotate: 'y',
-    subtitle: 'Co-Founder',
+    subtitle: 'Co-Founder/CTO',
     title: 'Devon Whitaker',
     fact: 'My favorite college football team is The Oregon Ducks... Go Ducks!!!',
   },
@@ -39,7 +39,7 @@ const team: Team = [
     description: 'Designer',
     image: '/meet-the-team/JojoU.webp',
     rotate: 'y',
-    subtitle: 'Co-Founder',
+    subtitle: 'Co-Founder/Chief Design Officer',
     title: 'Joanna Underwood',
     fact: 'I love to read books.',
   },
@@ -52,7 +52,7 @@ const MeetTheTeam: React.FC = () => {
         <h3 className="inline-block bg-purple-200 text-purple-800 px-4 py-4 rounded-full text-3xl font-semibold uppercase tracking-wide">
           Our Crew
         </h3>
-        <h2 className="mt-8 text-5xl leading-8 font-extrabold tracking-tight text-sky-300 sm:text-4xl">
+        <h2 className="text-5xl font-bold poppins-medium text-transparent bg-gradient-to-b from-sky-600/80 via-sky-300 to-sky-400/60 text-center text-edge-outline whitespace-nowrap bg-clip-text mt-7 mb-7">
           Meet The Team
         </h2>
         <p className="mt-4 mb-16 max-w-2xl text-xl text-white md:mx-auto lg:mx-auto">
