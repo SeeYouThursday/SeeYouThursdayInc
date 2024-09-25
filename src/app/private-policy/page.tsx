@@ -24,7 +24,7 @@ export default function PrivacyPolicyPage() {
             
             <h2 className="text-2xl text-black font-semibold mt-6">1. Introduction</h2>
             <p className='text-black'>
-              Welcome to SeeYouThursday's Privacy Policy. This policy describes how we collect, use, and protect your personal information.
+              Welcome to SeeYouThursday&apos;s Privacy Policy. This policy describes how we collect, use, and protect your personal information.
             </p>
 
             <h2 className="text-2xl text-black font-semibold mt-6">2. Information We Collect</h2>
