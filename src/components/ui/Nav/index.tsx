@@ -42,26 +42,27 @@ const Nav = () => {
   const navLinkSize = `text-violet-100 hover:text-white poppins-medium lg:text-xl sm:text-md md:text-lg text-center`;
 
   const navItems: navItem[] = [
+    { href: '/', name: 'Home', isActive: false },
     { href: '/pricing', name: 'Pricing', isActive: false },
     { href: '/products', name: 'Our Work', isActive: false },
     { href: '/contact-us', name: 'Contact Us', isActive: false },
   ];
 
-  const dropdown = [
-    {
-      href: '#services',
-      name: 'Services',
-      icon: '',
-      key: 'Services',
-      isActive: false,
-    },
-    {
-      href: '#ourCrew',
-      name: 'Meet The Team',
-      icon: '',
-      key: 'Team',
-      isActive: false,
-    },
+  // const dropdown = [
+  //   {
+  //     href: '#services',
+  //     name: 'Services',
+  //     icon: '',
+  //     key: 'Services',
+  //     isActive: false,
+  //   },
+  //   {
+  //     href: '#ourCrew',
+  //     name: 'Meet The Team',
+  //     icon: '',
+  //     key: 'Team',
+  //     isActive: false,
+  //   },
     // {
     //   href: '#contact',
     //   name: 'Contact Us',
@@ -69,7 +70,7 @@ const Nav = () => {
     //   key: 'Contact',
     //   isActive: false,
     // },
-  ];
+  // ];
 
   return (
     <Navbar
@@ -105,7 +106,7 @@ const Nav = () => {
                 quality={100}
                 src="/logo/revised-logo.webp"
                 alt="SeeYouThursday"
-                className="w-auto min-w-16 h-auto mt-3 mb-3 mobile:hidden"
+                className="w-auto min-w-16 h-auto mt-3 mb-3 "
               />
             </a>
           </NavbarBrand>
@@ -135,11 +136,11 @@ const Nav = () => {
         </div>
         {/* ADMIN USE */}
         <SignedIn>
-          <NavbarItem className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary">
+          {/* <NavbarItem className="hover:bg-violet-600 p-2 px-3 rounded-3xl hover:text-white text-primary">
             <Link color="primary" href="/dashboard" className="text-white">
               Dashboard
             </Link>
-          </NavbarItem>
+          </NavbarItem> */}
           <NavbarItem>
             <ClerkMenu />
           </NavbarItem>
