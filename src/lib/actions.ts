@@ -5,12 +5,19 @@ import { PrismaClient, Prisma } from '@prisma/client';
 import { redirect } from 'next/navigation';
 import { currentUser, auth } from '@clerk/nextjs/server';
 
-export const getAllProducts = async () => {
+export const getAllProducts = async (filter?: string) => {
   const prisma = new PrismaClient();
 
   try {
-    const getAll = await prisma.product.findMany({});
-    return getAll;
+    if (filter === 'title') {
+      const getAllTitles = await prisma.product.findMany({
+        select: { id: true, title: true },
+      });
+      return getAllTitles;
+    } else {
+      const getAll = await prisma.product.findMany({});
+      return getAll;
+    }
   } catch (err) {
     throw new Error('error getting projects');
   } finally {
@@ -115,4 +122,3 @@ export async function updateAdmin({
     throw new Error('Error uploading files');
   }
 }
-

@@ -17,6 +17,13 @@ module.exports = {
         port: '',
         pathname: '/**', // Allow all paths under this hostname
       },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+        port: '',
+        pathname: '/**', // Allow all paths under this hostname
+      },
     ],
+    dangerouslyAllowSVG: true, // Enable SVG images
   },
 };

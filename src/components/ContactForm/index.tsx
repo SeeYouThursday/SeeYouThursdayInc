@@ -2,7 +2,7 @@
 import { useState, useRef, Suspense } from 'react';
 import Image from 'next/image';
 import { validateEmail } from '@/lib/util/helpers';
-import ContactToast from '@/components/ui/ContactToast';
+import ContactToast from '@/components/ui/Toast';
 import { LetsConnect } from '@/components/ContactForm/ContactHeadings';
 import emailjs from '@emailjs/browser';
 import { FormInputEvent } from '@/lib/util/types/types';
@@ -202,7 +202,7 @@ export const ContactForm = ({
           />
         </Button>
       </form>
-      <ContactToast submit={submitted} />
+      <ContactToast submit={submitted} message="Message sent successfully." />
     </section>
   );
 };

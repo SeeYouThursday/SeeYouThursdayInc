@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 
-const ContactToast = ({ submit }: { submit: boolean }) => {
+const Toast = ({ submit, message }: { submit: boolean; message: string }) => {
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const ContactToast = ({ submit }: { submit: boolean }) => {
       {showToast ? (
         <div className="toast toast-end">
           <div className="alert alert-success">
-            <span>Message sent successfully.</span>
+            <span>{message}</span>
           </div>
         </div>
       ) : null}
@@ -31,4 +31,4 @@ const ContactToast = ({ submit }: { submit: boolean }) => {
   );
 };
 
-export default ContactToast;
+export default Toast;

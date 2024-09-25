@@ -1,18 +1,21 @@
-import { PrismaClient } from "@prisma/client";
-import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from '@prisma/client';
+import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
-  const productId = req.nextUrl.searchParams.get('productid');
+  const clientId = req.nextUrl.searchParams.get('clientId');
 
-  if (!productId) {
-    return NextResponse.json({ error: 'Product ID is required' }, { status: 400 });
+  if (!clientId) {
+    return NextResponse.json(
+      { error: 'Client ID is required' },
+      { status: 400 }
+    );
   }
 
   try {
     const product = await prisma.product.findUnique({
-      where: { id: Number(productId) },
+      where: { id: Number(clientId) },
     });
 
     if (!product) {

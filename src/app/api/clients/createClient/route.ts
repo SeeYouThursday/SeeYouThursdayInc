@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
 const prisma = new PrismaClient();
 
@@ -17,7 +18,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       stack,
     } = body;
 
-    const product = await prisma.product.create({
+    const client = await prisma.product.create({
       data: {
         title,
         shortTitle,
@@ -30,7 +31,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
       },
     });
 
-    return NextResponse.json(product);
+    const cookieStore = cookies();
+    const clients = await prisma.product.findMany();
+    cookieStore.set('clients', JSON.stringify(clients));
+
+    return NextResponse.json(client);
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error }, { status: 500 });
