@@ -15,11 +15,12 @@ import {
   DropdownItem,
   DropdownTrigger,
   DropdownMenu,
+  Spacer,
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { IconChevronDown, IconComet } from '@tabler/icons-react';
-import {SignedIn } from '@clerk/nextjs';
+import { SignedIn } from '@clerk/nextjs';
 import ClerkMenu from '@/components/ui/ClerkMenu';
 // import { NavDropDown } from '@/components/navDropdown';
 
@@ -35,16 +36,12 @@ interface dropDown extends navItem {
 }
 
 const Nav = () => {
-  const [isActive, setIsActive] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
-
-  const navLinkSize = `text-violet-100 hover:text-white poppins-medium lg:text-xl sm:text-md md:text-lg text-center`;
 
   const navItems: navItem[] = [
     { href: '/', name: 'Home', isActive: false },
     { href: '/pricing', name: 'Pricing', isActive: false },
-    { href: '/products', name: 'Our Work', isActive: false },
+    { href: '/clients', name: 'Our Work', isActive: false },
     { href: '/contact-us', name: 'Contact Us', isActive: false },
   ];
 
@@ -63,13 +60,13 @@ const Nav = () => {
   //     key: 'Team',
   //     isActive: false,
   //   },
-    // {
-    //   href: '#contact',
-    //   name: 'Contact Us',
-    //   icon: '',
-    //   key: 'Contact',
-    //   isActive: false,
-    // },
+  // {
+  //   href: '#contact',
+  //   name: 'Contact Us',
+  //   icon: '',
+  //   key: 'Contact',
+  //   isActive: false,
+  // },
   // ];
 
   return (
@@ -94,7 +91,7 @@ const Nav = () => {
     >
       <NavbarContent justify="start">
         <NavbarItem>
-          <NavbarBrand className="flex items-center">
+          <NavbarBrand className="flex items-center ">
             <a
               href="/"
               title="Home"
@@ -106,15 +103,15 @@ const Nav = () => {
                 quality={100}
                 src="/logo/revised-logo.webp"
                 alt="SeeYouThursday"
-                className="w-auto min-w-16 h-auto mt-3 mb-3 "
+                className="w-auto min-w-16 h-auto mt-3 mb-3"
               />
             </a>
           </NavbarBrand>
         </NavbarItem>
-      </NavbarContent>{' '}
+      </NavbarContent>
       <NavbarContent className="" justify="center">
         <div
-          className="hidden sm:grid grid-cols-4 gap-2
+          className="hidden sm:flex
         lg:font-bold justify-center items-center flex-wrap"
         >
           {/* <NavDropConditional
@@ -125,10 +122,14 @@ const Nav = () => {
           {navItems.map((item) => (
             <NavbarItem
               key={item.name}
-              isActive={pathname === item.href}
-              className="px-3 flex justify-center items-center"
+              // isActive={pathname === item.href}
+              className="px-3 flex justify-center items-center font-semibold"
             >
-              <Link href={item.href} underline="hover" className={navLinkSize}>
+              <Link
+                href={item.href}
+                underline="hover"
+                className="text-violet-100 hover:text-white poppins-medium lg:text-xl sm:text-md md:text-lg text-center"
+              >
                 {item.name}
               </Link>
             </NavbarItem>
@@ -180,6 +181,7 @@ const Nav = () => {
     </Navbar>
   );
 };
+
 // const NavDropConditional = ({
 //   pathname,
 //   dropdown,
