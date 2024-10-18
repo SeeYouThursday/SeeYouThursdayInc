@@ -34,7 +34,7 @@ export async function handleFormSubmission(formData: FormData) {
   const id = client ? parseInt(client) : 0;
 
   if (!client) {
-    throw new Error('Client not specified');
+   console.error('Client not specified');
   }
 
   try {
@@ -53,17 +53,16 @@ export async function handleFormSubmission(formData: FormData) {
     });
 
     revalidatePath('/dashboard');
-    return update;
   } catch (error) {
     console.error('Error uploading files:', error);
-    throw new Error('Error uploading files');
+    console.error('Error uploading files');
   } finally {
     prisma.$disconnect();
     redirect('/dashboard');
   }
 }
 
-export async function handleAdminImgSubmit(formData: FormData) {
+export async function handleAdminImgSubmit(formData: FormData): Promise<void> {
   const prisma = new PrismaClient();
   // Get Form Data
   const { img } = Object.fromEntries(formData.entries());
@@ -79,7 +78,7 @@ export async function handleAdminImgSubmit(formData: FormData) {
 
     //make sure that auth and user exists
     if (!user || !userId || !email) {
-      return new Error('not signed in');
+      return console.error('not signed in');
     }
 
     // update admin img //convert email/clerkId to strings
@@ -94,10 +93,10 @@ export async function handleAdminImgSubmit(formData: FormData) {
     });
 
     revalidatePath('/upload-img');
-    return update;
+    // return update;
   } catch (error) {
     console.error('Error uploading files:', error);
-    throw new Error('Error uploading files');
+    // throw new Error('Error uploading files');
   } finally {
     prisma.$disconnect();
     redirect('/dashboard');
