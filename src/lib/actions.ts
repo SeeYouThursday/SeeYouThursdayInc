@@ -34,7 +34,7 @@ export async function handleFormSubmission(formData: FormData) {
   const id = client ? parseInt(client) : 0;
 
   if (!client) {
-    throw new Error('Client not specified');
+   console.error('Client not specified');
   }
 
   try {
@@ -53,10 +53,10 @@ export async function handleFormSubmission(formData: FormData) {
     });
 
     revalidatePath('/dashboard');
-    return update;
+    update;
   } catch (error) {
     console.error('Error uploading files:', error);
-    throw new Error('Error uploading files');
+    console.error('Error uploading files');
   } finally {
     prisma.$disconnect();
     redirect('/dashboard');
