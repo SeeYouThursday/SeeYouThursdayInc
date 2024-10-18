@@ -53,7 +53,6 @@ export async function handleFormSubmission(formData: FormData) {
     });
 
     revalidatePath('/dashboard');
-    update;
   } catch (error) {
     console.error('Error uploading files:', error);
     console.error('Error uploading files');
